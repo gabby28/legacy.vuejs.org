@@ -10,17 +10,17 @@ a {
 img {
   border: none;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
 h1,
 h2,
 h3,
 h4 {
   font-weight: 600;
   color: #333;
+}
+code,
+pre {
+  font-family: 'Source Code Pro', 'Menlo', 'Consolas', monospace;
+  font-size: 14px;
 }
 #header {
   position: fixed;
@@ -34,6 +34,9 @@ h4 {
   height: 40px;
 }
 #header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   float: right;
   height: 40px;
   line-height: 40px;
