@@ -20,7 +20,7 @@ h4 {
 code,
 pre {
   font-family: 'Source Code Pro', 'Menlo', 'Consolas', monospace;
-  font-size: 14px;
+  font-size: 0.85em;
 }
 #header {
   position: fixed;
@@ -31,9 +31,9 @@ pre {
   background-color: #fff;
   box-shadow: 0 0 4px rgba(0,0,0,0.25);
   padding: 25px 60px;
-  height: 40px;
 }
-#header ul {
+#nav {
+  display: inline-block;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -41,22 +41,23 @@ pre {
   height: 40px;
   line-height: 40px;
 }
-#header ul li {
+#nav li {
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 1.2em;
 }
-#header .nav-link {
+#nav li:first-child {
+  margin-left: 0 !important;
+}
+.nav-link {
   padding-bottom: 3px;
 }
-#header .nav-link:hover,
-#header .nav-link.current {
+.nav-link:hover,
+.nav-link.current {
   border-bottom: 3px solid #42b983;
 }
 #logo {
   display: inline-block;
-  float: left;
-  font-family: $header-font;
-  font-size: 30px;
+  font-size: 1.85em;
   line-height: 40px;
   color: #333;
 }
@@ -70,4 +71,24 @@ pre {
   position: relative;
   z-index: 1;
   margin: 91px 60px 30px;
+}
+@media screen and (max-width: 720px) {
+  body {
+    font-size: 14px;
+  }
+  #header {
+    position: relative;
+    text-align: center;
+    padding: 18px 0;
+  }
+  #nav {
+    margin-top: 0.4em;
+    float: none;
+  }
+  #logo {
+    display: block;
+  }
+  #main {
+    margin: 0 20px 18px;
+  }
 }
