@@ -54,13 +54,12 @@
 
 <div class="content with-sidebar">
     <h1>Instantiation Options</h1>
-    <h3 id="Data_-26-amp-3b-_Logic">Data &amp; Logic</h3>
+    <h2 id="Data_-26-amp-3b-_Logic">Data &amp; Logic</h2>
+<h3 id="data">data</h3>
 <ul>
-<li><h4 id="data">data</h4>
-<p>  Type: <code>Object</code></p>
-<p>  The data object for the ViewModel. The ViewModel will proxy access to all its properties. The object it self can be accessed as <code>vm.$data</code>.</p>
-</li>
+<li><strong>Type:</strong> <code>Object</code></li>
 </ul>
+<p>The data object for the ViewModel. The ViewModel will proxy access to all its properties. The object it self can be accessed as <code>vm.$data</code>.</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -71,24 +70,25 @@
 8
 9
 10
-</pre></td><td class="code"><pre>    <span class="keyword">var</span> data = { a: <span class="number">1</span> }
-    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
-        data: data
-    })
-    vm.a <span class="comment">// 1</span>
-    vm.a = <span class="number">2</span>
-    data.a <span class="comment">// 2</span>
-    data.a = <span class="number">3</span>
-    vm.a <span class="comment">// 3</span>
-    vm.$data === data <span class="comment">// true</span>
+11
+</pre></td><td class="code"><pre><span class="keyword">var</span> data = { a: <span class="number">1</span> }
+<span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
+    data: data
+})
+vm.a <span class="comment">// 1</span>
+vm.a = <span class="number">2</span>
+data.a <span class="comment">// 2</span>
+data.a = <span class="number">3</span>
+vm.a <span class="comment">// 3</span>
+vm.$data === data <span class="comment">// true</span>
+<span class="keyword">var</span> a = <span class="string">"fesfsef"</span>
 </pre></td></tr></table></figure>
 
+<h3 id="methods">methods</h3>
 <ul>
-<li><h4 id="methods">methods</h4>
-<p>  Type: <code>Object</code></p>
-<p>  Methods to be copied to the ViewModel. All methods will have their <code>this</code> context automatically bound to the ViewModel.</p>
-</li>
+<li><strong>Type:</strong> <code>Object</code></li>
 </ul>
+<p>Methods to be copied to the ViewModel. All methods will have their <code>this</code> context automatically bound to the ViewModel.</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -99,104 +99,117 @@
 8
 9
 10
-</pre></td><td class="code"><pre>    <span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
-        data: { a: <span class="number">1</span> },
-        methods: {
-            plus: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-                <span class="keyword">this</span>.a++
-            }
+</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
+    data: { a: <span class="number">1</span> },
+    methods: {
+        plus: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+            <span class="keyword">this</span>.a++
         }
-    })
-    vm.plus()
-    vm.a <span class="comment">// 2</span>
+    }
+})
+vm.plus()
+vm.a <span class="comment">// 2</span>
 </pre></td></tr></table></figure>
 
-<h3 id="DOM_Element">DOM Element</h3>
+<h2 id="DOM_Element">DOM Element</h2>
+<h3 id="el">el</h3>
 <ul>
-<li><h4 id="el">el</h4>
-<p>  Type: <code>String</code> or <code>HTMLElement</code></p>
-<p>  Provide the ViewModel with an existing DOM node. It can be either a <code>querySelector()</code> selector or an actual node. The element will be accessible as <code>vm.$el</code>.</p>
-<p>  If this option is omitted, a detached node will be automatically created.</p>
-<p>  Restriction: only respected as an instantiation option, i.e. not in <code>Vue.extend()</code></p>
-</li>
-<li><h4 id="template">template</h4>
-<p>  Type: <code>String</code></p>
-<p>  A raw template string which will be converted into a DOM fragment and cloned into <code>vm.$el</code>. It will overwrite <code>vm.$el</code>‘s existing inner content.</p>
-</li>
-<li><h4 id="replace">replace</h4>
-<p>  Type: <code>Boolean</code><br>  Default: <code>false</code></p>
-<p>  Whether to replace <code>vm.$el</code> with the template’s top level element.</p>
-<p>  Restriction: only respected if the <strong>template</strong> option is present and the template contains exactly 1 top level element.</p>
-</li>
-<li><h4 id="tagName">tagName</h4>
-<p>  Type: <code>String</code><br>  Default: <code>&#39;div&#39;</code></p>
-<p>  The tag name to be used when creating <code>vm.$el</code>.</p>
-<p>  Restriction: only respected when the <strong>el</strong> option is omitted and the <strong>replace</strong> option is <code>false</code>.</p>
-</li>
-<li><h4 id="id">id</h4>
-<p>  Type: <code>String</code></p>
-<p>  Set as <code>vm.$el.id</code>.</p>
-</li>
-<li><h4 id="className">className</h4>
-<p>  Type: <code>String</code></p>
-<p>  Set as <code>vm.$el.className</code>.</p>
-</li>
-<li><h4 id="attributes">attributes</h4>
-<p>  Type: <code>Object</code></p>
-<p>  A hash of HTML attributes to be set on <code>vm.$el</code>.</p>
-</li>
+<li><strong>Type:</strong> <code>String</code> or <code>HTMLElement</code></li>
+<li><strong>Restriction:</strong> only respected as an instantiation option, i.e. not in <code>Vue.extend()</code></li>
 </ul>
-<h3 id="Lifecycle_Hooks">Lifecycle Hooks</h3>
+<p>Provide the ViewModel with an existing DOM node. It can be either a <code>querySelector()</code> selector or an actual node. The element will be accessible as <code>vm.$el</code>. If this option is omitted, a detached node will be automatically created.</p>
+<h3 id="template">template</h3>
+<ul>
+<li><strong>Type:</strong> <code>String</code></li>
+</ul>
+<p>A raw template string which will be converted into a DOM fragment and cloned into <code>vm.$el</code>. It will overwrite <code>vm.$el</code>‘s existing inner content.</p>
+<h3 id="replace">replace</h3>
+<ul>
+<li><strong>Type:</strong> <code>Boolean</code>  </li>
+<li><strong>Default:</strong> <code>false</code></li>
+<li><strong>Restriction:</strong> only respected if the <strong>template</strong> option is present and the template contains exactly 1 top level element.</li>
+</ul>
+<p>Whether to replace <code>vm.$el</code> with the template’s top level element.</p>
+<h3 id="tagName">tagName</h3>
+<ul>
+<li><strong>Type:</strong> <code>String</code>  </li>
+<li><strong>Default:</strong> <code>&#39;div&#39;</code></li>
+<li><strong>Restriction:</strong> only respected when the <strong>el</strong> option is omitted and the <strong>replace</strong> option is <code>false</code>.</li>
+</ul>
+<p>The tag name to be used when creating <code>vm.$el</code>.</p>
+<h3 id="id">id</h3>
+<ul>
+<li><strong>Type:</strong> <code>String</code></li>
+</ul>
+<p>Set as <code>vm.$el.id</code>.</p>
+<h3 id="className">className</h3>
+<ul>
+<li><strong>Type:</strong> <code>String</code></li>
+</ul>
+<p>Set as <code>vm.$el.className</code>.</p>
+<h3 id="attributes">attributes</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+</ul>
+<p>A hash of HTML attributes to be set on <code>vm.$el</code>.</p>
+<h2 id="Lifecycle_Hooks">Lifecycle Hooks</h2>
 <p>All lifecycle hooks have their <code>this</code> context bound to the ViewModel they belong to.</p>
+<h3 id="beforeCompile">beforeCompile</h3>
 <ul>
-<li><h4 id="beforeCompile">beforeCompile</h4>
-<p>  Alias: <code>created</code><br>  Type: <code>Function</code></p>
-<p>  Called before the compilation starts. Can be used to attach additional data to be observed on the ViewModel.</p>
-</li>
-<li><h4 id="afterCompile">afterCompile</h4>
-<p>  Alias: <code>ready</code><br>  Type: <code>Function</code></p>
-<p>  Called after the compilation has ended and the ViewModel is ready.</p>
-</li>
-<li><h4 id="enteredView">enteredView</h4>
-<p>  Type: <code>Function</code></p>
-<p>  Called when <code>vm.$el</code> is attached to DOM by a VueJS directive. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
-</li>
-<li><h4 id="leftView">leftView</h4>
-<p>  Type: <code>Function</code></p>
-<p>  Called when <code>vm.$el</code> is removed from the DOM by a VueJS directive. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
-</li>
-<li><h4 id="beforeDestroy">beforeDestroy</h4>
-<p>  Type: <code>Function</code></p>
-<p>  Called before a ViewModel is destroyed.</p>
-</li>
-<li><h4 id="afterDestroy">afterDestroy</h4>
-<p>  Type: <code>Function</code></p>
-<p>  Called after a ViewModel has been destroyed.</p>
-</li>
+<li><strong>Type:</strong> <code>Function</code></li>
+<li>Alias: <code>created</code></li>
 </ul>
-<h3 id="Private_Assets">Private Assets</h3>
+<p>Called before the compilation starts. Can be used to attach additional data to be observed on the ViewModel.</p>
+<h3 id="afterCompile">afterCompile</h3>
+<ul>
+<li><strong>Type:</strong> <code>Function</code></li>
+<li>Alias: <code>ready</code></li>
+</ul>
+<p>Called after the compilation has ended and the ViewModel is ready.</p>
+<h3 id="enteredView">enteredView</h3>
+<ul>
+<li><strong>Type:</strong> <code>Function</code></li>
+</ul>
+<p>Called when <code>vm.$el</code> is attached to DOM by a VueJS directive. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
+<h3 id="leftView">leftView</h3>
+<ul>
+<li><strong>Type:</strong> <code>Function</code></li>
+</ul>
+<p>Called when <code>vm.$el</code> is removed from the DOM by a VueJS directive. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
+<h3 id="beforeDestroy">beforeDestroy</h3>
+<ul>
+<li><strong>Type:</strong> <code>Function</code></li>
+</ul>
+<p>Called before a ViewModel is destroyed.</p>
+<h3 id="afterDestroy">afterDestroy</h3>
+<ul>
+<li><strong>Type:</strong> <code>Function</code></li>
+</ul>
+<p>Called after a ViewModel has been destroyed.</p>
+<h2 id="Private_Assets">Private Assets</h2>
 <p>These are private assets that will be available only to this ViewModel and its children during compilation.</p>
+<h3 id="directives">directives</h3>
 <ul>
-<li><h4 id="directives">directives</h4>
-<p>  Type: <code>Object</code></p>
-</li>
-<li><h4 id="filters">filters</h4>
-<p>  Type: <code>Object</code></p>
-</li>
-<li><h4 id="components">components</h4>
-<p>  Type: <code>Object</code></p>
-</li>
-<li><h4 id="partials">partials</h4>
-<p>  Type: <code>Object</code></p>
-</li>
+<li><strong>Type:</strong> <code>Object</code></li>
 </ul>
-<h3 id="Misc">Misc</h3>
+<h3 id="filters">filters</h3>
 <ul>
-<li><h4 id="lazy">lazy</h4>
-<p>  Type: <code>Boolean</code></p>
-<p>  Whether to trigger <code>v-model</code> updates only on <code>change</code> event (hit enter or lose focus) or on every <code>input</code> event (on every keystroke).</p>
-</li>
+<li><strong>Type:</strong> <code>Object</code></li>
 </ul>
+<h3 id="components">components</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+</ul>
+<h3 id="partials">partials</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+</ul>
+<h2 id="Misc">Misc</h2>
+<h3 id="lazy">lazy</h3>
+<ul>
+<li><strong>Type:</strong> <code>Boolean</code></li>
+</ul>
+<p>Whether to trigger <code>v-model</code> updates only on <code>change</code> event (hit enter or lose focus) or on every <code>input</code> event (on every keystroke).</p>
 
 </div>
         </div>
