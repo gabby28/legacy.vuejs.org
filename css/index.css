@@ -118,8 +118,12 @@ code {
   margin: 0 2px;
   border: 1px solid #e6e6e6;
 }
+em {
+  color: #7f8c8d;
+}
 .highlight {
   margin: 0;
+  overflow-x: scroll;
 }
 .highlight table,
 .highlight tr,
@@ -211,6 +215,13 @@ code {
     display: block;
   }
   #main {
-    margin: 0 1.6em 1.6em;
+    margin: 0 1.4em;
   }
+}
+#main {
+  text-align: center;
+}
+#main h1 {
+  font-size: 3em;
+  margin-top: 4em;
 }

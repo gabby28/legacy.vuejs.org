@@ -118,8 +118,12 @@ code {
   margin: 0 2px;
   border: 1px solid #e6e6e6;
 }
+em {
+  color: #7f8c8d;
+}
 .highlight {
   margin: 0;
+  overflow-x: scroll;
 }
 .highlight table,
 .highlight tr,
@@ -211,7 +215,7 @@ code {
     display: block;
   }
   #main {
-    margin: 0 1.6em 1.6em;
+    margin: 0 1.4em;
   }
 }
 .sidebar {
@@ -256,7 +260,7 @@ code {
 .content figure,
 .content p,
 .content ul {
-  margin: 0.8em 0;
+  margin: 0.8em 0 0 0.6em;
 }
 .content p,
 .content ul {
@@ -266,6 +270,15 @@ code {
   font-size: 0.9em;
   padding-left: 1.25em;
   color: #2c3e50;
+}
+.content a {
+  color: #42b983;
+}
+.content blockquote {
+  margin: 0;
+}
+.content blockquote p {
+  margin-left: 0;
 }
 .content.with-sidebar {
   margin-left: 280px;
