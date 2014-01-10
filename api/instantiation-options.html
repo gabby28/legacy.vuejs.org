@@ -30,6 +30,7 @@
         <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
+        
         <div id="main">
             
     <div class="sidebar">
@@ -60,7 +61,20 @@
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
-<p>The data object for the ViewModel. The ViewModel will proxy access to all its properties. The object it self can be accessed as <code>vm.$data</code>.</p>
+<p>The data object for the ViewModel. It can be accessed as <code>vm.$data</code>:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">var</span> data = { a: <span class="number">1</span> }
+<span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
+    data: data
+})
+vm.$data === data <span class="comment">// true</span>
+</pre></td></tr></table></figure>
+
+<p>The ViewModel will proxy access to all its properties, therefore you can manipulate the properties on the ViewModel and the changes get synced back to the actual data object:</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -68,28 +82,22 @@
 5
 6
 7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="keyword">var</span> data = { a: <span class="number">1</span> }
-<span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
-    data: data
-})
-vm.a <span class="comment">// 1</span>
+</pre></td><td class="code"><pre>vm.a <span class="comment">// 1</span>
+
 vm.a = <span class="number">2</span>
 data.a <span class="comment">// 2</span>
+
 data.a = <span class="number">3</span>
 vm.a <span class="comment">// 3</span>
-vm.$data === data <span class="comment">// true</span>
-<span class="keyword">var</span> a = <span class="string">"fesfsef"</span>
 </pre></td></tr></table></figure>
 
+<p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. Under the hood though, vue.js attaches an hidden property <code>__observer__</code> and recursively converts the object’s non-function properties into getters and setters, except for those with a key that starts with <code>$</code> or <code>_</code>.</p>
 <h3 id="methods">methods</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
 <p>Methods to be copied to the ViewModel. All methods will have their <code>this</code> context automatically bound to the ViewModel.</p>
+<p><strong>Example:</strong></p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -123,7 +131,10 @@ vm.a <span class="comment">// 2</span>
 <ul>
 <li><strong>Type:</strong> <code>String</code></li>
 </ul>
-<p>A raw template string which will be converted into a DOM fragment and cloned into <code>vm.$el</code>. It will overwrite <code>vm.$el</code>‘s existing inner content.</p>
+<p>A string template to be inserted into <code>vm.$el</code>. Any existing markup inside <code>vm.$el</code> will be overwriiten. If the <strong>replace</strong> option is <code>true</code>, the template will replace <code>vm.$el</code> entirely.</p>
+<p>If it starts with <code>#</code> it will be used as a querySelector and use the selected element’s innerHTML and the template string. This allows the use of the common <code>&lt;script type=&quot;x-template&quot;&gt;</code> trick to include templates.</p>
+<p><strong>Notes:</strong></p>
+<p>Vue.js uses DOM-based templating. The compiler walks through DOM nodes and looks for directives and creates data bindings. This means all vue.js templates are parsable HTML that can be converted into actual DOM nodes by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more ViewModel instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with <code>data-</code>.</p>
 <h3 id="replace">replace</h3>
 <ul>
 <li><strong>Type:</strong> <code>Boolean</code>  </li>
@@ -218,5 +229,20 @@ vm.a <span class="comment">// 2</span>
 
 </div>
         </div>
+        <script>
+            var main = document.getElementById('main'),
+                doc = document.documentElement,
+                body = document.body
+            if (document.querySelector('.sidebar')) {
+                window.addEventListener('scroll', function () {
+                    var top = doc && doc.scrollTop || body.scrollTop
+                    if (top > 94) {
+                        main.className = 'fix-sidebar'
+                    } else {
+                        main.className = ''
+                    }
+                })
+            }
+        </script>
     </body>
 </html>

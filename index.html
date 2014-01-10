@@ -30,28 +30,119 @@
         <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
-        <div id="main">
-            <h1>Under Construction</h1>
+        
+            <div id="hero">
+    <h1>Under Construction</h1>
+    <p>Vue.js is still under development so the API might change.</p>
+</div>
 <div id="features">
     <div class="feat">
         <h2>Simple</h2>
+        <p>Write some HTML, grab some JSON, create a ViewModel, there you go.</p>
     </div>
     <div class="feat">
         <h2>Fast</h2>
+        <p>Async batch DOM updates. No dirty checking.<br>See the <a href="/perf/">benchmark comparisons</a>.</p>
     </div>
     <div class="feat">
-        <h2>Expressive</h2>
+        <h2>Compact</h2>
+        <p>&lt; 11kb minified and gzipped, no dependency.</p>
+    </div>
+    <div class="feat">
+        <h2>Powerful</h2>
+        <p>Automatic dependency tracking.<br>Custom Directives and Filters.<br>Easy CSS Transitions.</p>
     </div>
     <div class="feat">
         <h2>Composable</h2>
-    </div>
-    <div class="feat">
-        <h2>Lightweight</h2>
+        <p>Nestable ViewModels with inheritable data, flexible event system and encapsulated assets.</p>
     </div>
     <div class="feat">
         <h2>Module Friendly</h2>
+        <p>Component, Browserify, Bower or RequireJS, all ready to go. See Installation.</p>
     </div>
 </div>
+        
+        <div id="main">
+            
+<div class="content">
+    <h1></h1>
+    <h2 id="Quick_Example">Quick Example</h2>
+<p><strong>HTML</strong></p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"app"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"todos"</span> <span class="attribute">class</span>=<span class="value">"&#123;&#123;done ? 'done' : ''&#125;&#125;"</span>&gt;</span>
+            &#123;&#123;content&#125;&#125;
+        <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><strong>JavaScript</strong></p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="keyword">var</span> data = {
+    title: <span class="string">'todos'</span>,
+    todos: [
+        {
+            done: <span class="literal">true</span>,
+            content: <span class="string">'Learn JavaScript'</span>
+        },
+        {
+            done: <span class="literal">false</span>,
+            content: <span class="string">'Learn vue.js'</span>
+        }
+    ]
+}
+
+<span class="keyword">var</span> app = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#app'</span>,
+    data: data
+})
+</pre></td></tr></table></figure>
+
+<p><a href="/guide/">Learn More</a></p>
+
+</div>
         </div>
+        <script>
+            var main = document.getElementById('main'),
+                doc = document.documentElement,
+                body = document.body
+            if (document.querySelector('.sidebar')) {
+                window.addEventListener('scroll', function () {
+                    var top = doc && doc.scrollTop || body.scrollTop
+                    if (top > 94) {
+                        main.className = 'fix-sidebar'
+                    } else {
+                        main.className = ''
+                    }
+                })
+            }
+        </script>
     </body>
 </html>

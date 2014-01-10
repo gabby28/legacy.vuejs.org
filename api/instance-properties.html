@@ -30,6 +30,7 @@
         <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
+        
         <div id="main">
             
     <div class="sidebar">
@@ -58,33 +59,60 @@
     <h3 id="vm-24-el">vm.$el</h3>
 <ul>
 <li><strong>Type:</strong> <code>HTMLElement</code></li>
+<li><strong>Read only</strong></li>
 </ul>
+<p>The DOM node that the ViewModel is managing.</p>
 <h3 id="vm-24-data">vm.$data</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
+<p>The data object that the ViewModel is observing. You can swap it with a new object. The ViewModel proxies access to the properties on its data object.</p>
 <h3 id="vm-24-">vm.$</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
+<li><strong>Read only</strong></li>
 </ul>
-<h3 id="vm-24-compiler">vm.$compiler</h3>
-<ul>
-<li><strong>Type:</strong> <code>Object Compiler</code></li>
-</ul>
+<p>An object that holds child ViewModels that has <code>v-component-id</code> registered. For more details see <a href="/api/directives.html#v-component-id">v-component-id</a>.</p>
 <h3 id="vm-24-index">vm.$index</h3>
 <ul>
 <li><strong>Type:</strong> <code>Number</code></li>
 </ul>
+<p>The Array index of a child ViewModel created by <code>v-repeat</code>. For more details see <a href="/api/directives.html#v-repeat">v-repeat</a>.</p>
 <h3 id="vm-24-parent">vm.$parent</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object ViewModel</code></li>
+<li><strong>Read only</strong></li>
 </ul>
+<p>The parent ViewModel, if the current ViewModel has one.</p>
 <h3 id="vm-24-root">vm.$root</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object ViewModel</code></li>
+<li><strong>Read only</strong></li>
 </ul>
+<p>The root ViewModel. It the current ViewModel has no parents this value will be itself.</p>
+<h3 id="vm-24-compiler">vm.$compiler</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object Compiler</code></li>
+<li><strong>Read only</strong></li>
+</ul>
+<p>The Compiler instance of the ViewModel. This object maintains some internal state of the ViewModel such as data bindings and in most cases you should avoid touching it.</p>
 
 </div>
         </div>
+        <script>
+            var main = document.getElementById('main'),
+                doc = document.documentElement,
+                body = document.body
+            if (document.querySelector('.sidebar')) {
+                window.addEventListener('scroll', function () {
+                    var top = doc && doc.scrollTop || body.scrollTop
+                    if (top > 94) {
+                        main.className = 'fix-sidebar'
+                    } else {
+                        main.className = ''
+                    }
+                })
+            }
+        </script>
     </body>
 </html>

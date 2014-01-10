@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Overview - vue.js</title>
+        <title>Installation - vue.js</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
@@ -30,13 +30,14 @@
         <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
+        
         <div id="main">
             
     <div class="sidebar">
     <h2>Guide</h2>
     <ul>
     
-        <li><a href="/guide/index.html" class="sidebar-link current">Overview</a></li>
+        <li><a href="/guide/index.html" class="sidebar-link current">Installation</a></li>
     
         <li><a href="/guide/getting-started.html" class="sidebar-link">Getting Started</a></li>
     
@@ -56,26 +57,58 @@
 </div>
 
 <div class="content with-sidebar">
-    <h1>Overview</h1>
-    <p>VueJS shares a number of concepts with AngularJS. If you have used Angular before, you will find VueJS very easy to pick up.</p>
-<h2 id="View">View</h2>
-<p>The actual HTML that the user sees.</p>
-<h2 id="Template">Template</h2>
-<p>The HTML with additional markup.</p>
-<h2 id="Model">Model</h2>
-<p>A slightly modified plain JavaScript object.</p>
-<h2 id="ViewModel">ViewModel</h2>
-<p>An object that syncs the Model and the View.</p>
-<h2 id="Directive">Directive</h2>
-<p>A prefixed HTML attribute that tells VueJS to do something about an element.</p>
-<h2 id="Filter">Filter</h2>
-<p>A function to process the value with before updating the View.</p>
-<h2 id="Expression">Expression</h2>
-<p>Simple JavaScript expressions that can be used inside directives.</p>
-<h2 id="Computed_Property">Computed Property</h2>
-<p>A model property that gets auto-updated when its dependencies change.</p>
+    <h1>Installation</h1>
+    <h2 id="Standalone">Standalone</h2>
+<p>Simply <a href="https://github.com/yyx990803/vue/tree/master/dist" target="_blank">download</a> a built version and include it with a <code>&lt;script&gt;</code> tag.</p>
+<h2 id="Component">Component</h2>
+<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ component install yyx990803/vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td></tr></table></figure>
+
+<h2 id="Browserify">Browserify</h2>
+<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ npm install vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td></tr></table></figure>
+
+<h2 id="Bower">Bower</h2>
+<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ bower install vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
+</pre></td></tr></table></figure>
+
+<p><code>Vue</code> will be registered as a global variable.</p>
+<h2 id="Module_Loaders">Module Loaders</h2>
+<p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as a CommonJS or AMD module.</p>
+<h2 id="Ready-3f-">Ready?</h2>
+<p><a href="/guide/getting-started.html">Let’s Get Started</a>.</p>
 
 </div>
         </div>
+        <script>
+            var main = document.getElementById('main'),
+                doc = document.documentElement,
+                body = document.body
+            if (document.querySelector('.sidebar')) {
+                window.addEventListener('scroll', function () {
+                    var top = doc && doc.scrollTop || body.scrollTop
+                    if (top > 94) {
+                        main.className = 'fix-sidebar'
+                    } else {
+                        main.className = ''
+                    }
+                })
+            }
+        </script>
     </body>
 </html>

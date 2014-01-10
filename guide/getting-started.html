@@ -30,13 +30,14 @@
         <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
+        
         <div id="main">
             
     <div class="sidebar">
     <h2>Guide</h2>
     <ul>
     
-        <li><a href="/guide/index.html" class="sidebar-link">Overview</a></li>
+        <li><a href="/guide/index.html" class="sidebar-link">Installation</a></li>
     
         <li><a href="/guide/getting-started.html" class="sidebar-link current">Getting Started</a></li>
     
@@ -57,45 +58,59 @@
 
 <div class="content with-sidebar">
     <h1>Getting Started</h1>
-    <h2 id="Installation">Installation</h2>
-<h3 id="Component">Component</h3>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ component install yyx990803/vue
-</pre></td></tr></table></figure>
-
+    <h2 id="Introduction">Introduction</h2>
+<p>Vue.js is a library that aims to simplify the development of interactive interfaces.</p>
+<p>Technically, it provides the <a href="#ViewModel">ViewModel</a> layer of the MVVM pattern, which connects the <a href="#View">View</a> and the <a href="#Model">Model</a> via two way data bindings.</p>
+<p>Philosophically, the primary goal is to allow the developer to embrace an extremely simple mental model when dealing with interfaces - there’s only one type of object you need to worry about: the ViewModel. It is where all the view logic happens, and manipulating the ViewModel will automatically keep the View and the Model in sync. You can roughly think of them as composable components. Actuall DOM manipulations and output formatting are abstracted away into <a href="#Directives">Directives</a> and <a href="#Filters">Filters</a>.</p>
+<p>API-wise vue.js is heavily influenced by <a href="http://angularjs.org" target="_blank">AngularJS</a>, <a href="http://ractivejs.org" target="_blank">Ractive.js</a> and <a href="http://www.rivetsjs.com" target="_blank">Rivets.js</a>. If you have used any of these before, you will find vue.js very easy to pick up. If you are unfamiliar with some of the terms mentioned above, read on for a brief overview of what they mean. Otherwise, you can jump right to <a href="#A_Quick_Example">the quick example</a>.</p>
+<h2 id="Concepts_Overview">Concepts Overview</h2>
+<h3 id="ViewModel">ViewModel</h3>
+<p>An object that syncs the Model and the View. In vue.js, ViewModels are instantiated with the <code>Vue</code> constructor or its sub-classes:</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(options)
 </pre></td></tr></table></figure>
 
-<h3 id="Browserify">Browserify</h3>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ npm install vue
-</pre></td></tr></table></figure>
-
+<p>This is the primary object that you will be interacting with as a developer when using vue.js. See <a href="/api/">Class: Vue</a> for more details.</p>
+<h3 id="View">View</h3>
+<p>The actual HTML/DOM that the user sees.</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td><td class="code"><pre>vm.$el <span class="comment">// The View</span>
 </pre></td></tr></table></figure>
 
-<h3 id="Bower">Bower</h3>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ bower install vue
+<p>When using vue.js, you rarely have to touch the View yourself except in custom directives (explained later). View updates will be automatically triggered when the data changes.</p>
+<h3 id="Model">Model</h3>
+<p>A slightly modified plain JavaScript object.</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>vm.$data <span class="comment">// The Model</span>
 </pre></td></tr></table></figure>
 
+<p>In vue.js, models are simply plain JavaScript objects, or <strong>data objects</strong>. You can manipulate their properties and ViewModels that are observing them will be notified of the changes. For technical details see <a href="/api/instantiation-options.html#data">Instantiation Options: data</a>.</p>
+<h3 id="Directives">Directives</h3>
+<p>Prefixed HTML attributes that tell vue.js to do something about a DOM node.</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p><code>Vue</code> will be registered as a global variable.</p>
-<h3 id="Module_Loaders">Module Loaders</h3>
-<p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as a CommonJS or AMD module.</p>
-<h3 id="Standalone">Standalone</h3>
-<p>Simply include a built version in <code>/dist</code> with a <code>&lt;script&gt;</code> tag.</p>
+<p>Here the div element has a <code>v-text</code> directive with the value <code>message</code>. What it does is telling vue.js to keep the div’s textContent in sync with the ViewModel’s <code>message</code> property.</p>
+<p>You can also use mustache-style bindings:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Directives can encapsulate arbitrary DOM manipulations. Check out the full list of <a href="/api/directives.html">built-in directives</a>. You can also <a href="/guide/custom-directive.html">write your custom directives</a>.</p>
+<h3 id="Filters">Filters</h3>
+<p>Functions that are used to process the raw values before updating the View. They are denoted by a “pipe” inside directives or bindings:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;message | capitalize&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. You can chain multiple filters together. Check out the full list of <a href="/api/filters.html">built-in filters</a> and how to <a href="/guide/custom-filter.html">write custom filters</a>.</p>
 <h2 id="A_Quick_Example">A Quick Example</h2>
 <p><strong>HTML</strong></p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 2
 3
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span> <span class="attribute">v-on</span>=<span class="value">"click:changeText"</span>&gt;</span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">p</span> <span class="attribute">v-text</span>=<span class="value">"hello"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
@@ -107,26 +122,38 @@
 4
 5
 6
-7
-8
-9
-10
-11
 </pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
     el: <span class="string">'#demo'</span>,
     data: {
         hello: <span class="string">'Hello World!'</span>,
-    },
-    methods: {
-        changeText: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-            <span class="keyword">this</span>.hello = <span class="string">'Hello VueJS!'</span>
-       }    
     }
 })
 </pre></td></tr></table></figure>
 
+<h2 id="Registering_Handlers">Registering Handlers</h2>
+<h2 id="Using_Templates_-2f-_Partials">Using Templates / Partials</h2>
+<h2 id="Computed_Properties">Computed Properties</h2>
+<h2 id="Expressions">Expressions</h2>
+<h2 id="Repeated_Items">Repeated Items</h2>
+<h2 id="Two-way_Bindings">Two-way Bindings</h2>
+<h2 id="Extending_the_ViewModel">Extending the ViewModel</h2>
 
 </div>
         </div>
+        <script>
+            var main = document.getElementById('main'),
+                doc = document.documentElement,
+                body = document.body
+            if (document.querySelector('.sidebar')) {
+                window.addEventListener('scroll', function () {
+                    var top = doc && doc.scrollTop || body.scrollTop
+                    if (top > 94) {
+                        main.className = 'fix-sidebar'
+                    } else {
+                        main.className = ''
+                    }
+                })
+            }
+        </script>
     </body>
 </html>
