@@ -34,6 +34,6 @@
 }
 @media screen and (max-width: 600px) {
   #benchmark-results .bar {
-    width: 40%;
+    width: 45%;
   }
 }
