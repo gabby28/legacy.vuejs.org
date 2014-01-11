@@ -298,7 +298,14 @@ a.button:hover {
   background-position: -320px 0;
 }
 @media screen and (max-width: 420px) {
+  #hero {
+    margin: 3em 0 1em;
+  }
+  #hero h1 {
+    font-size: 2em;
+  }
   #hero a.button {
+    font-size: 1.2em;
     margin: 0.5em 0;
   }
 }
