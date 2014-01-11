@@ -223,6 +223,9 @@ p {
   margin: 5em 2em;
   text-align: center;
 }
+#hero a.button {
+  width: 180px;
+}
 h1 {
   font-size: 3em;
 }
@@ -236,14 +239,14 @@ a.button {
   padding: 0.5em 1.5em;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-  border-bottom: 1px solid #389d6f;
+  border-bottom: 1px solid #3aa373;
   transition: background-color 0.2s ease-out;
 }
 a.button:hover {
   background-color: #53c290;
 }
 #features {
-  width: 80%;
+  width: 800px;
   margin: 0 auto;
   text-align: center;
 }
@@ -252,8 +255,11 @@ a.button:hover {
   -moz-box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
-  width: 23%;
-  margin: 0 3%;
+  width: 200px;
+  margin: 15px 30px;
+}
+#features .feat p {
+  color: #7f8c8d;
 }
 #main {
   max-width: 720px;
@@ -272,15 +278,34 @@ a.button:hover {
 #learn-more a.button {
   font-size: 1.2em;
 }
-@media screen and (max-width: 1200px) {
-  #features .feat {
-    width: 38%;
-    margin: 0 5%;
+.icon {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background: url("../images/icons.png");
+  background-size: 400px 80px;
+}
+.icon.fast {
+  background-position: -80px 0;
+}
+.icon.compact {
+  background-position: -160px 0;
+}
+.icon.powerful {
+  background-position: -240px 0;
+}
+.icon.composable {
+  background-position: -320px 0;
+}
+@media screen and (max-width: 420px) {
+  #hero a.button {
+    margin: 0.5em 0;
   }
 }
-@media screen and (max-width: 600px) {
-  #features .feat {
-    margin: 0 auto;
-    width: 84%;
+@media screen and (max-width: 860px) {
+  #features,
+  #hero {
+    font-size: 16px;
+    width: auto;
   }
 }
