@@ -57,12 +57,116 @@
 <div class="content with-sidebar">
     <h1 id="Global_Methods">Global Methods</h1>
 <h3 id="Vue-extend-28-_options_-29-">Vue.extend( options )</h3>
-<h3 id="Vue-config-28-_options_-29-">Vue.config( options )</h3>
-<h3 id="Vue-directive-28-_name-2c-_definition_-29-">Vue.directive( name, definition )</h3>
-<h3 id="Vue-filter-28-_name-2c-_definition_-29-">Vue.filter( name, definition )</h3>
-<h3 id="Vue-component-28-_name-2c-_definition_-29-">Vue.component( name, definition )</h3>
-<h3 id="Vue-partial-28-_name-2c-_definition_-29-">Vue.partial( name, definition )</h3>
-<h3 id="Vue-transition-28-_name-2c-_definition_-29-">Vue.transition( name, definition )</h3>
+<ul>
+<li><strong>options</strong> <code>Object</code></li>
+</ul>
+<p>Create a subclass of the Vue class. Most <a href="/api/instantiation-options.html">instantiation options</a> can be used here, with the exception of the <code>el</code> option because you can’t create multiple ViewModel instances on the same element. For more details see <a href="/guide/composition.html">Extending and Composing ViewModels</a>.</p>
+<p><strong>Example</strong></p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> Avatar = Vue.extend(options)
+<span class="keyword">var</span> avatar = <span class="keyword">new</span> Avatar() <span class="comment">// you can pass more options here</span>
+</pre></td></tr></table></figure>
+
+<h3 id="Vue-config-28-_options_-7c-_key-2c-_-5b-value-5d-_-29-">Vue.config( options | key, [value] )</h3>
+<ul>
+<li><strong>options</strong> <code>Object</code></li>
+<li><strong>key</strong> <code>String</code></li>
+<li><strong>value</strong> <code>*</code> <em>optional</em></li>
+</ul>
+<p>Configure global settings. This function is overloaded:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="comment">// get the `debug` value</span>
+Vue.config(<span class="string">'debug'</span>) <span class="comment">// false</span>
+<span class="comment">// set the `debug` value</span>
+Vue.config(<span class="string">'debug'</span>, <span class="literal">true</span>)
+<span class="comment">// set multiple options</span>
+Vue.config({
+    debug: <span class="literal">true</span>,
+    prefix: <span class="string">'my'</span>
+})
+</pre></td></tr></table></figure>
+
+<p>Here are the options with their default values:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>{
+    <span class="comment">// prefix for directives</span>
+    prefix: <span class="string">'v'</span>,
+    <span class="comment">// batch DOM updates and render async</span>
+    async: <span class="literal">true</span>,
+    <span class="comment">// log debug info</span>
+    debug: <span class="literal">false</span>,
+    <span class="comment">// supress warnings</span>
+    silent: <span class="literal">false</span>,
+    <span class="comment">// CSS class attached when entering view</span>
+    enterClass: <span class="string">'v-enter'</span>,
+    <span class="comment">// CSS class attached when leaving view</span>
+    leaveClass: <span class="string">'v-leave'</span>
+}
+</pre></td></tr></table></figure>
+
+<h3 id="Vue-directive-28-_id-2c-_-5b-definition-5d-_-29-">Vue.directive( id, [definition] )</h3>
+<ul>
+<li><strong>id</strong> <code>String</code></li>
+<li><strong>definition</strong> <code>Function</code> or <code>Object</code> <em>optional</em></li>
+</ul>
+<p>Register or retrieve a global custom directive. For more details see <a href="/guide/custom-directive.html">Writing Custom Directives</a>.</p>
+<h3 id="Vue-filter-28-_id-2c-_definition_-29-">Vue.filter( id, definition )</h3>
+<ul>
+<li><strong>id</strong> <code>String</code></li>
+<li><strong>definition</strong> <code>Function</code> <em>optional</em></li>
+</ul>
+<p>Register or retrieve a global custom filter. For more details see <a href="/guide/custom-filter.html">Writing Custom Filters</a>.</p>
+<h3 id="Vue-component-28-_id-2c-_definition_-29-">Vue.component( id, definition )</h3>
+<ul>
+<li><strong>id</strong> <code>String</code></li>
+<li><strong>definition</strong> <code>Function Constructor</code> or <code>Object</code> <em>optional</em></li>
+</ul>
+<p>Register or retrieve a global component. For more details see <a href="/guide/composition.md">Extending and Composing ViewModels</a>.</p>
+<h3 id="Vue-transition-28-_id-2c-_definition_-29-">Vue.transition( id, definition )</h3>
+<ul>
+<li><strong>id</strong> <code>String</code></li>
+<li><strong>definition</strong> <code>Object</code> <em>optional</em></li>
+</ul>
+<p>Register or retrieve a global transition definition. For more details see <a href="/guide/transitions.html">Using Transition Effects</a>.</p>
+<h3 id="Vue-partial-28-_id-2c-_definition_-29-">Vue.partial( id, definition )</h3>
+<ul>
+<li><strong>id</strong> <code>String</code></li>
+<li><strong>definition</strong> <code>String</code> or <code>HTMLElement</code> <em>optional</em></li>
+</ul>
+<p>Register or retrieve a global partial. The definition can be a template string, a querySelector that starts with <code>#</code>, or a DOM element (whose innerHTML will be used as the template string.)</p>
+<p><strong>Example</strong></p>
+<p>JavaScript</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>Vue.partial(<span class="string">'avatar'</span>, <span class="string">'&lt;div class="avatar"&gt;&lt;/div&gt;'</span>)
+</pre></td></tr></table></figure>
+
+<p>HTML</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; avatar&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
 
 </div>
         </div>
