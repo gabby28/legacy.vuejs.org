@@ -57,20 +57,65 @@
 <div class="content with-sidebar">
     <h1 id="Directives">Directives</h1>
 <h3 id="v-text">v-text</h3>
+<p>Updates the element’s <code>textContent</code>. &#123;&#123; Mustache &#125;&#125; style interpolations are also compiled as a <code>v-text</code> direcitve on a textNode.</p>
 <h3 id="v-html">v-html</h3>
+<p>Updates the element’s <code>innerHTML</code>. Use with caution and avoid binding this to a user-supplied value.</p>
 <h3 id="v-show">v-show</h3>
+<ul>
+<li>This directive can trigger transitions.</li>
+</ul>
+<p>Set the element’s display to <code>none</code> or its original value, depending on the truthy-ness of the binding’s value.</p>
 <h3 id="v-class">v-class</h3>
+<ul>
+<li>This directive takes an optional argument.</li>
+</ul>
+<p>If no argument is provided, it will add the binding’s value to the element’s classList, and update the class as the value changes.</p>
+<p>If a directive argument is provided, the argument will be the class to be toggled depending on the binding value’s truthy-ness.</p>
 <h3 id="v-attr">v-attr</h3>
+<ul>
+<li>This directive requires an argument.</li>
+</ul>
 <h3 id="v-on">v-on</h3>
+<ul>
+<li>This directive requires an argument.</li>
+</ul>
 <h3 id="v-if">v-if</h3>
+<ul>
+<li>This directive can trigger transitions.</li>
+</ul>
 <h3 id="v-model">v-model</h3>
+<ul>
+<li>This directive can only be used on INPUT, SELECT, TEXTAREA and elements with <code>contenteditable</code> attribute.</li>
+</ul>
 <h3 id="v-repeat">v-repeat</h3>
+<ul>
+<li>This directive requires the value to be Array or falsy.</li>
+<li>This directive can trigger transitions.</li>
+</ul>
 <h3 id="v-with">v-with</h3>
+<ul>
+<li>This directive requires the value to be an Object or falsy.</li>
+</ul>
 <h3 id="v-component">v-component</h3>
+<ul>
+<li>This directive takes a registered asset id.</li>
+</ul>
 <h3 id="v-component-id">v-component-id</h3>
+<ul>
+<li>This directive takes a registered asset id.</li>
+</ul>
 <h3 id="v-transition">v-transition</h3>
+<ul>
+<li>This directive takes a registered asset id.</li>
+</ul>
 <h3 id="v-partial">v-partial</h3>
+<ul>
+<li>This directive takes a registered asset id.</li>
+</ul>
 <h3 id="v-pre">v-pre</h3>
+<ul>
+<li>This directive is an empty direcitve (it doesn’t need a keypath or expression)</li>
+</ul>
 
 </div>
         </div>

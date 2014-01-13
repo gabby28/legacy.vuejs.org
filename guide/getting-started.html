@@ -41,15 +41,15 @@
     
         <li><a href="/guide/getting-started.html" class="sidebar-link current">Getting Started</a></li>
     
-        <li><a href="/guide/custom-directive.html" class="sidebar-link">Writing Custom Directives</a></li>
+        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
     
-        <li><a href="/guide/custom-filter.html" class="sidebar-link">Writing Custom Filters</a></li>
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
     
         <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
-        <li><a href="/guide/forms.html" class="sidebar-link">Froms</a></li>
+        <li><a href="/guide/forms.html" class="sidebar-link">Forms</a></li>
     
         <li><a href="/guide/routing.html" class="sidebar-link">Routing</a></li>
     
@@ -97,14 +97,14 @@
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>Directives can encapsulate arbitrary DOM manipulations. Check out the full list of <a href="/api/directives.html">built-in directives</a>. You can also <a href="/guide/custom-directive.html">write your custom directives</a>.</p>
+<p>Directives can encapsulate arbitrary DOM manipulations. Check out the full list of <a href="/api/directives.html#List_of_Built-in_Directives">built-in directives</a>. You can also <a href="/guide/directives.html#Writing_a_Custom_Directive">write your custom directives</a>.</p>
 <h3 id="Filters">Filters</h3>
 <p>Functions that are used to process the raw values before updating the View. They are denoted by a “pipe” inside directives or bindings:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;message | capitalize&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. You can chain multiple filters together. Check out the full list of <a href="/api/filters.html">built-in filters</a> and how to <a href="/guide/custom-filter.html">write custom filters</a>.</p>
+<p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. You can chain multiple filters together. Check out the full list of <a href="/api/filters.html">built-in filters</a> and how to <a href="/guide/filters.html#Writing_a_Custom_Filter">write custom filters</a>.</p>
 <h2 id="A_Quick_Example">A Quick Example</h2>
 <p><strong>HTML</strong></p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
@@ -130,13 +130,10 @@
 })
 </pre></td></tr></table></figure>
 
+<h2 id="Computed_Properties">Computed Properties</h2>
+<h2 id="Repeated_Items">Repeated Items</h2>
 <h2 id="Registering_Handlers">Registering Handlers</h2>
 <h2 id="Using_Templates_-2f-_Partials">Using Templates / Partials</h2>
-<h2 id="Computed_Properties">Computed Properties</h2>
-<h2 id="Expressions">Expressions</h2>
-<h2 id="Repeated_Items">Repeated Items</h2>
-<h2 id="Two-way_Bindings">Two-way Bindings</h2>
-<h2 id="Extending_the_ViewModel">Extending the ViewModel</h2>
 
 </div>
         </div>

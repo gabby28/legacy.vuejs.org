@@ -57,11 +57,25 @@
 <div class="content with-sidebar">
     <h1 id="Filters">Filters</h1>
 <h3 id="capitalize">capitalize</h3>
+<p><em>‘abc’ =&gt; ‘Abc’</em></p>
 <h3 id="uppercase">uppercase</h3>
+<p><em>‘abc’ =&gt; ‘ABC’</em></p>
 <h3 id="lowercase">lowercase</h3>
+<p><em>‘ABC’ =&gt; ‘abc’</em></p>
 <h3 id="currency">currency</h3>
+<p><em>12345 =&gt; $12,345.00</em></p>
 <h3 id="pluralize">pluralize</h3>
+<ul>
+<li>this filter takes at least one argument</li>
+</ul>
+<p><em>‘item’ =&gt; ‘item’ or ‘items’</em></p>
+<p>The arguments can be an array of strings corresponding to the single, double, triple … forms of the word to be pluralized. When the number to be pluralized exceeds the length of the args, it will use the last entry in the array.</p>
 <h3 id="key">key</h3>
+<ul>
+<li>this filter only works in <code>v-on</code></li>
+<li>this filter takes exactly one argument</li>
+</ul>
+<p>Wrap the handler so it only gets called when the keyCode matches the argument.</p>
 
 </div>
         </div>

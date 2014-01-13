@@ -60,12 +60,41 @@
 <ul>
 <li><strong>options</strong> <code>Object</code></li>
 </ul>
-<p>Create a subclass of the Vue class. Most <a href="/api/instantiation-options.html">instantiation options</a> can be used here, with the exception of the <code>el</code> option because you can’t create multiple ViewModel instances on the same element. For more details see <a href="/guide/composition.html">Extending and Composing ViewModels</a>.</p>
+<p>Create a subclass of the Vue class. Most <a href="/api/instantiation-options.html">instantiation options</a> can be used here, with the exception of the <code>el</code> option because you can’t create multiple ViewModel instances on the same element. Also see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <p><strong>Example</strong></p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
-</pre></td><td class="code"><pre><span class="keyword">var</span> Avatar = Vue.extend(options)
-<span class="keyword">var</span> avatar = <span class="keyword">new</span> Avatar() <span class="comment">// you can pass more options here</span>
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="keyword">var</span> Profile = Vue.extend({
+    tagName: <span class="string">'P'</span>,
+    template: <span class="string">'&#123;&#123;firstName&#125;&#125; &#123;&#123;lastName&#125;&#125; aka &#123;&#123;alias&#125;&#125;'</span>
+})
+
+<span class="keyword">var</span> profile = <span class="keyword">new</span> Profile({
+    data: {
+        firstName : <span class="string">'Walter'</span>,
+        lastName  : <span class="string">'White'</span>,
+        alias     : <span class="string">'Heisenberg'</span>
+    }  
+})
+
+profile.$appendTo(<span class="string">'body'</span>)
+</pre></td></tr></table></figure>
+
+<p>Will result in:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">p</span>&gt;</span>Walter White aka Heisenberg<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 </pre></td></tr></table></figure>
 
 <h3 id="Vue-config-28-_options_-7c-_key-2c-_-5b-value-5d-_-29-">Vue.config( options | key, [value] )</h3>
@@ -131,19 +160,19 @@ Vue.config({
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> or <code>Object</code> <em>optional</em></li>
 </ul>
-<p>Register or retrieve a global custom directive. For more details see <a href="/guide/custom-directive.html">Writing Custom Directives</a>.</p>
+<p>Register or retrieve a global custom directive. For more details see <a href="/guide/directives.html#Writing_a_Custom_Directive">Writing Custom Directives</a>.</p>
 <h3 id="Vue-filter-28-_id-2c-_definition_-29-">Vue.filter( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> <em>optional</em></li>
 </ul>
-<p>Register or retrieve a global custom filter. For more details see <a href="/guide/custom-filter.html">Writing Custom Filters</a>.</p>
+<p>Register or retrieve a global custom filter. For more details see <a href="/guide/filters.html#Writing_a_Custom_Filter">Writing Custom Filters</a>.</p>
 <h3 id="Vue-component-28-_id-2c-_definition_-29-">Vue.component( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function Constructor</code> or <code>Object</code> <em>optional</em></li>
 </ul>
-<p>Register or retrieve a global component. For more details see <a href="/guide/composition.md">Extending and Composing ViewModels</a>.</p>
+<p>Register or retrieve a global component. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <h3 id="Vue-transition-28-_id-2c-_definition_-29-">Vue.transition( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
@@ -157,14 +186,41 @@ Vue.config({
 </ul>
 <p>Register or retrieve a global partial. The definition can be a template string, a querySelector that starts with <code>#</code>, or a DOM element (whose innerHTML will be used as the template string.)</p>
 <p><strong>Example</strong></p>
-<p>JavaScript</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>Vue.partial(<span class="string">'avatar'</span>, <span class="string">'&lt;div class="avatar"&gt;&lt;/div&gt;'</span>)
-</pre></td></tr></table></figure>
-
 <p>HTML</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; avatar&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
+    &#123;&#123;&gt; avatar&#125;&#125;
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>JavaScript</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>Vue.partial(<span class="string">'avatar'</span>, <span class="string">'&lt;img v-attr="src:avatarURL"&gt;'</span>)
+
+<span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        avatarURL: <span class="string">'/images/avatar.jpg'</span>
+    }    
+})
+</pre></td></tr></table></figure>
+
+<p>Will result in:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/images/avatar.jpg"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Directives In Depth - vue.js</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="/css/page.css" type="text/css">
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46852172-1', 'vuejs.org');
+  ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        <div id="header">
+    <a id="logo" href="/">
+        <img src="/images/logo.png">
+        <span>vue.js</span>
+    </a>
+    <ul id="nav">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+        <li><a href="/api/" class="nav-link">API Reference</a></li>
+        <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
+</div>
+        
+        <div id="main">
+            
+    <div class="sidebar">
+    <h2>Guide</h2>
+    <ul>
+    
+        <li><a href="/guide/index.html" class="sidebar-link">Installation</a></li>
+    
+        <li><a href="/guide/getting-started.html" class="sidebar-link">Getting Started</a></li>
+    
+        <li><a href="/guide/directives.html" class="sidebar-link current">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+    
+        <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
+    
+        <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
+    
+        <li><a href="/guide/forms.html" class="sidebar-link">Forms</a></li>
+    
+        <li><a href="/guide/routing.html" class="sidebar-link">Routing</a></li>
+    
+    </ul>
+</div>
+
+<div class="content with-sidebar">
+    <h1 id="Directives_In_Depth">Directives In Depth</h1>
+<h2 id="Synopsis">Synopsis</h2>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>prefix-directiveId=<span class="string">"[arg:] ( keypath | expression ) [filters...]"</span>
+</pre></td></tr></table></figure>
+
+<h2 id="A_Simple_Example">A Simple Example</h2>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Here the prefix is <code>v</code> which is the default. The directive ID is <code>text</code> and the the keypath is <code>message</code>. This directive instructs Vue.js to update the div’s <code>textContent</code> whenever the <code>message</code> property on the ViewModel changes.</p>
+<h2 id="Expressions">Expressions</h2>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"'hello ' + user.firstName + ' ' + user.lastName"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Here we are using a computed expression instead of a single property key.  Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop. Note that inside expressions you can only access properties and methods present on the current ViewModel for security reasons.</p>
+<h2 id="Argument">Argument</h2>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"click : clickHandler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Some directives require an argument before the keypath or expression. In this example the <code>click</code> argument indicates we want the <code>v-on</code> directive to listen for a click event and then call the <code>clickHandler</code> method of the ViewModel instance.</p>
+<h2 id="Filters">Filters</h2>
+<p>Filters can be appended to directive keypaths or expressions to further process the value before updating the DOM. Filters are denoted by a single pipe (<code>|</code>) as in shell scripts. For more details see <a href="/guide/filters.html">Filters in Depth</a>.</p>
+<h2 id="Multiple_Clauses">Multiple Clauses</h2>
+<p>You can create multiple bindings of the same directive in a single attribute, separated by commas:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"
+    click   : onClick,
+    keyup   : onKeyup,
+    keydown : onKeydown
+"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="Empty_Directive">Empty Directive</h2>
+<p>Some direcitves don’t create data bindings - they simply do something to the element once and do not require a keypath or expression at all, for example the <code>v-pre</code> directive:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-pre</span>&gt;</span>
+    <span class="comment">&lt;!-- markup in here will not be compiled --&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="Writing_a_Custom_Directive">Writing a Custom Directive</h2>
+
+</div>
+        </div>
+        <script>
+            var main = document.getElementById('main'),
+                doc = document.documentElement,
+                body = document.body
+            if (document.querySelector('.sidebar')) {
+                window.addEventListener('scroll', function () {
+                    var top = doc && doc.scrollTop || body.scrollTop
+                    if (top > 94) {
+                        main.className = 'fix-sidebar'
+                    } else {
+                        main.className = ''
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>
