@@ -57,7 +57,8 @@
 <div class="content with-sidebar">
     <h1 id="Directives">Directives</h1>
 <h3 id="v-text">v-text</h3>
-<p>Updates the element’s <code>textContent</code>. &#123;&#123; Mustache &#125;&#125; style interpolations are also compiled as a <code>v-text</code> direcitve on a textNode.</p>
+<p>Updates the element’s <code>textContent</code>.</p>
+<p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations are also compiled as a <code>v-text</code> direcitve on a textNode.</p>
 <h3 id="v-html">v-html</h3>
 <p>Updates the element’s <code>innerHTML</code>. Use with caution and avoid binding this to a user-supplied value.</p>
 <h3 id="v-show">v-show</h3>
@@ -70,14 +71,28 @@
 <li>This directive takes an optional argument.</li>
 </ul>
 <p>If no argument is provided, it will add the binding’s value to the element’s classList, and update the class as the value changes.</p>
-<p>If a directive argument is provided, the argument will be the class to be toggled depending on the binding value’s truthy-ness.</p>
+<p>If a directive argument is provided, the argument will be the class to be toggled depending on the binding value’s truthy-ness. Combined with multiple clauses this can be pretty useful:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-class</span>=<span class="value">"
+    red    : hasError,
+    bold   : isImportant,
+    hidden : isHidden
+"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+</pre></td></tr></table></figure>
+
 <h3 id="v-attr">v-attr</h3>
 <ul>
-<li>This directive requires an argument.</li>
+<li>This directive requires exactly one argument.</li>
 </ul>
+<p>Updates the element’s given attribute (indicated by the argument).</p>
+<p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives. One special case you might want to use this instead of interpolation is when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> nodes. If you use interpolation for <code>src</code> and the node is inserted into the DOM before being compiled, the browser will make a failed http request trying to fetch the image.</p>
 <h3 id="v-on">v-on</h3>
 <ul>
-<li>This directive requires an argument.</li>
+<li>This directive requires exactly one argument.</li>
 </ul>
 <h3 id="v-if">v-if</h3>
 <ul>
