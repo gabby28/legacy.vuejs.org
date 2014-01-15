@@ -1323,9 +1323,7 @@ CompilerProto.markComputed = function (binding) {
         vm    = this.vm
     binding.isComputed = true
     // bind the accessors to the vm
-    if (binding.isFn) {
-        binding.value = utils.bind(value, vm)
-    } else {
+    if (!binding.isFn) {
         value.$get = utils.bind(value.$get, vm)
         if (value.$set) {
             value.$set = utils.bind(value.$set, vm)
@@ -3155,6 +3153,7 @@ module.exports = {
 
         var compiler = this.compiler,
             event    = this.arg,
+            isExp    = this.binding.isExp,
             ownerVM  = this.binding.compiler.vm
 
         if (compiler.repeat &&
@@ -3177,7 +3176,7 @@ module.exports = {
                 if (target) {
                     e.el = target
                     e.targetVM = target.vue_viewmodel
-                    handler.call(ownerVM, e)
+                    handler.call(isExp ? e.targetVM : ownerVM, e)
                 }
             }
             dHandler.event = event
