@@ -18,10 +18,11 @@
 </script>
     </head>
     <body>
-        <div id="header">
+        
+            <div id="header">
     <a id="logo" href="/">
         <img src="/images/logo.png">
-        <span>vue.js</span>
+        <span>Vue.js</span>
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
@@ -61,8 +62,8 @@
 </pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(options)
 </pre></td></tr></table></figure>
 
-<p>When you instantiate a ViewModel instance, it compiles the DOM node it is assigned to and creates data bindings that keep the DOM and the data in sync. It takes an option object that can include options about the DOM node, data object, mixin methods, lifecycle hooks and more. See the full list of <a href="/api/instantiation-options.html">Instantitation Options</a>.</p>
-<p>Each ViewModel instance has an associated DOM node <code>$el</code>, which is essentially the V in MVVM. It also has an associated JavaScript object <code>$data</code>, which is essentially the M in MVVM. Changing the M results in updates in the V. For two-way bindings, inputs in the V results in changes in the M. For more details check out <a href="/api/instance-properties.html">Instance Properties</a>.</p>
+<p>When you instantiate a ViewModel instance, it compiles the DOM element it is assigned to and creates data bindings that keep the DOM and the data in sync. It takes an option object that can include options about the DOM element, data object, mixin methods, lifecycle hooks and more. See the full list of <a href="/api/instantiation-options.html">Instantitation Options</a>.</p>
+<p>Each ViewModel instance has an associated DOM element <code>$el</code>, which is essentially the V in MVVM. It also has an associated JavaScript object <code>$data</code>, which is essentially the M in MVVM. Changing the M results in updates in the V. For two-way bindings, inputs in the V results in changes in the M. For more details check out <a href="/api/instance-properties.html">Instance Properties</a>.</p>
 <p>Each ViewModel instance also has a number of <a href="/api/instance-methods.html">Instance Methods</a> which covers data observation, event communication and dom manipulation.</p>
 <p><code>Vue</code> also holds several <a href="/api/global-methods.html">Global Methods</a>, which allow you to extend the <code>Vue</code> class, configure global settings and register global custom assets such as components, directives, filters and more.</p>
 

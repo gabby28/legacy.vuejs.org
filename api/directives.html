@@ -18,10 +18,11 @@
 </script>
     </head>
     <body>
-        <div id="header">
+        
+            <div id="header">
     <a id="logo" href="/">
         <img src="/images/logo.png">
-        <span>vue.js</span>
+        <span>Vue.js</span>
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
@@ -89,48 +90,93 @@
 <li>This directive requires exactly one argument.</li>
 </ul>
 <p>Updates the element’s given attribute (indicated by the argument).</p>
-<p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives. One special case you might want to use this instead of interpolation is when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> nodes. If you use interpolation for <code>src</code> and the node is inserted into the DOM before being compiled, the browser will make a failed http request trying to fetch the image.</p>
-<h3 id="v-on">v-on</h3>
-<ul>
-<li>This directive requires exactly one argument.</li>
-</ul>
-<h3 id="v-if">v-if</h3>
-<ul>
-<li>This directive can trigger transitions.</li>
-</ul>
-<h3 id="v-model">v-model</h3>
-<ul>
-<li>This directive can only be used on INPUT, SELECT, TEXTAREA and elements with <code>contenteditable</code> attribute.</li>
-</ul>
+<p><strong>Example:</strong></p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">v-attr</span>=<span class="value">"width:w, height:h"</span>&gt;</span><span class="tag">&lt;/<span class="title">canvas</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives. One special case you might want to use this instead of interpolation is when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. If you use interpolation for <code>src</code> and the element is inserted into the DOM before being compiled, the browser will make a failed http request trying to fetch the image.</p>
 <h3 id="v-repeat">v-repeat</h3>
 <ul>
 <li>This directive requires the value to be Array or falsy.</li>
 <li>This directive can trigger transitions.</li>
 </ul>
-<h3 id="v-with">v-with</h3>
+<p>Create a child ViewModel for every item in the binding Array. These child ViewModels will be automatically created / destroyed when mutating methods, e.g. <code>push()</code>, are called on the Array. For more details see <a href="/guide/list.html">Displaying a List</a>.</p>
+<h3 id="v-on">v-on</h3>
 <ul>
-<li>This directive requires the value to be an Object or falsy.</li>
+<li>This directive requires exactly one argument.</li>
 </ul>
+<p>Attaches an event listener to the element. The event type is denoted by the argument. For more details see <a href="/guide/events.html">Listening for Events</a>.</p>
+<h3 id="v-model">v-model</h3>
+<ul>
+<li>This directive can only be used on INPUT, SELECT, TEXTAREA and elements with <code>contenteditable</code> attribute.</li>
+</ul>
+<p>Create a two-way binding on a form or editable element. Data is synced on every <code>input</code> event by default. When the ViewModel has the <code>lazy</code> option set to true, data will be synced only on <code>change</code> events. For more details see <a href="/guide/forms.html">Handling Forms</a>.</p>
+<h3 id="v-if">v-if</h3>
+<ul>
+<li>This directive can trigger transitions.</li>
+</ul>
+<p>Conditionally insert / remove the element based on the truthy-ness of the binding value.</p>
 <h3 id="v-component">v-component</h3>
 <ul>
 <li>This directive takes a registered asset id.</li>
 </ul>
+<p>Compile this element as a child ViewModel with a registered component constructor. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
+<h3 id="v-with">v-with</h3>
+<ul>
+<li>This directive requires the value to be an Object or falsy.</li>
+</ul>
+<p>Compile this element as a child ViewModel, using the binding value as the <code>data</code> option. This can be used in combination with <code>v-component</code>.</p>
 <h3 id="v-component-id">v-component-id</h3>
 <ul>
 <li>This directive takes a registered asset id.</li>
 </ul>
+<p>Only respected when used in combination with <code>v-component</code> or <code>v-with</code>. The ViewModel will be registered in its parent’s <code>$</code> property.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"parent"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"Box"</span> <span class="attribute">v-component-id</span>=<span class="value">"box"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="comment">// register the Box component</span>
+Vue.component(<span class="string">'Box'</span>, ...)
+<span class="comment">// compile parent</span>
+<span class="keyword">var</span> parent = <span class="keyword">new</span> Vue({ el: <span class="string">'#parent'</span> })
+<span class="comment">// access the child component</span>
+<span class="keyword">var</span> child = parent.$.box
+</pre></td></tr></table></figure>
+
 <h3 id="v-transition">v-transition</h3>
 <ul>
 <li>This directive takes an optional registered asset id.</li>
 </ul>
+<p>When no value is provided, Vue.js will apply CSS transition classes to this element when adding / removing this element to / from the DOM.</p>
+<p>When an id is provided, Vue.js will execute the registered enter / leave functions before the DOM operations take place.</p>
+<p>Transitions are applied when certain transition-triggering directives modifies the element, or when the ViewModel’s DOM manipulation methods are called.</p>
+<p>For details, see <a href="/guide/transitions.html">Using Transition Effects</a>.</p>
 <h3 id="v-partial">v-partial</h3>
 <ul>
 <li>This directive takes a registered asset id.</li>
 </ul>
+<p>Replace the element’s innerHTML with a registered partial. You can also use this syntax:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; my-partial&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
 <h3 id="v-pre">v-pre</h3>
 <ul>
 <li>This directive is an empty direcitve (it doesn’t need a keypath or expression)</li>
 </ul>
+<p>Skip compilation for this element and all its children.</p>
 
 </div>
         </div>

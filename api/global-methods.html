@@ -18,10 +18,11 @@
 </script>
     </head>
     <body>
-        <div id="header">
+        
+            <div id="header">
     <a id="logo" href="/">
         <img src="/images/logo.png">
-        <span>vue.js</span>
+        <span>Vue.js</span>
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
@@ -223,6 +224,11 @@ Vue.config({
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+<h3 id="Vue-nextTick-28-_callback_-29-">Vue.nextTick( callback )</h3>
+<ul>
+<li><strong>callback</strong> <code>Function</code></li>
+</ul>
+<p>Vue.js batches view updates and execute them all asynchronously. It uses <code>requestAnimationFrame</code> if available and fallsback to <code>setTimeout(fn, 0)</code>. This method calls the callback after the next view update, which can be useful when you want to wait until the view has been updated.</p>
 
 </div>
         </div>
