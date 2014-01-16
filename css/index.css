@@ -187,6 +187,9 @@ p {
   color: #7f8c8d;
   font-size: 1.5em;
 }
+#hero .warning {
+  color: #7f8c8d;
+}
 #hero a.button {
   width: 180px;
 }
@@ -326,6 +329,12 @@ a.button:hover {
   #hero a.button {
     font-size: 1em;
     margin: 0.5em 0;
+  }
+  #hero .sub {
+    font-size: 1em;
+  }
+  #hero .warning {
+    font-size: 0.8em;
   }
   #main {
     margin: 0 auto;
