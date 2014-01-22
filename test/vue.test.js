@@ -1184,7 +1184,7 @@ CompilerProto.bindDirective = function (directive) {
 
     // for a simple directive, simply call its bind() or _update()
     // and we're done.
-    if (directive.isSimple) {
+    if (directive.isEmpty) {
         if (directive.bind) directive.bind()
         return
     }
@@ -1398,7 +1398,7 @@ CompilerProto.destroy = function () {
         // if this directive is an instance of an external binding
         // e.g. a directive that refers to a variable on the parent VM
         // we need to remove it from that binding's instances
-        if (!dir.isSimple && dir.binding.compiler !== compiler) {
+        if (!dir.isEmpty && dir.binding.compiler !== compiler) {
             instances = dir.binding.instances
             if (instances) instances.splice(instances.indexOf(dir), 1)
         }
@@ -2071,11 +2071,11 @@ function Directive (definition, expression, rawKey, compiler, node) {
     this.vm       = compiler.vm
     this.el       = node
 
-    var isSimple  = expression === ''
+    var isEmpty  = expression === ''
 
     // mix in properties from the directive definition
     if (typeof definition === 'function') {
-        this[isSimple ? 'bind' : '_update'] = definition
+        this[isEmpty ? 'bind' : '_update'] = definition
     } else {
         for (var prop in definition) {
             if (prop === 'unbind' || prop === 'update') {
@@ -2087,8 +2087,8 @@ function Directive (definition, expression, rawKey, compiler, node) {
     }
 
     // empty expression, we're done.
-    if (isSimple) {
-        this.isSimple = true
+    if (isEmpty) {
+        this.isEmpty = true
         return
     }
 
@@ -2193,11 +2193,13 @@ DirProto.refresh = function (value) {
  *  Actually invoking the _update from the directive's definition
  */
 DirProto.apply = function (value) {
-    this._update(
-        this.filters
-            ? this.applyFilters(value)
-            : value
-    )
+    if (this._update) {
+        this._update(
+            this.filters
+                ? this.applyFilters(value)
+                : value
+        )
+    }
 }
 
 /**
@@ -3347,7 +3349,7 @@ var ViewModel
 module.exports = {
 
     bind: function () {
-        if (this.isSimple) {
+        if (this.isEmpty) {
             this.build()
         }
     },

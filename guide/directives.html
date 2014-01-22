@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script src="/js/classList.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -35,39 +36,42 @@
         <div id="main">
             
     <div class="sidebar">
-    <h2>Guide</h2>
-    <ul>
-    
-        <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
-    
-        <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
-    
-        <li><a href="/guide/directives.html" class="sidebar-link current">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
-    
-        <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
-    
-        <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
-    
-        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
-    
-        <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-    
-        <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
-    
-        <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
-    
-        <li><a href="/guide/architecture.html" class="sidebar-link">App Architecture</a></li>
-    
-    </ul>
+    <div class="toggle">···</div>
+    <div class="list">
+        <h2>Guide</h2>
+        <ul>
+        
+            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+        
+            <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
+        
+            <li><a href="/guide/directives.html" class="sidebar-link current">Directives In Depth</a></li>
+        
+            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        
+            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+        
+            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+        
+            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        
+            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+        
+            <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
+        
+            <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
+        
+            <li><a href="/guide/architecture.html" class="sidebar-link">App Architecture</a></li>
+        
+        </ul>
+    </div>
 </div>
 
 <div class="content with-sidebar">
     <h1 id="Directives_In_Depth">Directives In Depth</h1>
 <h2 id="Synopsis">Synopsis</h2>
 <p>A Vue.js directive is an HTML attribute that takes the following format:</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>prefix-directiveId=<span class="string">"[arg:] ( keypath | expression ) [filters...]"</span>
 </pre></td></tr></table></figure>
 
@@ -119,21 +123,158 @@
 </pre></td></tr></table></figure>
 
 <h2 id="Writing_a_Custom_Directive">Writing a Custom Directive</h2>
+<p>You can register a global custom directive with the <code>Vue.directive()</code> method, passing in a <strong>directiveId</strong> followed by a <strong>definition object</strong>. A definition object can provide several hook functions (all optional):</p>
+<ul>
+<li><strong>bind</strong>: called only once, when the directive is first bound to the element.</li>
+<li><strong>update</strong>: called when the binding value changes. The new value is provided as the argument.</li>
+<li><strong>unbind</strong>: called only once, when the directive is unbound from the element.</li>
+</ul>
+<p><strong>Example</strong></p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'my-directive'</span>, {
+    bind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="comment">// do preparation work</span>
+        <span class="comment">// e.g. add event listeners or expensive stuff</span>
+        <span class="comment">// that needs to be run only once</span>
+    },
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+        <span class="comment">// do something based on the updated value</span>
+        <span class="comment">// this will also be called for the initial value</span>
+    },
+    unbind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="comment">// do clean up work</span>
+        <span class="comment">// e.g. remove event listeners added in bind()</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<p>Once registered, you can use it in Vue.js templates like this (you need to add the Vue.js prefix to it):</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-my-directive</span>=<span class="value">"someValue"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>When you only need the <code>update</code> function, you can pass in a single function instead of the definition object:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'my-directive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+    <span class="comment">// this function will be used as update()</span>
+})
+</pre></td></tr></table></figure>
+
+<h3 id="The_Directive_Object">The Directive Object</h3>
+<p>All the hook functions will be copied into the actual <strong>directive object</strong>, which you can access inside these functions as their <code>this</code> context. A directive object exposes some useful properties:</p>
+<ul>
+<li><strong>el</strong>: the element the directive is bound to.</li>
+<li><strong>key</strong>: the keypath of the binding, excluding arguments and filters.</li>
+<li><strong>arg</strong>: the argument, if present.</li>
+<li><strong>vm</strong>: the ViewModel that owns this directive.</li>
+<li><strong>value</strong>: the current binding value.</li>
+</ul>
+<p>You should treat all these properties as read-only and refrain from changing them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
+<p>An example of a custom directive using some of these properties:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span> <span class="attribute">v-demo</span>=<span class="value">"LightSlateGray : msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre>Vue.directive(<span class="string">'demo'</span>, {
+    bind: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">this</span>.el.style.color = <span class="string">'#fff'</span>
+        <span class="keyword">this</span>.el.style.backgroundColor = <span class="keyword">this</span>.arg
+    },
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+        <span class="keyword">this</span>.el.innerHTML =
+            <span class="string">'argument - '</span> + <span class="keyword">this</span>.arg + <span class="string">'&lt;br&gt;'</span> +
+            <span class="string">'key - '</span> + <span class="keyword">this</span>.key + <span class="string">'&lt;br&gt;'</span> +
+            <span class="string">'value - '</span> + value
+    }
+})
+<span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        msg: <span class="string">'hello!'</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><strong>Result</strong></p>
+<p><div id="demo" v-demo="LightSlateGray : msg"></div></p>
+<script src="/js/vue.min.js"></script>
+<script>
+Vue.directive('demo', {
+    bind: function () {
+        this.el.style.color = '#fff'
+        this.el.style.backgroundColor = this.arg
+    },
+    update: function (value) {
+        this.el.innerHTML =
+            'argument - ' + this.arg + '<br>' +
+            'key - ' + this.key + '<br>' +
+            'value - ' + value
+    }
+})
+var demo = new Vue({
+    el: '#demo',
+    data: {
+        msg: 'hello!'
+    }
+})
+</script>
+
+<p>For more complicated examples, checkout <code>src/directives/</code> in the source code.<br>Next: <a href="/guide/filters.html">Filters in Depth</a>.</p>
 
 </div>
         </div>
         <script>
             var main = document.getElementById('main'),
                 doc = document.documentElement,
-                body = document.body
-            if (document.querySelector('.sidebar')) {
+                body = document.body,
+                header = document.getElementById('header'),
+                menu = document.querySelector('.sidebar'),
+                menuToggle = document.querySelector('.sidebar .toggle')
+            if (menu) {
                 window.addEventListener('scroll', function () {
                     var top = doc && doc.scrollTop || body.scrollTop
-                    if (top > 94) {
+                    if (top > header.offsetHeight) {
                         main.className = 'fix-sidebar'
                     } else {
                         main.className = ''
                     }
+                })
+                menuToggle.addEventListener('click', function () {
+                    menu.classList.toggle('open')
                 })
             }
         </script>
