@@ -42,6 +42,10 @@
     
         <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
     
+        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+    
         <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
     
         <li><a href="/guide/events.html" class="sidebar-link current">Listening for Events</a></li>
@@ -49,10 +53,6 @@
         <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-    
-        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
@@ -65,7 +65,7 @@
 
 <div class="content with-sidebar">
     <h1 id="Listening_for_Events">Listening for Events</h1>
-<p>You can bind <code>v-on</code> to either a handler function (without the invocation parentheses) or an expression:</p>
+<p>You can use the <code>v-on</code> directive to bind event listeners to DOM events. It can be bound to either an event handler function (without the invocation parentheses) or an inline expression. If a handler function is provided, it will get the original DOM event as the argument. The event also comes with an extra property: <code>targetVM</code>, pointing to the particular ViewModel the event was triggered on:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -87,6 +87,7 @@
 9
 10
 11
+12
 </pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
     el: <span class="string">'#demo'</span>,
     data: {
@@ -94,13 +95,15 @@
     },
     methods: {
         onClick: <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> {</span>
+            console.log(e.target.tagName) <span class="comment">// "A"</span>
             console.log(e.targetVM === <span class="keyword">this</span>) <span class="comment">// true</span>
         }
     }
 })
 </pre></td></tr></table></figure>
 
-<p>As shown in the example above, if a handler function is provided, it will get the original DOM event as the argument. The event also comes with an extra property: <code>targetVM</code>, pointing to the particular ViewModel the event was triggered on. This could be useful when <code>v-on</code> is used with <code>v-repeat</code>, since the latter creates a lot of child ViewModels. However, it is often more convenient to use an invocation expression passing in <code>this</code>, which equals the current context ViewModel:</p>
+<h2 id="Invoke_Handler_with_Expression">Invoke Handler with Expression</h2>
+<p><code>targetVM</code> could be useful when <code>v-on</code> is used with <code>v-repeat</code>, since the latter creates a lot of child ViewModels. However, it is often more convenient to use an invocation expression passing in <code>this</code>, which equals the current context ViewModel:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -139,6 +142,7 @@
 })
 </pre></td></tr></table></figure>
 
+<h2 id="Why_Listeners_in_HTML-3f-">Why Listeners in HTML?</h2>
 <p>You might be concerned about this whole event listening approach violates the good old rules about “separation of concern”. Rest assured - since all Vue.js handler functions and expressions are strictly bound to the ViewModel that’s handling the current View, it won’t cause any maintainance difficulty. In fact, there are several benefits in using <code>v-on</code>:</p>
 <ol>
 <li>It makes it easier to locate the handler function implementations within your JS code by simply skimming the HTML template.</li>

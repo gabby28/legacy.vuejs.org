@@ -42,6 +42,10 @@
     
         <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
     
+        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+    
         <li><a href="/guide/list.html" class="sidebar-link current">Displaying a List</a></li>
     
         <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
@@ -49,10 +53,6 @@
         <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-    
-        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
@@ -89,7 +89,7 @@
 8
 9
 10
-</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
+</pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
     el: <span class="string">'#demo'</span>,
     data: {
         parentMsg: <span class="string">'Hello'</span>,
@@ -105,7 +105,7 @@
 <p><ul id="demo"><li v-repeat="items" class="item-{&#123;$index&#125;}">{&#123;$index&#125;} - {&#123;parentMsg&#125;} {&#123;childMsg&#125;}</li></ul></p>
 <script src="/js/vue.min.js"></script>
 <script>
-new Vue({
+var demo = new Vue({
     el: '#demo',
     data: {
         parentMsg: 'Hello',
@@ -115,6 +115,60 @@ new Vue({
         ]
     }
 })
+</script>
+
+<h2 id="Mutation_Methods">Mutation Methods</h2>
+<p>Under the hood, Vue.js intercepts the Array’s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates. You should avoid directly manipulating a data-bound Array with indices, as those changes will not be picked up by Vue.js.</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>demo.items.push({ childMsg: <span class="string">'Baz'</span> })
+</pre></td></tr></table></figure>
+
+<p><a href="#demo" onclick="demoPush()">Execute this</a></p>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>demo.items.pop()
+</pre></td></tr></table></figure>
+
+<p><a href="#demo" onclick="demo.items.pop()">Execute this</a></p>
+
+<h2 id="Augmentations-3a-_remove-28-29-_and_replace-28-29-">Augmentations: remove() and replace()</h2>
+<p>In addition, Vue.js also augments data-bound Arrays with two custom mutating methods: <code>remove()</code> and <code>replace()</code>. These two methods are overloaded and quite versatile - they can take an index, an object in the Array, or a function.</p>
+<p>When the argument is an index or an object in the Array, <code>replace()</code> takes an additional argument which is the object to be swappd in. In this case both methods return the removed/replaced object:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> i = Math.floor(Math.random() * demo.items.length)
+demo.items.replace(i, { childMsg: <span class="string">'Replaced!'</span>})
+</pre></td></tr></table></figure>
+
+<p><a href="#demo" onclick="demoReplace()">Execute this</a></p>
+
+<p>When the argument is a function, for <code>remove()</code> an object will be removed if the function returns true; for <code>replace()</code> an object will be replaced by the return value if the value is not undefined. Both methods return an Array of all removed/replaced objects:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>demo.items.remove(<span class="function"><span class="keyword">function</span> <span class="params">(item)</span> {</span>
+    <span class="keyword">return</span> item.childMsg === <span class="string">'Replaced!'</span>
+})
+</pre></td></tr></table></figure>
+
+<p><a href="#demo" onclick="demoRemove()">Execute this</a></p>
+
+<p>Next up: <a href="/guide/events.html">Listening for Events</a>.</p>
+<script>
+function demoPush () {
+    demo.items.push({ childMsg: 'Baz' })
+}
+
+function demoRemove () {
+    demo.items.remove(function (item) {
+        return item.childMsg === 'Replaced!'
+    })
+}
+
+function demoReplace () {
+    var i = Math.floor(Math.random() * demo.items.length)
+    demo.items.replace(i, { childMsg: 'Replaced!'})
+}
 </script>
 </div>
         </div>

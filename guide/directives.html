@@ -42,6 +42,10 @@
     
         <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
     
+        <li><a href="/guide/directives.html" class="sidebar-link current">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+    
         <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
     
         <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
@@ -49,10 +53,6 @@
         <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-    
-        <li><a href="/guide/directives.html" class="sidebar-link current">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
@@ -77,12 +77,13 @@
 </pre></td></tr></table></figure>
 
 <p>Here the prefix is <code>v</code> which is the default. The directive ID is <code>text</code> and the the keypath is <code>message</code>. This directive instructs Vue.js to update the div’s <code>textContent</code> whenever the <code>message</code> property on the ViewModel changes.</p>
-<h2 id="Expressions">Expressions</h2>
+<h2 id="Inline_Expressions">Inline Expressions</h2>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"'hello ' + user.firstName + ' ' + user.lastName"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>Here we are using a computed expression instead of a single property key.  Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop. Note that inside expressions you can only access properties and methods present on the current ViewModel for security reasons.</p>
+<p>Here we are using a computed expression instead of a single property key. Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop. Note that inside expressions you can only access properties and methods present on the current ViewModel for security reasons.</p>
+<p>You should use expressions wisely and avoid putting too much logic in your templates, especially statements that modifies the data. For bindings that require more complicated operations, use <a href="/guide/computed.html">Computed Properties</a> instead.</p>
 <h2 id="Argument">Argument</h2>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"click : clickHandler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
