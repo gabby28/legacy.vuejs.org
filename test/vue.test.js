@@ -837,30 +837,23 @@ function Compiler (vm, options) {
 
     // set compiler properties
     compiler.vm  = vm
+    compiler.bindings = makeHash()
     compiler.dirs = []
     compiler.exps = []
     compiler.computed = []
     compiler.childCompilers = []
     compiler.emitter = new Emitter()
 
-    // inherit parent bindings
-    var parent = compiler.parentCompiler
-    compiler.bindings = parent
-        ? Object.create(parent.bindings)
-        : makeHash()
-    compiler.rootCompiler = parent
-        ? getRoot(parent)
-        : compiler
-
     // set inenumerable VM properties
     def(vm, '$', makeHash())
     def(vm, '$el', el)
     def(vm, '$compiler', compiler)
-    def(vm, '$root', compiler.rootCompiler.vm)
+    def(vm, '$root', getRoot(compiler).vm)
 
     // set parent VM
     // and register child id on parent
-    var childId = utils.attr(el, 'component-id')
+    var parent = compiler.parentCompiler,
+        childId = utils.attr(el, 'component-id')
     if (parent) {
         parent.childCompilers.push(compiler)
         def(vm, '$parent', parent.vm)
@@ -997,7 +990,7 @@ CompilerProto.setupObserver = function () {
         })
 
     function check (key) {
-        if (!hasOwn.call(bindings, key)) {
+        if (!bindings[key]) {
             compiler.createBinding(key)
         }
     }
@@ -1198,27 +1191,23 @@ CompilerProto.bindDirective = function (directive) {
 
     // otherwise, we got more work to do...
     var binding,
-        compiler      = this,
-        key           = directive.key,
-        baseKey       = key.split('.')[0]
+        compiler = this,
+        key      = directive.key
 
     if (directive.isExp) {
         // expression bindings are always created on current compiler
         binding = compiler.createBinding(key, true, directive.isFn)
-    } else if (
-        hasOwn.call(compiler.data, baseKey) ||
-        hasOwn.call(compiler.vm, baseKey)
-    ) {
-        // If the directive's compiler's VM has the base key,
-        // it belongs here. Create the binding if it's not created already.
-        binding = hasOwn.call(compiler.bindings, key)
-            ? compiler.bindings[key]
-            : compiler.createBinding(key)
     } else {
-        // due to prototypal inheritance of bindings, if a key doesn't exist
-        // on the bindings object, then it doesn't exist in the whole
-        // prototype chain. In this case we create the new binding at the root level.
-        binding = compiler.bindings[key] || compiler.rootCompiler.createBinding(key)
+        // recursively locate which compiler owns the binding
+        while (compiler) {
+            if (compiler.hasKey(key)) {
+                break
+            } else {
+                compiler = compiler.parentCompiler
+            }
+        }
+        compiler = compiler || this
+        binding = compiler.bindings[key] || compiler.createBinding(key)
     }
 
     binding.instances.push(directive)
@@ -1273,7 +1262,7 @@ CompilerProto.createBinding = function (key, isExp, isFn) {
             // ensure path in data so it can be observed
             Observer.ensurePath(compiler.data, key)
             var parentKey = key.slice(0, key.lastIndexOf('.'))
-            if (!hasOwn.call(bindings, parentKey)) {
+            if (!bindings[parentKey]) {
                 // this is a nested value binding, but the binding for its parent
                 // has not been created yet. We better create that one too.
                 compiler.createBinding(parentKey)
@@ -1375,6 +1364,15 @@ CompilerProto.execHook = function (id, alt) {
 }
 
 /**
+ *  Check if a compiler's data contains a keypath
+ */
+CompilerProto.hasKey = function (key) {
+    var baseKey = key.split('.')[0]
+    return hasOwn.call(this.data, baseKey) ||
+        hasOwn.call(this.vm, baseKey)
+}
+
+/**
  *  Unbind and remove element
  */
 CompilerProto.destroy = function () {
@@ -1415,8 +1413,8 @@ CompilerProto.destroy = function () {
 
     // unbind/unobserve all own bindings
     for (key in bindings) {
-        if (hasOwn.call(bindings, key)) {
-            binding = bindings[key]
+        binding = bindings[key]
+        if (binding) {
             if (binding.root) {
                 Observer.unobserve(binding.value, binding.key, compiler.observer)
             }
@@ -2040,7 +2038,7 @@ module.exports = {
     ensurePath  : ensurePath,
     convert     : convert,
     copyPaths   : copyPaths,
-    watchArray  : watchArray,
+    watchArray  : watchArray
 }
 });
 require.register("vue/src/directive.js", function(exports, require, module){
@@ -2269,7 +2267,6 @@ module.exports = Directive
 });
 require.register("vue/src/exp-parser.js", function(exports, require, module){
 var utils = require('./utils'),
-    hasOwn = Object.prototype.hasOwnProperty,
     stringSaveRE = /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/g,
     stringRestoreRE = /"(\d+)"/g
 
@@ -2323,33 +2320,26 @@ function getVariables (code) {
  *  final resolved vm.
  */
 function getRel (path, compiler) {
-    var rel = '',
-        vm  = compiler.vm,
-        dot = path.indexOf('.'),
-        key = dot > -1
-            ? path.slice(0, dot)
-            : path
-    while (true) {
-        if (
-            hasOwn.call(vm.$data, key) ||
-            hasOwn.call(vm, key)
-        ) {
+    var rel  = '',
+        dist = 0,
+        self = compiler
+    while (compiler) {
+        if (compiler.hasKey(path)) {
             break
         } else {
-            if (vm.$parent) {
-                vm = vm.$parent
-                rel += '$parent.'
-            } else {
-                break
-            }
+            compiler = compiler.parentCompiler
+            dist++
         }
     }
-    compiler = vm.$compiler
-    if (
-        !hasOwn.call(compiler.bindings, path) &&
-        path.charAt(0) !== '$'
-    ) {
-        compiler.createBinding(path)
+    if (compiler) {
+        while (dist--) {
+            rel += '$parent.'
+        }
+        if (!compiler.bindings[path] && path.charAt(0) !== '$') {
+            compiler.createBinding(path)
+        }
+    } else {
+        self.createBinding(path)
     }
     return rel
 }

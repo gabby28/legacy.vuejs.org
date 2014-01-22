@@ -38,21 +38,21 @@
     <h2>Guide</h2>
     <ul>
     
-        <li><a href="/guide/index.html" class="sidebar-link">Installation</a></li>
+        <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
     
-        <li><a href="/guide/getting-started.html" class="sidebar-link">Getting Started</a></li>
+        <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
     
         <li><a href="/guide/list.html" class="sidebar-link current">Displaying a List</a></li>
     
         <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
     
-        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
     
-        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
@@ -65,7 +65,57 @@
 
 <div class="content with-sidebar">
     <h1 id="Displaying_a_List">Displaying a List</h1>
+<p>You can use the <code>v-repeat</code> directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child ViewModel using that object as the data object. On and inside the template element you have access to properties of both the child ViewModel and the parent ViewModel. In addition, you also have access to the current child ViewModel’s <code>$index</code> property, which is the index of its data object in the Array.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"items"</span> <span class="attribute">class</span>=<span class="value">"item-{&#123;$index&#125;}"</span>&gt;</span>
+        {&#123;$index&#125;} - {&#123;parentMsg&#125;} {&#123;childMsg&#125;}
+    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</pre></td></tr></table></figure>
 
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        parentMsg: <span class="string">'Hello'</span>,
+        items: [
+            { childMsg: <span class="string">'Foo'</span> },
+            { childMsg: <span class="string">'Bar'</span> }
+        ]
+    }
+})
+</pre></td></tr></table></figure>
+
+<p>Result:</p>
+<p><ul id="demo"><li v-repeat="items" class="item-{&#123;$index&#125;}">{&#123;$index&#125;} - {&#123;parentMsg&#125;} {&#123;childMsg&#125;}</li></ul></p>
+<script src="/js/vue.min.js"></script>
+<script>
+new Vue({
+    el: '#demo',
+    data: {
+        parentMsg: 'Hello',
+        items: [
+            { childMsg: 'Foo' },
+            { childMsg: 'Bar' }
+        ]
+    }
+})
+</script>
 </div>
         </div>
         <script>

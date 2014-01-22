@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Handling Forms - vue.js</title>
+        <title>Installation - vue.js</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
@@ -38,7 +38,7 @@
     <h2>Guide</h2>
     <ul>
     
-        <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+        <li><a href="/guide/installation.html" class="sidebar-link current">Installation</a></li>
     
         <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
     
@@ -46,7 +46,7 @@
     
         <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
     
-        <li><a href="/guide/forms.html" class="sidebar-link current">Handling Forms</a></li>
+        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
     
@@ -64,7 +64,47 @@
 </div>
 
 <div class="content with-sidebar">
-    <h1 id="Handling_Forms">Handling Forms</h1>
+    <h1 id="Installation">Installation</h1>
+<p><strong>Compatibility Note:</strong> Vue.js does not support IE8 and below. For IE9, the <a href="https://github.com/remy/polyfills/blob/master/classList.js" target="_blank">classList polyfill</a> is needed.</p>
+<h2 id="Standalone">Standalone</h2>
+<p>Simply download and include with a script tag. <code>Vue</code> will be registered as a global variable.</p>
+<ul>
+<li><p><a style="font-size:1.25em" href="https://raw.github.com/yyx990803/vue/v0.7.6/dist/vue.js" download target="_blank">Development Version</a> <br> - 89.04kb, plenty of comments</p>
+</li>
+<li><p><a style="font-size:1.25em" href="https://raw.github.com/yyx990803/vue/v0.7.6/dist/vue.min.js" download target="_blank">Production Version</a> <br> - 31.26kb minified / 10.71kb minified + gzipped</p>
+</li>
+</ul>
+<h2 id="Component">Component</h2>
+<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ component install yyx990803/vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td></tr></table></figure>
+
+<h2 id="Browserify">Browserify</h2>
+<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ npm install vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td></tr></table></figure>
+
+<h2 id="Bower">Bower</h2>
+<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>$ bower install vue
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
+</pre></td></tr></table></figure>
+
+<h2 id="Module_Loaders">Module Loaders</h2>
+<p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as a CommonJS or AMD module.</p>
+<h2 id="Ready-3f-">Ready?</h2>
+<p><a href="/guide/">Let’s Get Started</a>.</p>
 
 </div>
         </div>

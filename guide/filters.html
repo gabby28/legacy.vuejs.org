@@ -38,21 +38,21 @@
     <h2>Guide</h2>
     <ul>
     
-        <li><a href="/guide/index.html" class="sidebar-link">Installation</a></li>
+        <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
     
-        <li><a href="/guide/getting-started.html" class="sidebar-link">Getting Started</a></li>
+        <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
     
         <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
     
         <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
     
-        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link current">Filters in Depth</a></li>
+        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
     
-        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link current">Filters in Depth</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
@@ -66,22 +66,23 @@
 <div class="content with-sidebar">
     <h1 id="Filters_in_Depth">Filters in Depth</h1>
 <h2 id="Synopsis">Synopsis</h2>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">filterId</span> <span class="attr_selector">[args...]</span>
+<p>A Vue.js filter is denoted by a single pipe (<code>|</code>) and can be followed by one or more arguments:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>| filterId [args...]
 </pre></td></tr></table></figure>
 
 <h2 id="Examples">Examples</h2>
-<p>Filters can be appended to directive keypath or expressions. They are denoted by a single pipe (<code>|</code>) as in shell scripts:</p>
+<p>Filters must be placed at the end of a directive’s value:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-text</span>=<span class="value">"message | capitalize"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>You can also use them inside interpolations:</p>
+<p>You can also use them inside mustache-style bindings:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span>&gt;</span>&#123;&#123;message | uppercase&#125;&#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>You can chain muliple filters together:</p>
+<p>Muliple filters can be chained together:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span>&gt;</span>&#123;&#123;message | lowercase | reverse&#125;&#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span>
 </pre></td></tr></table></figure>

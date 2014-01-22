@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Installation - vue.js</title>
+        <title>Getting Started - vue.js</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
@@ -38,21 +38,21 @@
     <h2>Guide</h2>
     <ul>
     
-        <li><a href="/guide/index.html" class="sidebar-link current">Installation</a></li>
+        <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
     
-        <li><a href="/guide/getting-started.html" class="sidebar-link">Getting Started</a></li>
+        <li><a href="/guide/index.html" class="sidebar-link current">Getting Started</a></li>
     
         <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
     
         <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
     
-        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-    
-        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
     
         <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
     
-        <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+    
+        <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
     
         <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
     
@@ -64,47 +64,140 @@
 </div>
 
 <div class="content with-sidebar">
-    <h1 id="Installation">Installation</h1>
-<p><strong>Compatibility Note:</strong> Vue.js does not support IE8 and below. For IE9, the <a href="https://github.com/remy/polyfills/blob/master/classList.js" target="_blank">classList polyfill</a> is needed.</p>
-<h2 id="Standalone">Standalone</h2>
-<p>Simply download and include with a script tag. <code>Vue</code> will be registered as a global variable.</p>
-<ul>
-<li><p><a style="font-size:1.25em" href="https://raw.github.com/yyx990803/vue/v0.7.6/dist/vue.js" download target="_blank">Development Version</a> <br> - 89.04kb, plenty of comments</p>
-</li>
-<li><p><a style="font-size:1.25em" href="https://raw.github.com/yyx990803/vue/v0.7.6/dist/vue.min.js" download target="_blank">Production Version</a> <br> - 31.26kb minified / 10.71kb minified + gzipped</p>
-</li>
-</ul>
-<h2 id="Component">Component</h2>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ component install yyx990803/vue
-</pre></td></tr></table></figure>
-
+    <h1 id="Getting_Started">Getting Started</h1>
+<h2 id="Introduction">Introduction</h2>
+<p>Vue.js is a library that aims to simplify the development of interactive interfaces.</p>
+<p>Technically, it provides the <a href="#ViewModel">ViewModel</a> layer of the MVVM pattern, which connects the <a href="#View">View</a> and the <a href="#Model">Model</a> via two way data bindings. Actuall DOM manipulations and output formatting are abstracted away into <a href="#Directives">Directives</a> and <a href="#Filters">Filters</a>.</p>
+<p>Philosophically, the primary goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations.</p>
+<p>Vue.js’ API is heavily influenced by <a href="http://angularjs.org" target="_blank">AngularJS</a>, <a href="http://ractivejs.org" target="_blank">Ractive.js</a> and <a href="http://www.rivetsjs.com" target="_blank">Rivets.js</a>. To some extent you can think of Vue.js as the data-binding part of AngularJS with a simpler, less intrusive API, or as Rivets.js plus expressions, automatic dependency tracking and composability.</p>
+<p>If you are confused by some of the terms mentioned above, read on for a brief overview of what they mean. Otherwise, you can jump right to <a href="#A_Quick_Example">the quick example</a>.</p>
+<h2 id="Concepts_Overview">Concepts Overview</h2>
+<h3 id="ViewModel">ViewModel</h3>
+<p>An object that syncs the Model and the View. In Vue.js, ViewModels are instantiated with the <code>Vue</code> constructor or its sub-classes:</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(options)
 </pre></td></tr></table></figure>
 
-<h2 id="Browserify">Browserify</h2>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ npm install vue
-</pre></td></tr></table></figure>
-
+<p>This is the primary object that you will be interacting with as a developer when using Vue.js. For more details see <a href="/api/">Class: Vue</a>.</p>
+<h3 id="View">View</h3>
+<p>The actual HTML/DOM that the user sees.</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+</pre></td><td class="code"><pre>vm.$el <span class="comment">// The View</span>
 </pre></td></tr></table></figure>
 
-<h2 id="Bower">Bower</h2>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ bower install vue
+<p>When using Vue.js, you rarely have to touch the DOM yourself except in custom directives (explained later). View updates will be automatically triggered when the data changes. These view updates are highly granular with the precision down to a textNode. They are also batched and executed asynchronously for greater performance.</p>
+<h3 id="Model">Model</h3>
+<p>A slightly modified plain JavaScript object.</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>vm.$data <span class="comment">// The Model</span>
 </pre></td></tr></table></figure>
 
+<p>In Vue.js, models are simply plain JavaScript objects, or <strong>data objects</strong>. You can manipulate their properties and ViewModels that are observing them will be notified of the changes. Vue.js converts the properties on data objects into ES5 getter/setters, which allows direct manipulation without the need for dirty checking. For technical details see <a href="/api/instantiation-options.html#data">Instantiation Options: data</a>.</p>
+<h3 id="Directives">Directives</h3>
+<p>Prefixed HTML attributes that tell Vue.js to do something about a DOM element.</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h2 id="Module_Loaders">Module Loaders</h2>
-<p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as a CommonJS or AMD module.</p>
-<h2 id="Ready-3f-">Ready?</h2>
-<p><a href="/guide/getting-started.html">Let’s Get Started</a>.</p>
+<p>Here the div element has a <code>v-text</code> directive with the value <code>message</code>. What it does is telling Vue.js to keep the div’s textContent in sync with the ViewModel’s <code>message</code> property.</p>
+<p>Directives can encapsulate arbitrary DOM manipulations. For example <code>v-attr</code> manipulates an element’s attributes, <code>v-repeat</code> clones an element based on an Array, <code>v-on</code> attaches event listeners… we will cover them later.</p>
+<p>You can also use mustache-style bindings, both in text and in attributes. They are translated into <code>v-text</code> and <code>v-attr</code> directives under the hood. For example:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h3 id="Filters">Filters</h3>
+<p>Functions that are used to process the raw values before updating the View. They are denoted by a “pipe” inside directives or bindings:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;message | capitalize&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. For more details see <a href="/guide/filters.html">Filters in Depth</a>.</p>
+<h2 id="A_Quick_Example">A Quick Example</h2>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title | uppercase&#125;&#125;<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">li
+</span>            <span class="attribute">v-repeat</span>=<span class="value">"todos"</span>
+            <span class="attribute">v-on</span>=<span class="value">"click: done = !done"</span>
+            <span class="attribute">class</span>=<span class="value">"&#123;&#123;done ? 'done' : ''&#125;&#125;"</span>
+        &gt;</span>
+            &#123;&#123;content&#125;&#125;
+        <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        title: <span class="string">'todos'</span>,
+        todos: [
+            {
+                done: <span class="literal">true</span>,
+                content: <span class="string">'Learn JavaScript'</span>
+            },
+            {
+                done: <span class="literal">false</span>,
+                content: <span class="string">'Learn vue.js'</span>
+            }
+        ]
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><strong>Result</strong></p>
+<p><div id="demo"><h1>&#123;&#123;title | uppercase&#125;&#125;</h1><ul><li v-repeat="todos" v-on="click: done = !done" class="&#123;&#123;done ? 'done' : ''&#125;&#125;">&#123;&#123;content&#125;&#125;</li></ul></div></p>
+<script src="/js/vue.min.js"></script>
+<script>
+var demo = new Vue({
+    el: '#demo',
+    data: {
+        title: 'todos',
+        todos: [
+            {
+                done: true,
+                content: 'Learn JavaScript'
+            },
+            {
+                done: false,
+                content: 'Learn vue.js'
+            }
+        ]
+    }
+})
+</script>
+
+<p>You can click on a todo to toggle it, or you can open your Browser’s console and play with the <code>demo</code> object - for example, change <code>demo.title</code>, push a new object into <code>demo.todos</code>, or toggle a todo’s <code>done</code> state.</p>
+<p>You probably have a few questions in mind now - don’t worry, we’ll cover them soon. Next up: <a href="/guide/list.html">Displaying a List</a>.</p>
 
 </div>
         </div>
