@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script>
+            window.PAGE_TYPE = "guide"
+        </script>
         <script src="/js/classList.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
         <script>
@@ -72,7 +75,7 @@
 <h2 id="Introduction">Introduction</h2>
 <p>Vue.js is a library that aims to simplify the development of interactive interfaces.</p>
 <p>Technically, it provides the <a href="#ViewModel">ViewModel</a> layer of the MVVM pattern, which connects the <a href="#View">View</a> and the <a href="#Model">Model</a> via two way data bindings. Actuall DOM manipulations and output formatting are abstracted away into <a href="#Directives">Directives</a> and <a href="#Filters">Filters</a>.</p>
-<p>Philosophically, the primary goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations.</p>
+<p>Philosophically, the goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations. It is not a full-blown framework - it is designed to be simple and flexible. You can use it alone for rapid prototyping, or mix and match with other libraries for a custom front-end stack. It’s also a natural fit for no-backend services such as Firebase.</p>
 <p>Vue.js’ API is heavily influenced by <a href="http://angularjs.org" target="_blank">AngularJS</a>, <a href="http://ractivejs.org" target="_blank">Ractive.js</a> and <a href="http://www.rivetsjs.com" target="_blank">Rivets.js</a>. To some extent you can think of Vue.js as the data-binding part of AngularJS with a simpler, less intrusive API, or as Rivets.js plus expressions, automatic dependency tracking and composability.</p>
 <p>If you are confused by some of the terms mentioned above, read on for a brief overview of what they mean. Otherwise, you can jump right to <a href="#A_Quick_Example">the quick example</a>.</p>
 <h2 id="Concepts_Overview">Concepts Overview</h2>
@@ -205,26 +208,6 @@ var demo = new Vue({
 
 </div>
         </div>
-        <script>
-            var main = document.getElementById('main'),
-                doc = document.documentElement,
-                body = document.body,
-                header = document.getElementById('header'),
-                menu = document.querySelector('.sidebar'),
-                menuToggle = document.querySelector('.sidebar .toggle')
-            if (menu) {
-                window.addEventListener('scroll', function () {
-                    var top = doc && doc.scrollTop || body.scrollTop
-                    if (top > header.offsetHeight) {
-                        main.className = 'fix-sidebar'
-                    } else {
-                        main.className = ''
-                    }
-                })
-                menuToggle.addEventListener('click', function () {
-                    menu.classList.toggle('open')
-                })
-            }
-        </script>
+        <script src="/js/common.js"></script>
     </body>
 </html>

@@ -86,43 +86,6 @@ pre .xml .css,
 pre .xml .cdata {
   opacity: 0.5;
 }
-#demo {
-  border: 1px solid #eee;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  border-radius: 3px;
-  padding: 25px 35px;
-  margin-left: 0.8em;
-  margin-bottom: 40px;
-  font-size: 1.2em;
-  line-height: 1.5em;
-}
-#demo h1 {
-  margin: 0 0 0.5em;
-  font-size: 1.8em;
-}
-#demo ul {
-  padding-left: 1.5em;
-  margin: 0;
-}
-#demo li {
-  cursor: pointer;
-  color: #34495e;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-}
-#demo li.done {
-  color: #7f8c8d;
-  text-decoration: line-through;
-}
-ul#demo li {
-  margin-left: 1.5em;
-}
-@media screen and (max-width: 720px) {
-  #demo {
-    margin-left: 0;
-  }
-}
 body {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   color: #34495e;
@@ -165,7 +128,7 @@ p {
 .highlight {
   overflow-x: auto;
   position: relative;
-  padding-top: 20px;
+  padding: 20px 0 1em;
 }
 .highlight table,
 .highlight tr,
@@ -346,7 +309,7 @@ a.button:hover {
   padding: 0 1em;
   position: relative;
   background-color: #fff;
-  top: -0.65em;
+  top: -0.75em;
 }
 @media screen and (max-width: 420px) {
   body {
