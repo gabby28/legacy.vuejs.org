@@ -800,8 +800,7 @@ var Emitter     = require('./emitter'),
     TextParser  = require('./text-parser'),
     DepsParser  = require('./deps-parser'),
     ExpParser   = require('./exp-parser'),
-    // cache deps ob
-    depsOb      = DepsParser.observer,
+    
     // cache methods
     slice       = Array.prototype.slice,
     log         = utils.log,
@@ -976,7 +975,7 @@ CompilerProto.setupObserver = function () {
     observer
         .on('get', function (key) {
             check(key)
-            depsOb.emit('get', bindings[key])
+            DepsParser.catcher.emit('get', bindings[key])
         })
         .on('set', function (key, val) {
             observer.emit('change:' + key, val)
@@ -1730,7 +1729,6 @@ require.register("vue/src/observer.js", function(exports, require, module){
 
 var Emitter  = require('./emitter'),
     utils    = require('./utils'),
-    depsOb   = require('./deps-parser').observer,
 
     // cache methods
     typeOf   = utils.typeOf,
@@ -1871,7 +1869,7 @@ function convert (obj, key) {
         get: function () {
             var value = values[key]
             // only emit get on tip values
-            if (depsOb.active && typeOf(value) !== OBJECT) {
+            if (pub.shouldGet && typeOf(value) !== OBJECT) {
                 observer.emit('get', key)
             }
             return value
@@ -2032,7 +2030,12 @@ function unobserve (obj, path, observer) {
     observer.proxies[path] = null
 }
 
-module.exports = {
+var pub = module.exports = {
+
+    // whether to emit get events
+    // only enabled during dependency parsing
+    shouldGet   : false,
+
     observe     : observe,
     unobserve   : unobserve,
     ensurePath  : ensurePath,
@@ -2470,7 +2473,8 @@ exports.parseAttr = parseAttr
 require.register("vue/src/deps-parser.js", function(exports, require, module){
 var Emitter  = require('./emitter'),
     utils    = require('./utils'),
-    observer = new Emitter()
+    Observer = require('./observer'),
+    catcher  = new Emitter()
 
 /**
  *  Auto-extract the dependencies of a computed property
@@ -2480,7 +2484,7 @@ function catchDeps (binding) {
     if (binding.isFn) return
     utils.log('\n- ' + binding.key)
     var got = utils.hash()
-    observer.on('get', function (dep) {
+    catcher.on('get', function (dep) {
         var has = got[dep.key]
         if (has && has.compiler === dep.compiler) return
         got[dep.key] = dep
@@ -2489,7 +2493,7 @@ function catchDeps (binding) {
         dep.subs.push(binding)
     })
     binding.value.$get()
-    observer.off('get')
+    catcher.off('get')
 }
 
 module.exports = {
@@ -2497,16 +2501,16 @@ module.exports = {
     /**
      *  the observer that catches events triggered by getters
      */
-    observer: observer,
+    catcher: catcher,
 
     /**
      *  parse a list of computed property bindings
      */
     parse: function (bindings) {
         utils.log('\nparsing dependencies...')
-        observer.active = true
+        Observer.shouldGet = true
         bindings.forEach(catchDeps)
-        observer.active = false
+        Observer.shouldGet = false
         utils.log('\ndone.')
     }
     
@@ -2602,8 +2606,6 @@ module.exports = {
 require.register("vue/src/transition.js", function(exports, require, module){
 var endEvent   = sniffTransitionEndEvent(),
     config     = require('./config'),
-    enterClass = config.enterClass,
-    leaveClass = config.leaveClass,
     // exit codes for testing
     codes = {
         CSS_E     : 1,
@@ -2682,27 +2684,27 @@ function applyTransitionClass (el, stage, changeState) {
         }
 
         // set to hidden state before appending
-        classList.add(enterClass)
+        classList.add(config.enterClass)
         // append
         changeState()
         // force a layout so transition can be triggered
         /* jshint unused: false */
         var forceLayout = el.clientHeight
         // trigger transition
-        classList.remove(enterClass)
+        classList.remove(config.enterClass)
         return codes.CSS_E
 
     } else { // leave
 
         // trigger hide transition
-        classList.add(leaveClass)
+        classList.add(config.leaveClass)
         var onEnd = function (e) {
             if (e.target === el) {
                 el.removeEventListener(endEvent, onEnd)
                 el.vue_trans_cb = null
                 // actually remove node here
                 changeState()
-                classList.remove(leaveClass)
+                classList.remove(config.leaveClass)
             }
         }
         // attach transition end listener
