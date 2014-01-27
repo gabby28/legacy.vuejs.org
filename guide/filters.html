@@ -106,6 +106,45 @@
 
 <p>For their specific use of the above examples see the <a href="/api/filters.html">full list of built-in filters</a>.</p>
 <h2 id="Writing_a_Custom_Filter">Writing a Custom Filter</h2>
+<p>You can register a custom filter with the global <code>Vue.filter()</code> method, passing in a <strong>filterID</strong> and a <strong>filter function</strong>. The filter function takes a value as the argument and return the transformed value:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Vue.filter(<span class="string">'reverse'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
+    <span class="keyword">return</span> value.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)
+})
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="comment">&lt;!--
+    'abc' =&gt; 'cba'
+--&gt;</span>
+<span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-text</span>=<span class="value">"message | reverse"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>The filter function also takes a second argument, which is an Array of optional arguments.</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Vue.filter(<span class="string">'wrap'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value, args)</span> {</span>
+    <span class="keyword">return</span> args[<span class="number">0</span>] + value + args[<span class="number">1</span>]
+})
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="comment">&lt;!--
+    'hello' =&gt; 'before hello after'
+--&gt;</span>
+<span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-text</span>=<span class="value">"message | wrap before after"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>Now that you know everything about directives and filters, let’s talk about how to <a href="/guide/list.html">display a list of items</a>.</p>
 
 </div>
         </div>

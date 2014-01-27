@@ -72,7 +72,96 @@
 
 <div class="content with-sidebar">
     <h1 id="Computed_Properties">Computed Properties</h1>
-<p>Vue.js’ inline expressions are very convenient, but the best use cases for them are simple boolean operations or string concatenations. For more complicated logic, you should use Computed Properties.</p>
+<p>Vue.js’ inline expressions are very convenient, but the best use cases for them are simple boolean operations or string concatenations. For more complicated logic, you should use <strong>computed properties</strong>.</p>
+<p>In Vue.js, you define computed properties with the <code>computed</code> option:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
+    data: {
+        firstName: <span class="string">'Foo'</span>,
+        lastName: <span class="string">'Bar'</span>
+    },
+    computed: {
+        fullName: {
+            <span class="comment">// the getter should return the desired value</span>
+            $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+                <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName
+            },
+            <span class="comment">// the setter is optional</span>
+            $set: <span class="function"><span class="keyword">function</span> <span class="params">(newValue)</span> {</span>
+                <span class="keyword">var</span> names = newValue.split(<span class="string">' '</span>)
+                <span class="keyword">this</span>.firstName = names[<span class="number">0</span>]
+                <span class="keyword">this</span>.lastName = names[names.length - <span class="number">1</span>]
+            }
+        }
+    }
+})
+demo.fullName <span class="comment">// 'Foo Bar'</span>
+</pre></td></tr></table></figure>
+
+<p>A computed property is essentially a property defined with getter/setter functions. You can use a computed property just like a normal property, but when you access it, you get the value returned by the getter function; when you change its value, you trigger the setter function passing in the new value as its argument.</p>
+<h2 id="Dependency_Collection_Gotcha">Dependency Collection Gotcha</h2>
+<p>Like inline expressions, Vue.js automatically collects dependencies for computed properties and refreshes them when their dependencies change. There’s one thing to keep in mind though: since Vue.js collects dependencies by monitoring which properties are accessed inside a getter, you need to be careful when there is conditional logic within your getters. Consider this example:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>status: {
+    $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">return</span> <span class="keyword">this</span>.validated
+            ? <span class="keyword">this</span>.okMsg
+            : <span class="keyword">this</span>.errMsg
+    }
+}
+</pre></td></tr></table></figure>
+
+<p>If <code>validated</code> is true in the beginning, then <code>errMsg</code> will not be accessed and therefore not collected as a dependency. Vice-versa for <code>okMsg</code>. To get around this you can simply manually access potentially unreachable properties in your getter:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>status: {
+    <span class="variable">$get</span>: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="comment">// access dependencies explicitly</span>
+        <span class="keyword">this</span>.okMsg
+        <span class="keyword">this</span>.errMsg
+        <span class="keyword">return</span> <span class="keyword">this</span>.validated
+            ? <span class="keyword">this</span>.okMsg
+            : <span class="keyword">this</span>.errMsg
+    }
+}
+</pre></td></tr></table></figure>
+
+<p>You don’t need to worry about this in inline expressions because Vue.js’ expression parser takes care of it for you.</p>
+<p>Next: <a href="/guide/transitions.html">Using Transition Effects</a></p>
 
 </div>
         </div>

@@ -104,7 +104,7 @@ vm.a <span class="comment">// 3</span>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
-<p>Methods to be copied to the ViewModel. All methods will have their <code>this</code> context automatically bound to the ViewModel.</p>
+<p>Methods to be mixed into the ViewModel. All methods will have their <code>this</code> context automatically bound to the ViewModel instance.</p>
 <p><strong>Example:</strong></p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
@@ -125,6 +125,46 @@ vm.a <span class="comment">// 3</span>
     }
 })
 vm.plus()
+vm.a <span class="comment">// 2</span>
+</pre></td></tr></table></figure>
+
+<h3 id="computed">computed</h3>
+<ul>
+<li><strong>Type:</strong> <code>Object</code></li>
+</ul>
+<p>Computed properties to be mixed into the ViewModel. All getters and setters have their <code>this</code> context automatically bound to the ViewModel instance.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
+    data: { a: <span class="number">1</span> },
+    computed: {
+        aplus: {
+            $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+                <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>
+            },
+            $set: <span class="function"><span class="keyword">function</span> <span class="params">(v)</span> {</span>
+                <span class="keyword">this</span>.a = v - <span class="number">1</span>
+            }
+        }
+    }
+})
+vm.aplus <span class="comment">// 2</span>
+vm.aplus = <span class="number">3</span>
 vm.a <span class="comment">// 2</span>
 </pre></td></tr></table></figure>
 
@@ -174,16 +214,16 @@ vm.a <span class="comment">// 2</span>
 <p>A hash of HTML attributes to be set on <code>vm.$el</code>.</p>
 <h2 id="Lifecycle_Hooks">Lifecycle Hooks</h2>
 <p>All lifecycle hooks have their <code>this</code> context bound to the ViewModel they belong to.</p>
-<h3 id="beforeCompile">beforeCompile</h3>
+<h3 id="created">created</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
-<li>Alias: <code>created</code></li>
+<li>Alias: <code>beforeCompile</code></li>
 </ul>
 <p>Called before the compilation starts. Can be used to attach additional data to be observed on the ViewModel.</p>
-<h3 id="afterCompile">afterCompile</h3>
+<h3 id="ready">ready</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
-<li>Alias: <code>ready</code></li>
+<li>Alias: <code>afterCompile</code></li>
 </ul>
 <p>Called after the compilation has ended and the ViewModel is ready.</p>
 <h3 id="enteredView">enteredView</h3>
