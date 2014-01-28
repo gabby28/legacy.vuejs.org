@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<div class="content with-sidebar">
+<div class="content api with-sidebar">
     <h1 id="Directives">Directives</h1>
 <h3 id="v-text">v-text</h3>
 <p>Updates the element’s <code>textContent</code>.</p>
@@ -208,7 +208,7 @@ Vue.component(<span class="string">'Box'</span>, ...)
 <ul>
 <li>This directive is an empty direcitve (it doesn’t need a keypath or expression)</li>
 </ul>
-<p>Skip compilation for this element and all its children.</p>
+<p>Skip compilation for this element and all its children. Skipping large amount of nodes with no directives on them can speed up compilation.</p>
 
 </div>
         </div>

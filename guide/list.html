@@ -65,13 +65,13 @@
         
             <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
         
-            <li><a href="/guide/architecture.html" class="sidebar-link">App Architecture</a></li>
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
         
         </ul>
     </div>
 </div>
 
-<div class="content with-sidebar">
+<div class="content guide with-sidebar">
     <h1 id="Displaying_a_List">Displaying a List</h1>
 <p>You can use the <code>v-repeat</code> directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child ViewModel using that object as the data object. On and inside the template element you have access to properties of both the child ViewModel and the parent ViewModel. In addition, you also have access to the current child ViewModel’s <code>$index</code> property, which is the index of its data object in the Array.</p>
 <p><strong>Example:</strong></p>
@@ -126,7 +126,7 @@ var demo = new Vue({
 </script>
 
 <h2 id="Mutation_Methods">Mutation Methods</h2>
-<p>Under the hood, Vue.js intercepts an observed Array’s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates. You should avoid directly manipulating a data-bound Array with indices, as those changes will not be picked up by Vue.js.</p>
+<p>Under the hood, Vue.js intercepts an observed Array’s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates.</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>demo.items.push({ childMsg: <span class="string">'Baz'</span> })
 </pre></td></tr></table></figure>
@@ -138,6 +138,8 @@ var demo = new Vue({
 </pre></td></tr></table></figure>
 
 <p><a href="#demo" onclick="demo.items.pop()">Execute this</a></p>
+
+<p class="tip">You should avoid directly setting elements of a data-bound Array with indices, because those changes will not be picked up by Vue.js.</p>
 
 <h2 id="Augmentations-3a-_remove-28-29-_and_replace-28-29-">Augmentations: remove() and replace()</h2>
 <p>In addition, Vue.js also augments data-bound Arrays with two custom mutating methods: <code>remove()</code> and <code>replace()</code>. These two methods are overloaded and quite versatile - they can take an index, an object in the Array, or a function.</p>

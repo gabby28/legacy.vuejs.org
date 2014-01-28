@@ -65,14 +65,182 @@
         
             <li><a href="/guide/composition.html" class="sidebar-link current">Composing ViewModels</a></li>
         
-            <li><a href="/guide/architecture.html" class="sidebar-link">App Architecture</a></li>
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
         
         </ul>
     </div>
 </div>
 
-<div class="content with-sidebar">
+<div class="content guide with-sidebar">
     <h1 id="Composing_ViewModels">Composing ViewModels</h1>
+<h2 id="Registering_a_Component">Registering a Component</h2>
+<p>Vue.js allows you to treat registered ViewModel constructors as reusable components. To register a component, use the global <code>Vue.component()</code> method:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">var</span> MyComponent = Vue.extend({
+    template: <span class="string">'A custom component!'</span>
+})
+Vue.component(<span class="string">'my-component'</span>, MyComponent)
+</pre></td></tr></table></figure>
+
+<p>To make things easier, you can also directly pass in the option object instead of an actual constructor:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>Vue.component(<span class="string">'my-component'</span>, {
+    template: <span class="string">'A custom component!'</span>
+})
+</pre></td></tr></table></figure>
+
+<p>Then you can use it in a parent ViewModel’s template:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"my-component"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>If you prefer, all registered components can also be used in the form of a custom element tag:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">my-component</span>&gt;</span><span class="tag">&lt;/<span class="title">my-component</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<h2 id="Encapsulating_Private_Assets">Encapsulating Private Assets</h2>
+<p>Sometimes a component needs to use assets such as directives, filters and its own child components, but might want to keep these assets encapsulated so the component itself can be reused elsewhere. You can do that using the private assets instantiation options. Private assets will only be accessible by the instances of the owner component and its child components.</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="comment">// All 5 types of assets</span>
+<span class="keyword">var</span> MyComponent = Vue.extend({
+    directives: {
+        <span class="comment">// id : definition pairs same with the global methods</span>
+        <span class="string">'private-directive'</span>: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+            <span class="comment">// ...</span>
+        }
+    },
+    filters: {
+        <span class="comment">// ...</span>
+    },
+    components: {
+        <span class="comment">// ...</span>
+    },
+    transitions: {
+        <span class="comment">// ...</span>
+    },
+    partials: {
+        <span class="comment">// ...</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+<h2 id="Inheriting_Data">Inheriting Data</h2>
+<p>A child component can inherit Objects in its parent’s data by combining <code>v-component</code> with <code>v-with</code>. For Arrays you can combine <code>v-component</code> with <code>v-repeat</code>.</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre>Vue.component(<span class="string">'user-profile'</span>, {
+    template: <span class="string">'{&#123;name&#125;}&lt;br&gt;{&#123;email&#125;}'</span>
+})
+<span class="keyword">var</span> parent = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        user: {
+            name: <span class="string">'Foo Bar'</span>,
+            email: <span class="string">'foo@bar.com'</span>
+        },
+        users: [
+            {
+                name: <span class="string">'Chuck Norris'</span>,
+                email: <span class="string">'chuck@norris.com'</span>
+            },
+            {
+                name: <span class="string">'Bruce Lee'</span>,
+                email: <span class="string">'burce@lee.com'</span>
+            }
+        ]
+    }
+})
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">v-with</span>=<span class="value">"user"</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users"</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p><strong>Result:</strong></p>
+<p><div id="demo"><p v-with="user" v-component="user-profile"></p><ul><li v-repeat="users" v-component="user-profile"></li></ul></div></p>
+<script src="/js/vue.min.js"></script>
+<script>
+    Vue.component('user-profile', {
+        template: '{&#123;name&#125;}<br>{&#123;email&#125;}'
+    })
+    var parent = new Vue({
+        el: '#demo',
+        data: {
+            user: {
+                name: 'Foo Bar',
+                email: 'foo@bar.com'
+            },
+            users: [
+                {
+                    name: 'Chuck Norris',
+                    email: 'chuck@norris.com'
+                },
+                {
+                    name: 'Bruce Lee',
+                    email: 'burce@lee.com'
+                }
+            ]
+        }
+    })
+</script>
+
+<p>Next: <a href="/guide/application.html">Building Larger Apps</a>.</p>
 
 </div>
         </div>

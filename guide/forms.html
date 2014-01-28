@@ -65,13 +65,13 @@
         
             <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
         
-            <li><a href="/guide/architecture.html" class="sidebar-link">App Architecture</a></li>
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
         
         </ul>
     </div>
 </div>
 
-<div class="content with-sidebar">
+<div class="content guide with-sidebar">
     <script src="/js/vue.min.js"></script>
 
 <h1 id="Handling_Forms">Handling Forms</h1>
@@ -132,7 +132,7 @@
 </pre></td></tr></table></figure>
 
 <p><strong>Result</strong></p>
-<p><form id="demo"><p><input type="text" v-model="msg"> {&#123;msg&#125;}</p><p><input type="checkbox" v-model="checked"> {&#123;checked ? &quot;yes&quot; : &quot;no&quot;&#125;}</p><p><input type="radio" v-model="picked" name="picked" value="one"><input type="radio" v-model="picked" name="picked" value="two"> {&#123;picked&#125;}</p><p><select v-model="selected"><option>one</option><option>two</option></select> {&#123;selected&#125;}</p></form></p>
+<p><form id="demo"><p><input type="text" v-model="msg"> {&#123;msg&#125;}</p><p><input type="checkbox" v-model="checked"> {&#123;checked ? &quot;yes&quot; : &quot;no&quot;&#125;}</p><p><input type="radio" v-model="picked" name="picked" value="one"><input type="radio" v-model="picked" name="picked" value="two"> {&#123;picked&#125;}</p><p><select v-model="selected"><option>one</option><option>two</option></select> {&#123;selected&#125;}</p><p>data: {&#123;serialized&#125;}</p></form></p>
 <script>
     new Vue({
         el: '#demo',
@@ -141,6 +141,11 @@
             checked: true,
             picked: 'one',
             selected: 'two'
+        },
+        computed: {
+            serialized: {$get: function () {
+                return JSON.stringify(this.$data)
+            }}
         }
     })
 </script>

@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<div class="content with-sidebar">
+<div class="content api with-sidebar">
     <h1 id="Instantiation_Options">Instantiation Options</h1>
 <h2 id="Data_-26-amp-3b-_Logic">Data &amp; Logic</h2>
 <h3 id="data">data</h3>
@@ -100,12 +100,14 @@ data.a = <span class="number">3</span>
 vm.a <span class="comment">// 3</span>
 </pre></td></tr></table></figure>
 
-<p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. Under the hood though, vue.js attaches an hidden property <code>__observer__</code> and recursively converts the object’s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
+<p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. You can also share it between multiple ViewModels.</p>
+<p class="tip">Under the hood, vue.js attaches an hidden property <code>__observer__</code> and recursively converts the object’s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
+
 <h3 id="methods">methods</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
-<p>Methods to be mixed into the ViewModel. All methods will have their <code>this</code> context automatically bound to the ViewModel instance.</p>
+<p>Methods to be mixed into the ViewModel. You can access these methods directly on the VM instance, or use them in directive expressions. All methods will have their <code>this</code> context automatically bound to the ViewModel instance.</p>
 <p><strong>Example:</strong></p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
@@ -182,8 +184,8 @@ vm.a <span class="comment">// 2</span>
 </ul>
 <p>A string template to be inserted into <code>vm.$el</code>. Any existing markup inside <code>vm.$el</code> will be overwriiten. If the <strong>replace</strong> option is <code>true</code>, the template will replace <code>vm.$el</code> entirely.</p>
 <p>If it starts with <code>#</code> it will be used as a querySelector and use the selected element’s innerHTML and the template string. This allows the use of the common <code>&lt;script type=&quot;x-template&quot;&gt;</code> trick to include templates.</p>
-<p><strong>Notes:</strong></p>
-<p>Vue.js uses DOM-based templating. The compiler walks through DOM elements and looks for directives and creates data bindings. This means all vue.js templates are parsable HTML that can be converted into actual DOM elements by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more ViewModel instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with <code>data-</code>.</p>
+<p class="tip">Vue.js uses DOM-based templating. The compiler walks through DOM elements and looks for directives and creates data bindings. This means all vue.js templates are parsable HTML that can be converted into actual DOM elements by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more ViewModel instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with <code>data-</code>.</p>
+
 <h3 id="replace">replace</h3>
 <ul>
 <li><strong>Type:</strong> <code>Boolean</code>  </li>

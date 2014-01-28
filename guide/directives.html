@@ -65,13 +65,13 @@
         
             <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
         
-            <li><a href="/guide/architecture.html" class="sidebar-link">App Architecture</a></li>
+            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
         
         </ul>
     </div>
 </div>
 
-<div class="content with-sidebar">
+<div class="content guide with-sidebar">
     <h1 id="Directives_In_Depth">Directives In Depth</h1>
 <h2 id="Synopsis">Synopsis</h2>
 <p>A Vue.js directive is an HTML attribute that takes the following format:</p>
@@ -91,8 +91,9 @@
 </pre></td></tr></table></figure>
 
 <p>Here we are using a computed expression instead of a single property key. Vue.js automatically tracks the properties an expression depends on and refreshes the directive whenever a dependency changes. Thanks to async batch updates, even when multiple dependencies change, an expression will only be updated once every event loop.</p>
-<p>You should use expressions wisely and avoid putting too much logic in your templates, especially statements that modifies the data. For bindings that require more complicated operations, use <a href="/guide/computed.html">Computed Properties</a> instead.</p>
-<p>Note that for security reasons, within expressions you can only access properties and methods present on the current ViewModel and its ancestors.</p>
+<p>You should use expressions wisely and avoid putting too much logic in your templates, especially statements with side effects (with the exception of event listener expressions). For bindings that require more complicated operations, use <a href="/guide/computed.html">Computed Properties</a> instead.</p>
+<p class="tip">For security reasons, in inline expressions you can only access properties and methods present on the current context ViewModel and its parents.</p>
+
 <h2 id="Argument">Argument</h2>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"click : clickHandler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
@@ -187,10 +188,11 @@
 <li><strong>el</strong>: the element the directive is bound to.</li>
 <li><strong>key</strong>: the keypath of the binding, excluding arguments and filters.</li>
 <li><strong>arg</strong>: the argument, if present.</li>
-<li><strong>vm</strong>: the ViewModel that owns this directive.</li>
+<li><strong>vm</strong>: the context ViewModel that owns this directive.</li>
 <li><strong>value</strong>: the current binding value.</li>
 </ul>
-<p>You should treat all these properties as read-only and refrain from changing them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
+<p class="tip">You should treat all these properties as read-only and refrain from changing them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
+
 <p>An example of a custom directive using some of these properties:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span> <span class="attribute">v-demo</span>=<span class="value">"LightSlateGray : msg"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>

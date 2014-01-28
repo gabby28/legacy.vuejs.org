@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Building Larger Apps - vue.js</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script>
+            window.PAGE_TYPE = "guide"
+        </script>
+        <script src="/js/classList.js"></script>
+        <link rel="stylesheet" href="/css/page.css" type="text/css">
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46852172-1', 'vuejs.org');
+  ga('send', 'pageview');
+</script>
+    </head>
+    <body>
+        
+            <div id="header">
+    <a id="logo" href="/">
+        <img src="/images/logo.png">
+        <span>Vue.js</span>
+    </a>
+    <ul id="nav">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+        <li><a href="/api/" class="nav-link">API Reference</a></li>
+        <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
+</div>
+        
+        <div id="main">
+            
+    <div class="sidebar">
+    <div class="toggle">···</div>
+    <div class="list">
+        <h2>Guide</h2>
+        <ul>
+        
+            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+        
+            <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
+        
+            <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+        
+            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+        
+            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+        
+            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+        
+            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+        
+            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+        
+            <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
+        
+            <li><a href="/guide/composition.html" class="sidebar-link">Composing ViewModels</a></li>
+        
+            <li><a href="/guide/application.html" class="sidebar-link current">Building Larger Apps</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<div class="content guide with-sidebar">
+    <h1 id="Building_Larger_Apps">Building Larger Apps</h1>
+<p>Vue.js is designed to be as flexible as possible - it’s just an interface library that doesn’t enforce any architectural decisions. While this can be very useful for rapid prototyping, it could be a challenge for those with less experience to build larger scale applications with it. The following is an opinionated perspective on how to organize larger projects when using Vue.js.</p>
+<h2 id="Build_with_Component">Build with Component</h2>
+<p>Vue.js is built with <a href="https://github.com/component/component" target="_blank">Component</a>, a front-end package manager and build tool. With Component you can write your browser code in the format of CommonJS modules (the same format Node.js uses), and publish packages simply by pushing them to public GitHub repositories. This helps greatly with both code modularization and reusability. For a boilerplate of using Vue.js with Component, see the <a href="https://github.com/vuejs/vue-component-example" target="_blank">vue-component-example</a>.</p>
+<p>There are already <a href="https://github.com/component/component/wiki/Components" target="_blank">a great number of components</a> available that deal with common problems in front-end applications. For a larger scale application, you can use Vue.js as the interface layer and fill in the missing pieces with other components.</p>
+<h2 id="Modularization">Modularization</h2>
+<p>Component as a built tool not only deals with JavaScript; it can also build CSS, templates and other assets. With builder hooks it can also pre-process files written in non-native formats, e.g. CoffeeScript, SASS and Stylus. Therefore it is possible to deliver highly self-contained components that encapsulates template structure, JavaScript logic and CSS presentation at the same time. A simple example can be found <a href="https://github.com/vuejs/vue-component-example/tree/master/src/components/a" target="_blank">here</a>.</p>
+<h2 id="Routing">Routing</h2>
+<p>You can implement some rudimentary routing logic by manually updating a state object on hashchange. An example can be found <a href="https://github.com/yyx990803/vue/blob/master/test/functional/fixtures/routing.html" target="_blank">here</a>.</p>
+<p>It is also possible to implement something more robust with the help of routing components such as <a href="https://github.com/visionmedia/page.js" target="_blank">page.js</a>. There is plan to provide a vue-router component that integrates with Vue.js for easier routing and deep linking.</p>
+<h2 id="Communication_with_Server">Communication with Server</h2>
+<p>All Vue.js ViewModels and their raw <code>$data</code> can be serialized with <code>JSON.stringify()</code> with no additional effort. You can use any Ajax component you like, for example <a href="https://github.com/visionmedia/superagent" target="_blank">superagent</a>. It also plays nicely with no-backend services such as Firebase. In addition there is plan to provide a vue-resource component that resembles Angular’s <code>$resource</code>, to make interfacing with a REST API easier.</p>
+
+</div>
+        </div>
+        <script src="/js/common.js"></script>
+    </body>
+</html>

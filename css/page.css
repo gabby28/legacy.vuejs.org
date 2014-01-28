@@ -154,9 +154,7 @@ p {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-.highlight.lang-html .code:after,
-.highlight.lang-js .code:after,
-.highlight.lang-bash .code:after {
+.highlight[class*="lang-"] .code:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -179,6 +177,9 @@ p {
 }
 .highlight.lang-bash .code:after {
   content: 'Shell';
+}
+.highlight.lang-css .code:after {
+  content: 'CSS';
 }
 #main {
   position: relative;
@@ -301,7 +302,7 @@ ul#demo li {
 .content.with-sidebar {
   margin: 0 0 0 280px;
 }
-.content.with-sidebar ul {
+.content.api ul {
   font-size: 0.9em;
   padding-left: 1.25em;
   color: #7f8c8d;
@@ -344,8 +345,28 @@ ul#demo li {
 .content blockquote p {
   margin-left: 0;
 }
-.content ol li {
-  margin: 1em 0;
+.content p.tip {
+  padding: 12px 24px 12px 30px;
+  margin: 2em 0 2em 0.8em;
+  border-left: 4px solid #42b983;
+  background-color: #f6f6f6;
+  position: relative;
+}
+.content p.tip:before {
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  left: -17px;
+  background-color: #42b983;
+  color: #fff;
+  content: "i";
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  font-family: Georgia;
 }
 @media screen and (min-width: 720px) {
   #main.fix-sidebar .sidebar {
@@ -410,7 +431,8 @@ ul#demo li {
   }
   .content figure,
   .content p,
-  .content ul {
+  .content ul,
+  .content p.tip {
     margin-left: 0;
   }
 }
