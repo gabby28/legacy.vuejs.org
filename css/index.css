@@ -186,10 +186,14 @@ p {
   z-index: 1;
   padding: 0 60px 30px;
 }
+html,
+body {
+  height: 100%;
+}
 #nav {
   list-style-type: none;
   text-align: center;
-  margin: 3em 0;
+  margin-bottom: 3em;
   padding: 0;
 }
 #nav li {
@@ -210,8 +214,18 @@ p {
   width: 200px;
 }
 #hero {
-  margin: 4em 0 2.5em;
   text-align: center;
+  height: 100%;
+  min-height: 800px;
+  position: relative;
+}
+#hero .inner {
+  height: 640px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  margin-top: -360px;
+  left: 0;
 }
 #hero h1 {
   font-size: 3em;
@@ -220,13 +234,26 @@ p {
 #hero .sub {
   color: #7f8c8d;
   font-size: 1.2em;
-  margin-bottom: 2em;
 }
 #hero .warning {
   color: #7f8c8d;
 }
 #hero a.button {
   width: 180px;
+}
+#hero .desc {
+  max-width: 800px;
+  padding: 0 20px;
+  text-align: center;
+  margin: 1.5em auto;
+  color: #7f8c8d;
+}
+#hero .down {
+  position: absolute;
+  bottom: 30px;
+  width: 20px;
+  left: 50%;
+  margin-left: -10px;
 }
 a.button {
   display: inline-block;
@@ -244,9 +271,29 @@ a.button {
 a.button:hover {
   background-color: #53c290;
 }
+#social {
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 14px;
+  margin-top: 2em;
+}
+#social li {
+  display: inline-block;
+  margin: 0 5px;
+}
+#social li iframe {
+  width: 94px !important;
+}
+.cool {
+  text-align: center;
+  margin-top: 5em;
+  color: #7f8c8d;
+}
 #features {
   width: 800px;
-  margin: 0 auto;
+  margin: 3em auto;
   text-align: center;
 }
 #features .feat {
@@ -260,13 +307,13 @@ a.button:hover {
 #features .feat p {
   color: #7f8c8d;
 }
-#features a {
+#features .feat a {
   color: #42b983;
   font-weight: 600;
 }
 #learn-more {
   text-align: center;
-  margin: 3em 0;
+  padding-bottom: 5em;
 }
 #learn-more a.button {
   font-size: 1.2em;
@@ -290,28 +337,6 @@ a.button:hover {
 .icon.composable {
   background-position: -320px 0;
 }
-.divider {
-  font-size: 1.5em;
-  font-weight: bold;
-  max-width: 800px;
-  margin: 4em auto 1.5em;
-  text-align: center;
-  border-top: 1px solid #ddd;
-}
-.divider span {
-  display: inline-block;
-  padding: 0 1em;
-  position: relative;
-  background-color: #fff;
-  top: -0.75em;
-}
-.desc {
-  max-width: 800px;
-  padding: 0 40px;
-  text-align: center;
-  margin: 2em auto;
-  color: #7f8c8d;
-}
 #main {
   display: none;
 }
@@ -325,6 +350,9 @@ a.button:hover {
   #logo {
     width: 100px;
   }
+  p.desc br {
+    display: none;
+  }
   .nav-link {
     font-size: 0.85em;
     margin: 0 0.5em;
@@ -334,7 +362,11 @@ a.button:hover {
     margin: 2.5em 1em;
   }
   #hero {
-    margin: 2em 1em 5em;
+    min-height: 600px;
+  }
+  #hero .inner {
+    height: 600px;
+    margin-top: -300px;
   }
   #hero h1 {
     font-size: 2em;
@@ -346,8 +378,18 @@ a.button:hover {
   #hero .sub {
     font-size: 1em;
   }
-  #hero .warning {
+  #hero .warning,
+  #hero .desc {
     font-size: 0.8em;
+  }
+  #hero .down {
+    display: none;
+  }
+  #social {
+    margin-top: 1.5em;
+  }
+  .cool {
+    margin-top: 0;
   }
 }
 @media screen and (max-width: 860px) {
