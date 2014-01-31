@@ -207,6 +207,10 @@ body {
 .nav-link:hover,
 .nav-link.current {
   border-bottom: 3px solid #42b983;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
 }
 #logo {
   display: block;
@@ -232,7 +236,7 @@ body {
   margin: 0.5em 0 0;
 }
 #hero .sub {
-  color: #7f8c8d;
+  color: #34495e;
   font-size: 1.2em;
 }
 #hero .warning {
@@ -250,12 +254,15 @@ body {
 }
 #hero .down {
   position: absolute;
-  bottom: 30px;
-  width: 20px;
-  left: 50%;
-  margin-left: -10px;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 1.5em 0;
 }
-a.button {
+#hero .down img {
+  width: 20px;
+}
+#hero a.button {
   display: inline-block;
   margin: 0.5em;
   font-size: 1.25em;
@@ -266,9 +273,9 @@ a.button {
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.2);
   border-bottom: 1px solid #3aa373;
-  transition: background-color 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
-a.button:hover {
+#hero a.button:hover {
   background-color: #53c290;
 }
 #social {
@@ -286,56 +293,107 @@ a.button:hover {
 #social li iframe {
   width: 94px !important;
 }
-.cool {
+#features {
+  padding: 4em 0;
   text-align: center;
-  margin-top: 5em;
+  background-color: #f3f3f3;
+}
+#features .cool {
+  font-size: 1.8em;
+  text-align: center;
+  margin-top: 1em;
   color: #7f8c8d;
 }
-#features {
-  width: 800px;
-  margin: 3em auto;
-  text-align: center;
+#features .feats {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 #features .feat {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   display: inline-block;
+  text-align: left;
   vertical-align: top;
-  width: 200px;
-  margin: 0.5em 2em;
+  width: 280px;
+  margin: 40px;
+}
+#features .feat h2 {
+  color: #34495e;
+  line-height: 40px;
+  margin-bottom: 0;
 }
 #features .feat p {
   color: #7f8c8d;
+  padding-left: 52px;
+  margin: 0.4em 0;
 }
 #features .feat a {
   color: #42b983;
   font-weight: 600;
 }
-#learn-more {
-  text-align: center;
-  padding-bottom: 5em;
-}
-#learn-more a.button {
-  font-size: 1.2em;
-}
-.icon {
+#features .icon {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
   background: url("../images/icons.png");
-  background-size: 400px 80px;
+  background-size: 240px 40px;
 }
-.icon.fast {
+#features .icon.fast {
+  background-position: -40px 0;
+}
+#features .icon.compact {
   background-position: -80px 0;
 }
-.icon.compact {
+#features .icon.powerful {
+  background-position: -120px 0;
+}
+#features .icon.composable {
   background-position: -160px 0;
 }
-.icon.powerful {
-  background-position: -240px 0;
+#features .icon.module {
+  background-position: -200px 0;
 }
-.icon.composable {
-  background-position: -320px 0;
+#footer {
+  text-align: center;
+  color: #fff;
+  padding: 4em 0;
+  background-color: #7f8c8d;
+}
+#footer .avatar {
+  width: 100px;
+  border-radius: 100%;
+  margin: 2.5em 0 1em;
+}
+#footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+#footer a.start {
+  font-size: 1.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid #fff;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  margin-bottom: 2em;
+}
+#footer a.start:hover {
+  background-color: #fff;
+  color: #7f8c8d;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+#footer p {
+  margin: 0.3em 0;
 }
 #main {
   display: none;
@@ -349,9 +407,6 @@ a.button:hover {
   }
   #logo {
     width: 100px;
-  }
-  p.desc br {
-    display: none;
   }
   .nav-link {
     font-size: 0.85em;
@@ -380,7 +435,12 @@ a.button:hover {
   }
   #hero .warning,
   #hero .desc {
-    font-size: 0.8em;
+    font-size: 0.9em;
+    margin: 1em 0;
+  }
+  #hero .warning br,
+  #hero .desc br {
+    display: none;
   }
   #hero .down {
     display: none;
@@ -391,11 +451,15 @@ a.button:hover {
   .cool {
     margin-top: 0;
   }
+  #features .feat {
+    font-size: 14px;
+    margin: 0.8em 0;
+    width: 250px;
+  }
 }
 @media screen and (max-width: 860px) {
   #features,
   #hero {
     font-size: 16px;
-    width: auto;
   }
 }
