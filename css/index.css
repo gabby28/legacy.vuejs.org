@@ -108,8 +108,8 @@ strong {
 }
 code,
 pre {
-  font-family: 'Source Code Pro', 'Menlo', 'Consolas', monospace;
-  font-size: 0.85em;
+  font-family: Monaco, courier, monospace;
+  font-size: 0.75em;
   background-color: #f6f6f6;
 }
 code {
@@ -146,13 +146,13 @@ p {
   width: 1.5em;
 }
 .highlight .gutter pre {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 .highlight .code pre {
   padding-left: 0.5em;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 .highlight[class*="lang-"] .code:after {
   position: absolute;
@@ -165,8 +165,8 @@ p {
   padding: 5px 10px 0;
   line-height: 15px;
   height: 15px;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
   font-weight: 600;
 }
 .highlight.lang-html .code:after {

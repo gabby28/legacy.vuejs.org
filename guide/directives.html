@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic|Source+Code+Pro' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
         <script>
             window.PAGE_TYPE = "guide"
@@ -182,8 +182,7 @@
 })
 </pre></td></tr></table></figure>
 
-<h3 id="The_Directive_Object">The Directive Object</h3>
-<p>All the hook functions will be copied into the actual <strong>directive object</strong>, which you can access inside these functions as their <code>this</code> context. A directive object exposes some useful properties:</p>
+<p>All the hook functions will be copied into the actual <strong>directive object</strong>, which you can access inside these functions as their <code>this</code> context. The directive object exposes some useful properties:</p>
 <ul>
 <li><strong>el</strong>: the element the directive is bound to.</li>
 <li><strong>key</strong>: the keypath of the binding, excluding arguments and filters.</li>

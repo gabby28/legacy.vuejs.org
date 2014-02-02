@@ -108,8 +108,8 @@ strong {
 }
 code,
 pre {
-  font-family: 'Source Code Pro', 'Menlo', 'Consolas', monospace;
-  font-size: 0.85em;
+  font-family: Monaco, courier, monospace;
+  font-size: 0.75em;
   background-color: #f6f6f6;
 }
 code {
@@ -146,13 +146,13 @@ p {
   width: 1.5em;
 }
 .highlight .gutter pre {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 .highlight .code pre {
   padding-left: 0.5em;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 .highlight[class*="lang-"] .code:after {
   position: absolute;
@@ -165,8 +165,8 @@ p {
   padding: 5px 10px 0;
   line-height: 15px;
   height: 15px;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
   font-weight: 600;
 }
 .highlight.lang-html .code:after {
@@ -189,7 +189,7 @@ p {
 #demo {
   border: 1px solid #eee;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  border-radius: 3px;
+  border-radius: 0px;
   padding: 25px 35px;
   margin-left: 0.8em;
   margin-bottom: 40px;
@@ -344,6 +344,9 @@ ul#demo li {
 }
 .content blockquote p {
   margin-left: 0;
+}
+.content iframe {
+  margin: 1em 0;
 }
 .content p.tip {
   padding: 12px 24px 12px 30px;
