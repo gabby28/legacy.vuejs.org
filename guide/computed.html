@@ -119,6 +119,23 @@
 demo.fullName <span class="comment">// 'Foo Bar'</span>
 </pre></td></tr></table></figure>
 
+<p>When you only need the getter, you can provide a single function instead of an object:</p>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="comment">// ...</span>
+computed: {
+    fullName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName 
+    }    
+}
+<span class="comment">// ...</span>
+</pre></td></tr></table></figure>
+
 <p>A computed property is essentially a property defined with getter/setter functions. You can use a computed property just like a normal property, but when you access it, you get the value returned by the getter function; when you change its value, you trigger the setter function passing in the new value as its argument.</p>
 <h2 id="Dependency_Collection_Gotcha">Dependency Collection Gotcha</h2>
 <p>Like inline expressions, Vue.js automatically collects dependencies for computed properties and refreshes them when their dependencies change. There’s one thing to keep in mind though: since Vue.js collects dependencies by monitoring which properties are accessed inside a getter, you need to be careful when there is conditional logic within your getters. Consider this example:</p>
@@ -129,17 +146,17 @@ demo.fullName <span class="comment">// 'Foo Bar'</span>
 5
 6
 7
-</pre></td><td class="code"><pre>status: {
-    $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        <span class="keyword">return</span> <span class="keyword">this</span>.validated
-            ? <span class="keyword">this</span>.okMsg
-            : <span class="keyword">this</span>.errMsg
-    }
+</pre></td><td class="code"><pre><span class="comment">// ...</span>
+status: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>.validated
+        ? <span class="keyword">this</span>.okMsg
+        : <span class="keyword">this</span>.errMsg
 }
+<span class="comment">// ...</span>
 </pre></td></tr></table></figure>
 
 <p>If <code>validated</code> is true in the beginning, then <code>errMsg</code> will not be accessed and therefore not collected as a dependency. Vice-versa for <code>okMsg</code>. To get around this you can simply manually access potentially unreachable properties in your getter:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -149,16 +166,16 @@ demo.fullName <span class="comment">// 'Foo Bar'</span>
 8
 9
 10
-</pre></td><td class="code"><pre>status: {
-    <span class="variable">$get</span>: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        <span class="comment">// access dependencies explicitly</span>
-        <span class="keyword">this</span>.okMsg
-        <span class="keyword">this</span>.errMsg
-        <span class="keyword">return</span> <span class="keyword">this</span>.validated
-            ? <span class="keyword">this</span>.okMsg
-            : <span class="keyword">this</span>.errMsg
-    }
+</pre></td><td class="code"><pre><span class="comment">// ...</span>
+status: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="comment">// access dependencies explicitly</span>
+    <span class="keyword">this</span>.okMsg
+    <span class="keyword">this</span>.errMsg
+    <span class="keyword">return</span> <span class="keyword">this</span>.validated
+        ? <span class="keyword">this</span>.okMsg
+        : <span class="keyword">this</span>.errMsg
 }
+<span class="comment">// ...</span>
 </pre></td></tr></table></figure>
 
 <p class="tip">You don’t need to worry about this in inline expressions because Vue.js’ expression parser takes care of it for you.</p>
