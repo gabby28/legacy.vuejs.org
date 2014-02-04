@@ -125,6 +125,21 @@ em {
 p {
   word-spacing: 0.05em;
 }
+a.button {
+  display: inline-block;
+  font-size: 1.25em;
+  color: #fff !important;
+  font-weight: 400 !important;
+  background-color: #42b983;
+  padding: 0.5em 1.5em;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  border-bottom: 1px solid #3aa373;
+  transition: all 0.2s ease-out;
+}
+a.button:hover {
+  background-color: #53c290;
+}
 .highlight {
   overflow-x: auto;
   position: relative;
@@ -242,9 +257,6 @@ body {
 #hero .warning {
   color: #7f8c8d;
 }
-#hero a.button {
-  width: 180px;
-}
 #hero .desc {
   max-width: 800px;
   padding: 0 20px;
@@ -263,20 +275,8 @@ body {
   width: 20px;
 }
 #hero a.button {
-  display: inline-block;
+  width: 180px;
   margin: 0.5em;
-  font-size: 1.25em;
-  color: #fff !important;
-  font-weight: 400 !important;
-  background-color: #42b983;
-  padding: 0.5em 1.5em;
-  border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-  border-bottom: 1px solid #3aa373;
-  transition: all 0.2s ease-out;
-}
-#hero a.button:hover {
-  background-color: #53c290;
 }
 #social {
   text-align: center;

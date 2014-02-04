@@ -125,6 +125,21 @@ em {
 p {
   word-spacing: 0.05em;
 }
+a.button {
+  display: inline-block;
+  font-size: 1.25em;
+  color: #fff !important;
+  font-weight: 400 !important;
+  background-color: #42b983;
+  padding: 0.5em 1.5em;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  border-bottom: 1px solid #3aa373;
+  transition: all 0.2s ease-out;
+}
+a.button:hover {
+  background-color: #53c290;
+}
 .highlight {
   overflow-x: auto;
   position: relative;
@@ -305,6 +320,15 @@ ul#demo li {
 .content.api ul {
   font-size: 0.9em;
   padding-left: 1.25em;
+  color: #7f8c8d;
+}
+.content a.button {
+  font-size: 1.2em;
+  margin: 0.2em 0;
+  width: 180px;
+  text-align: center;
+}
+.content span.light {
   color: #7f8c8d;
 }
 .content h1 {
