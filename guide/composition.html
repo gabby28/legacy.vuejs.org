@@ -10,7 +10,7 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/classList.js"></script>
+        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -194,8 +194,7 @@ Vue.component(<span class="string">'user-profile'</span>, {
 </pre></td></tr></table></figure>
 
 <p><strong>Result:</strong></p>
-<script src="/js/vue.min.js"></script>
-<div id="demo-1" class="demo"><p v-component="user-profile" v-with="user"></p></div>
+<p><div id="demo-1" class="demo"><p v-component="user-profile" v-with="user"></p></div></p>
 <script>
     Vue.component('user-profile', {
         template: '{&#123;name&#125;}<br>{&#123;email&#125;}'

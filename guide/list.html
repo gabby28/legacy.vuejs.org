@@ -10,7 +10,7 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/classList.js"></script>
+        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -111,7 +111,6 @@
 
 <p>Result:</p>
 <p><ul id="demo"><li v-repeat="items" class="item-{&#123;$index&#125;}">{&#123;$index&#125;} - {&#123;parentMsg&#125;} {&#123;childMsg&#125;}</li></ul></p>
-<script src="/js/vue.min.js"></script>
 <script>
 var demo = new Vue({
     el: '#demo',
