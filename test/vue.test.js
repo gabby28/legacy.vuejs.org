@@ -594,6 +594,8 @@ var config    = require('./config'),
     toString  = Object.prototype.toString,
     join      = Array.prototype.join,
     console   = window.console,
+
+    hasClassList = 'classList' in document.documentElement,
     ViewModel // late def
 
 var defer =
@@ -786,6 +788,34 @@ var utils = module.exports = {
      */
     nextTick: function (cb) {
         defer(cb, 0)
+    },
+
+    /**
+     *  add class for IE9
+     *  uses classList if available
+     */
+    addClass: function (el, cls) {
+        if (hasClassList) {
+            el.classList.add(cls)
+        } else {
+            var cur = ' ' + el.className + ' '
+            if (cur.indexOf(' ' + cls + ' ') < 0) {
+                el.className = (cur + cls).trim()
+            }
+        }
+    },
+
+    /**
+     *  remove class for IE9
+     */
+    removeClass: function (el, cls) {
+        if (hasClassList) {
+            el.classList.remove(cls)
+        } else {
+            el.className = (' ' + el.className + ' ')
+                .replace(' ' + cls + ' ', '')
+                .trim()
+        }
     }
 }
 });
@@ -2684,6 +2714,8 @@ function applyTransitionClass (el, stage, changeState) {
         return codes.CSS_SKIP
     }
 
+    // if the browser supports transition,
+    // it must have classList...
     var classList         = el.classList,
         lastLeaveCallback = el.vue_trans_cb
 
@@ -2840,13 +2872,13 @@ module.exports = {
 
     'class': function (value) {
         if (this.arg) {
-            this.el.classList[value ? 'add' : 'remove'](this.arg)
+            utils[value ? 'addClass' : 'removeClass'](this.el, this.arg)
         } else {
             if (this.lastVal) {
-                this.el.classList.remove(this.lastVal)
+                utils.removeClass(this.el, this.lastVal)
             }
             if (value) {
-                this.el.classList.add(value)
+                utils.addClass(this.el, value)
                 this.lastVal = value
             }
         }

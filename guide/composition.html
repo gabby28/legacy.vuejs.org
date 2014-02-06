@@ -9,12 +9,6 @@
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
         <script>
             window.PAGE_TYPE = "guide"
-            // G+ button
-            ;(function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-            })();
         </script>
         <script src="/js/classList.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
@@ -67,7 +61,7 @@
         
             <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
         
-            <li><a href="/guide/transitions.html" class="sidebar-link">Using Transition Effects</a></li>
+            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
         
             <li><a href="/guide/composition.html" class="sidebar-link current">Composing ViewModels</a></li>
         
@@ -156,8 +150,152 @@ Vue.component(<span class="string">'my-component'</span>, MyComponent)
 })
 </pre></td></tr></table></figure>
 
-<h2 id="Inheriting_Data">Inheriting Data</h2>
-<p>A child component can inherit Objects in its parent’s data by combining <code>v-component</code> with <code>v-with</code>. For Arrays you can combine <code>v-component</code> with <code>v-repeat</code>.</p>
+<h2 id="Data_Inheritance">Data Inheritance</h2>
+<h3 id="Inheriting_Objects_with_-3c-code-3e-v-with-3c-2f-code-3e-">Inheriting Objects with <code>v-with</code></h3>
+<p>A child component can inherit Objects in its parent’s data by combining <code>v-component</code> with <code>v-with</code>:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo-1"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span> <span class="attribute">v-with</span>=<span class="value">"user"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="comment">// registering the component first</span>
+Vue.component(<span class="string">'user-profile'</span>, {
+    template: <span class="string">'{&#123;name&#125;}&lt;br&gt;{&#123;email&#125;}'</span>
+})
+<span class="comment">// the `user` object will be passed to the child</span>
+<span class="comment">// component as its $data</span>
+<span class="keyword">var</span> parent = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo'</span>,
+    data: {
+        user: {
+            name: <span class="string">'Foo Bar'</span>,
+            email: <span class="string">'foo@bar.com'</span>
+        }
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><strong>Result:</strong></p>
+<script src="/js/vue.min.js"></script>
+<div id="demo-1" class="demo"><p v-component="user-profile" v-with="user"></p></div>
+<script>
+    Vue.component('user-profile', {
+        template: '{&#123;name&#125;}<br>{&#123;email&#125;}'
+    })
+    var parent = new Vue({
+        el: '#demo-1',
+        data: {
+            user: {
+                name: 'Foo Bar',
+                email: 'foo@bar.com'
+            }
+        }
+    })
+</script>
+
+<h3 id="Inheriting_Array_Elements_with_-3c-code-3e-v-repeat-3c-2f-code-3e-">Inheriting Array Elements with <code>v-repeat</code></h3>
+<p>For an Array of Objects, you can combine <code>v-component</code> with <code>v-repeat</code>. In this case, for each Object in the Array, a child ViewModel will be created using that Object as data, and the specified component as the constructor.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"demo-2"</span>&gt;</span>
+    <span class="comment">&lt;!-- reusing the user-profile component we registered before --&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users"</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="keyword">var</span> parent2 = <span class="keyword">new</span> Vue({
+    el: <span class="string">'#demo-2'</span>,
+    data: {
+        users: [
+            {
+                name: <span class="string">'Chuck Norris'</span>,
+                email: <span class="string">'chuck@norris.com'</span>
+            },
+            {
+                name: <span class="string">'Bruce Lee'</span>,
+                email: <span class="string">'bruce@lee.com'</span>
+            }
+        ]
+    }
+})
+</pre></td></tr></table></figure>
+
+<p><strong>Result:</strong></p>
+<p><ul id="demo-2" class="demo"><li v-repeat="users" v-component="user-profile"></li></ul></p>
+<script>
+var parent2 = new Vue({
+    el: '#demo-2',
+    data: {
+        users: [
+            {
+                name: 'Chuck Norris',
+                email: 'chuck@norris.com'
+            },
+            {
+                name: 'Bruce Lee',
+                email: 'bruce@lee.com'
+            }
+        ]
+    }
+})
+</script>
+
+<h2 id="Accessing_Child_Components">Accessing Child Components</h2>
+<p>Sometimes you might need to access nested child components in JavaScript. To enable that you have to assign a child component an ID using <code>v-component-id</code>. For example:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"parent"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span> <span class="attribute">v-component-id</span>=<span class="value">"profile"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="keyword">var</span> parent = <span class="keyword">new</span> Vue({ el: <span class="string">'#parent'</span> })
+<span class="comment">// access child component</span>
+<span class="keyword">var</span> child = parent.$.profile
+</pre></td></tr></table></figure>
+
+<p>When <code>v-component-id</code> is used together with <code>v-repeat</code>, the value you get will be an Array containing the child components mirroring the data Array.</p>
+<h2 id="Event_Communication_Between_Nested_Components">Event Communication Between Nested Components</h2>
+<p>Although you can directly access a ViewModels children and parent, it is more convenient to use the built-in event system for cross-component communication. It also makes your code less coupled and easier to maintain. Once a parent-child relationship is established, you can dispatch and trigger events using each ViewModel’s <a href="/api/instance-methods.html#Cross-ViewModel_Events">event instance methods</a>.</p>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -176,74 +314,45 @@ Vue.component(<span class="string">'my-component'</span>, MyComponent)
 16
 17
 18
-19
-20
-21
-22
-</pre></td><td class="code"><pre>Vue.component(<span class="string">'user-profile'</span>, {
-    template: <span class="string">'{&#123;name&#125;}&lt;br&gt;{&#123;email&#125;}'</span>
+</pre></td><td class="code"><pre><span class="keyword">var</span> Child = Vue.extend({
+    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">this</span>.$dispatch(<span class="string">'child-created'</span>, <span class="keyword">this</span>)
+    }
 })
+
 <span class="keyword">var</span> parent = <span class="keyword">new</span> Vue({
-    el: <span class="string">'#demo'</span>,
-    data: {
-        user: {
-            name: <span class="string">'Foo Bar'</span>,
-            email: <span class="string">'foo@bar.com'</span>
-        },
-        users: [
-            {
-                name: <span class="string">'Chuck Norris'</span>,
-                email: <span class="string">'chuck@norris.com'</span>
-            },
-            {
-                name: <span class="string">'Bruce Lee'</span>,
-                email: <span class="string">'bruce@lee.com'</span>
-            }
-        ]
+    template: <span class="string">'&lt;div v-component="child"&gt;&lt;/div&gt;'</span>,
+    components: {
+        child: Child
+    },
+    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">this</span>.$on(<span class="string">'child-created'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(child)</span> {</span>
+            console.log(<span class="string">'new child created: '</span>)
+            console.log(child)
+        })
     }
 })
 </pre></td></tr></table></figure>
 
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span> <span class="attribute">v-with</span>=<span class="value">"user"</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users"</span> <span class="attribute">v-component</span>=<span class="value">"user-profile"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<p><strong>Result:</strong></p>
-<p><div id="demo"><p v-with="user" v-component="user-profile"></p><ul><li v-repeat="users" v-component="user-profile"></li></ul></div></p>
-<script src="/js/vue.min.js"></script>
 <script>
-    Vue.component('user-profile', {
-        template: '{&#123;name&#125;}<br>{&#123;email&#125;}'
-    })
-    var parent = new Vue({
-        el: '#demo',
-        data: {
-            user: {
-                name: 'Foo Bar',
-                email: 'foo@bar.com'
-            },
-            users: [
-                {
-                    name: 'Chuck Norris',
-                    email: 'chuck@norris.com'
-                },
-                {
-                    name: 'Bruce Lee',
-                    email: 'bruce@lee.com'
-                }
-            ]
-        }
-    })
+var Child = Vue.extend({
+    created: function () {
+        this.$dispatch('child-created', this)
+    }
+})
+
+var parent = new Vue({
+    template: '<div v-component="child"></div>',
+    components: {
+        child: Child
+    },
+    created: function () {
+        this.$on('child-created', function (child) {
+            console.log('new child created: ')
+            console.log(child)
+        })
+    }
+})
 </script>
 
 <p>Next: <a href="/guide/application.html">Building Larger Apps</a>.</p>

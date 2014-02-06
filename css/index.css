@@ -290,9 +290,7 @@ body {
 #social li {
   display: inline-block;
   margin: 0 5px;
-}
-#social li iframe {
-  width: 94px !important;
+  width: 95px;
 }
 #features {
   padding: 4em 0;
@@ -473,6 +471,9 @@ body {
   }
   #social {
     margin-top: 1.5em;
+  }
+  #social li {
+    width: 90px;
   }
   .cool {
     margin-top: 0;

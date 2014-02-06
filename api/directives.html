@@ -9,12 +9,6 @@
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
         <script>
             window.PAGE_TYPE = "api"
-            // G+ button
-            ;(function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-            })();
         </script>
         <script src="/js/classList.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
@@ -169,30 +163,7 @@
 <ul>
 <li>This directive takes a registered asset id.</li>
 </ul>
-<p>Only respected when used in combination with <code>v-component</code> or <code>v-with</code>. The ViewModel will be registered in its parent’s <code>$</code> property.</p>
-<p><strong>Example:</strong></p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"parent"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"Box"</span> <span class="attribute">v-component-id</span>=<span class="value">"box"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="comment">// register the Box component</span>
-Vue.component(<span class="string">'Box'</span>, ...)
-<span class="comment">// compile parent</span>
-<span class="keyword">var</span> parent = <span class="keyword">new</span> Vue({ el: <span class="string">'#parent'</span> })
-<span class="comment">// access the child component</span>
-<span class="keyword">var</span> child = parent.$.box
-</pre></td></tr></table></figure>
-
+<p>Only respected when used in combination with <code>v-component</code>, <code>v-with</code> or <code>v-repeat</code>. The ViewModel will be accessible in its parent’s <code>$</code> object, e.g. <code>parent.$[id]</code>. When used with <code>v-repeat</code>, the value will be an Array containing the child ViewModel instances corresponding to the Array they are bound to. For examples see <a href="/guide/composition.html#Accessing_Child_Components">Accessing Child Components</a>.</p>
 <h3 id="v-transition">v-transition</h3>
 <ul>
 <li>This directive takes an optional registered asset id.</li>
@@ -200,7 +171,7 @@ Vue.component(<span class="string">'Box'</span>, ...)
 <p>When no value is provided, Vue.js will apply CSS transition classes to this element when adding / removing this element to / from the DOM.</p>
 <p>When an id is provided, Vue.js will execute the registered enter / leave functions before the DOM operations take place.</p>
 <p>Transitions are applied when certain transition-triggering directives modifies the element, or when the ViewModel’s DOM manipulation methods are called.</p>
-<p>For details, see <a href="/guide/transitions.html">Using Transition Effects</a>.</p>
+<p>For details, see <a href="/guide/transitions.html">Adding Transition Effects</a>.</p>
 <h3 id="v-partial">v-partial</h3>
 <ul>
 <li>This directive takes a registered asset id.</li>

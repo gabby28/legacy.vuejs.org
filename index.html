@@ -9,12 +9,6 @@
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
         <script>
             window.PAGE_TYPE = ""
-            // G+ button
-            ;(function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-            })();
         </script>
         <script src="/js/classList.js"></script>
         <link rel="stylesheet" href="/css/index.css" type="text/css">
@@ -30,7 +24,16 @@
     </head>
     <body>
         
-            <div id="hero">
+            <script>
+    // G+ button
+    ;(function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+</script>
+
+<div id="hero">
     <div class="inner">
         <ul id="nav">
             <li><a href="/guide/" class="nav-link">Guide</a></li>
@@ -43,7 +46,7 @@
         <p class="sub">MVVM Made Simple</p>
         <p class="desc">Vue.js is a library for building interactive web interfaces. <br>It provides efficient MVVM data bindings with a simple and flexible API.</p>
         <p class="buttons">
-            <a href="/guide/installation.html" class="button">Get Vue.js v0.8.2</a>
+            <a href="/guide/installation.html" class="button">Get Vue.js v0.8.3</a>
             <a href="https://github.com/yyx990803/vue" target="_blank" class="button">Source on GitHub</a>
         </p>
         <ul id="social">
