@@ -201,7 +201,8 @@ a.button:hover {
   z-index: 1;
   padding: 0 60px 30px;
 }
-#demo {
+#demo,
+.demo {
   border: 1px solid #eee;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   border-radius: 0px;
@@ -211,30 +212,36 @@ a.button:hover {
   font-size: 1.2em;
   line-height: 1.5em;
 }
-#demo h1 {
+#demo h1,
+.demo h1 {
   margin: 0 0 0.5em;
   font-size: 1.8em;
 }
-#demo ul {
+#demo ul,
+.demo ul {
   padding-left: 1.5em;
   margin: 0;
 }
-#demo li {
+#demo li,
+.demo li {
   cursor: pointer;
   color: #34495e;
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
 }
-#demo li.done {
+#demo li.done,
+.demo li.done {
   color: #7f8c8d;
   text-decoration: line-through;
 }
-ul#demo li {
+ul#demo li,
+ul.demo li {
   margin-left: 1.5em;
 }
 @media screen and (max-width: 720px) {
-  #demo {
+  #demo,
+  .demo {
     margin-left: 0;
   }
 }
