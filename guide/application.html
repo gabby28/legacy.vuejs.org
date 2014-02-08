@@ -38,6 +38,7 @@
 </div>
         
         <div id="main">
+        
             
     <div class="sidebar">
     <div class="toggle">···</div>
@@ -72,8 +73,8 @@
 </div>
 
 <div class="content guide with-sidebar">
-    <h1 id="Building_Larger_Apps">Building Larger Apps</h1>
-<p>Vue.js is designed to be as flexible as possible - it’s just an interface library that doesn’t enforce any architectural decisions. While this can be very useful for rapid prototyping, it could be a challenge for those with less experience to build larger scale applications with it. The following is an opinionated perspective on how to organize larger projects when using Vue.js.</p>
+    <h1>Building Larger Apps</h1>
+    <p>Vue.js is designed to be as flexible as possible - it’s just an interface library that doesn’t enforce any architectural decisions. While this can be very useful for rapid prototyping, it could be a challenge for those with less experience to build larger scale applications with it. The following is an opinionated perspective on how to organize larger projects when using Vue.js.</p>
 <h2 id="Build_with_Component">Build with Component</h2>
 <p><img src="http://component.io/boot/images/logo.png"></p>
 <p>Vue.js is built with <a href="https://github.com/component/component" target="_blank">Component</a>, a front-end package manager and build tool. With Component you can write your browser code in the format of CommonJS modules (the same format Node.js uses), and publish packages simply by pushing them to public GitHub repositories. This helps greatly with both code modularization and reusability. For a boilerplate of using Vue.js with Component, see the <a href="https://github.com/vuejs/vue-component-example" target="_blank">vue-component-example</a>.</p>
@@ -89,6 +90,7 @@
 <p>By using Component, Vue.js entities (ViewModel constructors, directives, filters) within a large project can be split into separate CommonJS modules. When a Component-based project is built without the <code>standalone</code> flag, it will expose its <code>require()</code> method, granting access to all these internal modules. This makes it quite easy to write browser unit tests - just include the test build and require the module you want to test.</p>
 <p class="tip">Since Vue.js bindings update asynchronously, you should use <code>Vue.nextTick()</code> when asserting DOM updates after changing the data.</p>
 </div>
+        
         </div>
         <script src="/js/common.js"></script>
     </body>

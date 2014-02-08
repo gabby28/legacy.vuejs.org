@@ -38,6 +38,7 @@
 </div>
         
         <div id="main">
+        
             
     <div class="sidebar">
     <div class="toggle">···</div>
@@ -64,7 +65,11 @@
 </div>
 
 <div class="content api with-sidebar">
-    <h1 id="Directives">Directives</h1>
+    <h1>Directives</h1>
+    <h2 id="Data_Binding_Directives">Data Binding Directives</h2>
+<blockquote>
+<p>These directives can bind themselves to a property on the ViewModel, or to an expression which is evaluated in the context of the ViewModel. When the value of the underlying property or expression changes, the <code>update()</code> function of these directives will be called asynchronously on next tick.</p>
+</blockquote>
 <h3 id="v-text">v-text</h3>
 <p>Updates the element’s <code>textContent</code>.</p>
 <p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations are also compiled as a <code>v-text</code> direcitve on a textNode.</p>
@@ -113,8 +118,9 @@
 <h3 id="v-on">v-on</h3>
 <ul>
 <li>This directive requires exactly one argument.</li>
+<li>This directive requires the value to be a Function or an expression.</li>
 </ul>
-<p>Attaches an event listener to the element. The event type is denoted by the argument. For more details see <a href="/guide/events.html">Listening for Events</a>.</p>
+<p>Attaches an event listener to the element. The event type is denoted by the argument. It is also the only directive that can be used with the <code>key</code> filter. For more details see <a href="/guide/events.html">Listening for Events</a>.</p>
 <h3 id="v-model">v-model</h3>
 <ul>
 <li>This directive can only be used on INPUT, SELECT, TEXTAREA and elements with <code>contenteditable</code> attribute.</li>
@@ -125,14 +131,10 @@
 <li>This directive can trigger transitions.</li>
 </ul>
 <p>Conditionally insert / remove the element based on the truthy-ness of the binding value.</p>
-<h3 id="v-component">v-component</h3>
-<ul>
-<li>This directive takes a registered asset id.</li>
-</ul>
-<p>Compile this element as a child ViewModel with a registered component constructor. This can be used with <code>v-with</code> to inehrit data from the parent. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <h3 id="v-with">v-with</h3>
 <ul>
 <li>This directive requires the value to be an Object or falsy.</li>
+<li>You cannot use expressions with this directive.</li>
 </ul>
 <p>Compile this element as a child ViewModel, using the binding value as the <code>data</code> option. Inside the template you can directly access properties on the binding value. This can be used in combination with <code>v-component</code>.</p>
 <p>Suppose our data looks like this:</p>
@@ -159,6 +161,15 @@
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+<h2 id="Literal_Directives">Literal Directives</h2>
+<blockquote>
+<p>Literal directives treat their attribute value as a plain string; they do not attempt to bind themselves to anything. All they do is executing the <code>bind()</code> function with the string value once.</p>
+</blockquote>
+<h3 id="v-component">v-component</h3>
+<ul>
+<li>This directive takes a registered asset id.</li>
+</ul>
+<p>Compile this element as a child ViewModel with a registered component constructor. This can be used with <code>v-with</code> to inehrit data from the parent. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <h3 id="v-component-id">v-component-id</h3>
 <ul>
 <li>This directive takes a registered asset id.</li>
@@ -188,6 +199,7 @@
 <p>Skip compilation for this element and all its children. Skipping large amount of nodes with no directives on them can speed up compilation.</p>
 
 </div>
+        
         </div>
         <script src="/js/common.js"></script>
     </body>
