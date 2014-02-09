@@ -116,6 +116,8 @@
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+<p class="tip">It is not recommended to use mustache bindings inside the <code>style</code> attribute because Internet Explorer, regardless of version, will remove invalid inline styles when parsing the HTML.</p>
+
 <p class="tip">You can also use triple mustaches for unescaped HTML, which translate  to <code>v-html</code> internally. However, since this can open up window for potential XSS attacks, it is suggested that you only use triple mustaches when you are certain about the security of the data source.</p>
 
 <h3 id="Filters">Filters</h3>

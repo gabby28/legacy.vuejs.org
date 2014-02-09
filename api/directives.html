@@ -109,6 +109,31 @@
 </pre></td></tr></table></figure>
 
 <p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives. One special case you might want to use this instead of interpolation is when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. If you use interpolation for <code>src</code> and the element is inserted into the DOM before being compiled, the browser will make a failed http request trying to fetch the image.</p>
+<h3 id="v-style">v-style</h3>
+<ul>
+<li>This directive requires exactly one argument.</li>
+</ul>
+<p>Apply inline CSS styles to the element. The argument is the CSS property to apply.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"
+    top: top + 'px',
+    left: left + 'px',
+    background-color: 'rgb(0,0,' + bg + ')'
+"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>When the argument is prefixed with <code>$</code>, Vue.js will automatically apply prefixed version of the CSS rule too, so you don’t have to manually write all the prefixes inline. In the following example Vue.js will apply <code>transform</code>, <code>webkitTransform</code>, <code>mozTransform</code> and <code>msTransform</code>:</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"$transform: 'scale(' + scale + ')'"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p class="tip">It is recommended to use <code>v-style</code> instead of mustache bindings inside <code>style</code> attribute because Internet Explorer, regardless of version, will remove invalid inline styles when parsing the HTML.</p>
+
 <h3 id="v-repeat">v-repeat</h3>
 <ul>
 <li>This directive requires the value to be Array or falsy.</li>

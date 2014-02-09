@@ -1145,7 +1145,7 @@ CompilerProto.compile = function (node, root) {
  */
 CompilerProto.compileNode = function (node) {
     var i, j,
-        attrs = node.attributes,
+        attrs = slice.call(node.attributes),
         prefix = config.prefix + '-'
     // parse if has attributes
     if (attrs && attrs.length) {
@@ -1252,9 +1252,9 @@ CompilerProto.bindDirective = function (directive) {
     // keep track of it so we can unbind() later
     this.dirs.push(directive)
 
-    // for a simple directive, simply call its bind() or _update()
+    // for empty or literal directives, simply call its bind()
     // and we're done.
-    if (directive.isEmpty) {
+    if (directive.isEmpty || directive.isLiteral) {
         if (directive.bind) directive.bind()
         return
     }
@@ -2146,11 +2146,11 @@ var utils      = require('./utils'),
     // match up to the first single pipe, ignore those within quotes.
     KEY_RE          = /^(?:['"](?:\\.|[^'"])*['"]|\\.|[^\|]|\|\|)+/,
 
-    ARG_RE          = /^([\w- ]+):(.+)$/,
+    ARG_RE          = /^([\w-$ ]+):(.+)$/,
     FILTERS_RE      = /\|[^\|]+/g,
     FILTER_TOKEN_RE = /[^\s']+|'[^']+'/g,
     NESTING_RE      = /^\$(parent|root)\./,
-    SINGLE_VAR_RE   = /^[\w\.\$]+$/
+    SINGLE_VAR_RE   = /^[\w\.$]+$/
 
 /**
  *  Directive class
@@ -2180,6 +2180,13 @@ function Directive (definition, expression, rawKey, compiler, node) {
     // empty expression, we're done.
     if (isEmpty) {
         this.isEmpty = true
+        return
+    }
+
+    // for literal directives, all we need
+    // is the expression as the value.
+    if (this.isLiteral) {
+        this.value = expression.trim()
         return
     }
 
@@ -2875,6 +2882,7 @@ module.exports = {
     'if'      : require('./if'),
     'with'    : require('./with'),
     html      : require('./html'),
+    style     : require('./style'),
 
     attr: function (value) {
         this.el.setAttribute(this.arg, value)
@@ -3505,6 +3513,44 @@ module.exports = {
             parent.insertBefore(nodes[i], this.el)
         }
     }
+}
+});
+require.register("vue/src/directives/style.js", function(exports, require, module){
+var camelRE = /-([a-z])/g,
+    prefixes = ['webkit', 'moz', 'ms']
+
+function camelReplacer (m) {
+    return m[1].toUpperCase()
+}
+
+module.exports = {
+
+    bind: function () {
+        var prop = this.arg,
+            first = prop.charAt(0)
+        if (first === '$') {
+            // properties that start with $ will be auto-prefixed
+            prop = prop.slice(1)
+            this.prefixed = true
+        } else if (first === '-') {
+            // normal starting hyphens should not be converted
+            prop = prop.slice(1)
+        }
+        this.prop = prop.replace(camelRE, camelReplacer)
+    },
+
+    update: function (value) {
+        var prop = this.prop
+        this.el.style[prop] = value
+        if (this.prefixed) {
+            prop = prop.charAt(0).toUpperCase() + prop.slice(1)
+            var i = prefixes.length
+            while (i--) {
+                this.el.style[prefixes[i] + prop] = value
+            }
+        }
+    }
+
 }
 });
 require.alias("component-emitter/index.js", "vue/deps/emitter/index.js");
