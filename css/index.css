@@ -298,6 +298,11 @@ body {
 #example {
   text-align: center;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto 3em;
+}
+#example h2 {
+  margin-bottom: 1.5em;
 }
 #example code,
 #example pre {
@@ -341,8 +346,9 @@ body {
   border-color: #42b983;
 }
 #features {
-  padding: 2em 0 4em;
+  padding: 3em 0;
   text-align: center;
+  background-color: #f9f9f9;
 }
 #features .cool {
   font-size: 1.8em;
@@ -488,7 +494,7 @@ body {
     margin: 2.5em 1em;
   }
   #hero {
-    min-height: 600px;
+    min-height: 560px;
   }
   #hero .inner {
     height: 600px;
