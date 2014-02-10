@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Installation - vue.js</title>
+        <title>Plugins - vue.js</title>
         <meta charset="utf-8">
         <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -46,7 +46,7 @@
         <h2>Guide</h2>
         <ul>
         
-            <li><a href="/guide/installation.html" class="sidebar-link current">Installation</a></li>
+            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
         
             <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
         
@@ -68,57 +68,43 @@
         
             <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
         
-            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+            <li><a href="/guide/plugin.html" class="sidebar-link current">Plugins</a></li>
         
         </ul>
     </div>
 </div>
 
 <div class="content guide with-sidebar">
-    <h1>Installation</h1>
-    <blockquote>
-<p><strong>Compatibility Note:</strong> Vue.js does not support IE8 and below.</p>
-</blockquote>
-<h2 id="Standalone">Standalone</h2>
-<p>Simply download and include with a script tag. <code>Vue</code> will be registered as a global variable.</p>
-<p><a class="button" href="https://raw.github.com/yyx990803/vue/v0.8.5/dist/vue.js" download target="_blank">Development Version</a><br><span class="light">95.84kb, plenty of comments</span></p>
-<p><a class="button" href="https://raw.github.com/yyx990803/vue/v0.8.5/dist/vue.min.js" download target="_blank">Production Version</a><br><span class="light">33.82kb minified / 11.51kb gzipped</span></p>
-<p>Also available on <a href="http://cdnjs.com" target="_blank">cdnjs</a> (takes 4 hours to sync so might not work for latest version):</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdnjs.cloudflare.com/ajax/libs/vue/0.8.5/vue.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<h2 id="Component">Component</h2>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ component install yyx990803/vue
-</pre></td></tr></table></figure>
-
+    <h1>Plugins</h1>
+    <p><em>This is a very early preview for the plugin API and this may change in furture versions. You might want to wait for a few official plugins as reference before writing your own.</em></p>
+<h2 id="Using_a_Plugin">Using a Plugin</h2>
+<h3 id="Verbose_version">Verbose version</h3>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+2
+3
+</pre></td><td class="code"><pre><span class="comment">// assuming using a CommonJS build system</span>
+<span class="keyword">var</span> vueTouch = require(<span class="string">'vue-touch'</span>)
+Vue.use(vueTouch)
 </pre></td></tr></table></figure>
 
-<h2 id="Browserify">Browserify</h2>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ npm install vue
-</pre></td></tr></table></figure>
-
+<h3 id="Shorthand_equivalent">Shorthand equivalent</h3>
 <figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = require(<span class="string">'vue'</span>)
+2
+</pre></td><td class="code"><pre><span class="comment">// will auto require('vue-touch')</span>
+Vue.use(<span class="string">'vue-touch'</span>)
 </pre></td></tr></table></figure>
 
-<h2 id="Bower">Bower</h2>
-<figure class="highlight lang-bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ bower install vue
+<h2 id="Plugin_Implementation">Plugin Implementation</h2>
+<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>exports.install = <span class="function"><span class="keyword">function</span> <span class="params">(Vue)</span> {</span>
+    <span class="comment">// use Vue.require to access internal modules</span>
+    <span class="keyword">var</span> utils = Vue.require(<span class="string">'utils'</span>)
+}
 </pre></td></tr></table></figure>
 
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
-</pre></td></tr></table></figure>
-
-<h2 id="Module_Loaders">Module Loaders</h2>
-<p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as a CommonJS or AMD module.</p>
-<h2 id="Ready-3f-">Ready?</h2>
-<p><a href="/guide/">Let’s Get Started</a>.</p>
 
 </div>
         

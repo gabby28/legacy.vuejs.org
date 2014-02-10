@@ -2,13 +2,42 @@ describe('UNIT: Directives', function () {
     
     describe('attr', function () {
 
-        var dir = mockDirective('attr')
-        dir.arg = 'href'
+        var dir = mockDirective('attr', 'input'),
+            el = dir.el
 
-        it('should set an attribute', function () {
-            var url = 'http://a.b.com'
-            dir.update(url)
-            assert.strictEqual(dir.el.getAttribute('href'), url)
+        it('should set a truthy attribute value', function () {
+            var value = 'Arrrrrr!'
+
+            dir.arg = 'value'
+            dir.update(value)
+            assert.strictEqual(el.getAttribute('value'), value)
+        })
+
+        it('should set attribute value to `0`', function () {
+            dir.arg = 'value'
+            dir.update(0)
+            assert.strictEqual(el.getAttribute('value'), '0')
+        })
+
+        it('should remove an attribute if value is `false`', function () {
+            dir.arg = 'disabled'
+            el.setAttribute('disabled', 'disabled')
+            dir.update(false)
+            assert.strictEqual(el.getAttribute('disabled'), null)
+        })
+
+        it('should remove an attribute if value is `null`', function () {
+            dir.arg = 'disabled'
+            el.setAttribute('disabled', 'disabled')
+            dir.update(null)
+            assert.strictEqual(el.getAttribute('disabled'), null)
+        })
+
+        it('should remove an attribute if value is `undefined`', function () {
+            dir.arg = 'disabled'
+            el.setAttribute('disabled', 'disabled')
+            dir.update(undefined)
+            assert.strictEqual(el.getAttribute('disabled'), null)
         })
 
     })
@@ -32,12 +61,15 @@ describe('UNIT: Directives', function () {
             assert.strictEqual(dir.el.textContent, 'true')
         })
 
+        it('should work with objects', function () {
+            dir.update({foo:"bar"})
+            assert.strictEqual(dir.el.textContent, '{"foo":"bar"}')
+        })
+
         it('should be empty with other stuff', function () {
             dir.update(null)
             assert.strictEqual(dir.el.textContent, '')
             dir.update(undefined)
-            assert.strictEqual(dir.el.textContent, '')
-            dir.update({a:123})
             assert.strictEqual(dir.el.textContent, '')
             dir.update(function () {})
             assert.strictEqual(dir.el.textContent, '')
@@ -65,12 +97,15 @@ describe('UNIT: Directives', function () {
             assert.strictEqual(dir.el.textContent, 'true')
         })
 
+        it('should work with objects', function () {
+            dir.update({foo:"bar"})
+            assert.strictEqual(dir.el.textContent, '{"foo":"bar"}')
+        })
+
         it('should be empty with other stuff', function () {
             dir.update(null)
             assert.strictEqual(dir.el.innerHTML, '')
             dir.update(undefined)
-            assert.strictEqual(dir.el.innerHTML, '')
-            dir.update({a:123})
             assert.strictEqual(dir.el.innerHTML, '')
             dir.update(function () {})
             assert.strictEqual(dir.el.innerHTML, '')

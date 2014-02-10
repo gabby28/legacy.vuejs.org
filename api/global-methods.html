@@ -234,6 +234,16 @@ Vue.config({
 <li><strong>callback</strong> <code>Function</code></li>
 </ul>
 <p>Vue.js batches view updates and execute them all asynchronously. It uses <code>requestAnimationFrame</code> if available and fallsback to <code>setTimeout(fn, 0)</code>. This method calls the callback after the next view update, which can be useful when you want to wait until the view has been updated.</p>
+<h3 id="Vue-require-28-_module_-29-">Vue.require( module )</h3>
+<ul>
+<li><strong>module</strong> <code>String</code></li>
+</ul>
+<p>Get access to Vue.js’ internal modules. This is intended for plugin authors only.</p>
+<h3 id="Vue-use-28-_plguin_-29-">Vue.use( plguin )</h3>
+<ul>
+<li><strong>plugin</strong> <code>Object</code> or <code>Function</code></li>
+</ul>
+<p>Mount a Vue.js plugin. If the plugin is an Object, it must have an <code>install</code> method. If it is a function itself, it will be treated as the install method. The install method will be called with Vue as the argument. For more details, see <a href="/guide/plugin.html">Plugins</a>.</p>
 
 </div>
         
