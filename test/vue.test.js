@@ -1282,7 +1282,7 @@ CompilerProto.bindDirective = function (directive) {
 
     // for empty or literal directives, simply call its bind()
     // and we're done.
-    if (directive.isEmpty || directive.isLiteral) {
+    if (directive.isEmpty || !directive._update) {
         if (directive.bind) directive.bind()
         return
     }
@@ -2216,13 +2216,6 @@ function Directive (definition, expression, rawKey, compiler, node) {
     // empty expression, we're done.
     if (isEmpty) {
         this.isEmpty = true
-        return
-    }
-
-    // for literal directives, all we need
-    // is the expression as the value.
-    if (this.isLiteral) {
-        this.value = expression.trim()
         return
     }
 
@@ -3242,11 +3235,6 @@ module.exports = {
                     }
                 })
             }
-            // in case `$destroy` is called directly on a repeated vm
-            // make sure the vm's data is properly removed
-            item.$compiler.observer.on('hook:afterDestroy', function () {
-                col.remove(data)
-            })
         }
     },
 
