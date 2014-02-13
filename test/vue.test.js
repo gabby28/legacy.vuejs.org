@@ -943,7 +943,7 @@ function Compiler (vm, options) {
     extend(data, vm)
 
     // observe the data
-    Observer.observe(data, '', compiler.observer)
+    compiler.observeData(data)
     
     // for repeated items, create an index binding
     // which should be inenumerable but configurable
@@ -952,21 +952,6 @@ function Compiler (vm, options) {
         def(data, '$index', compiler.repeatIndex, false, true)
         compiler.createBinding('$index')
     }
-
-    // allow the $data object to be swapped
-    Object.defineProperty(vm, '$data', {
-        enumerable: false,
-        get: function () {
-            return compiler.data
-        },
-        set: function (newData) {
-            var oldData = compiler.data
-            Observer.unobserve(oldData, '', compiler.observer)
-            compiler.data = newData
-            Observer.copyPaths(newData, oldData)
-            Observer.observe(newData, '', compiler.observer)
-        }
-    })
 
     // now parse the DOM, during which we will create necessary bindings
     // and bind the parsed directives
@@ -1089,6 +1074,44 @@ CompilerProto.setupObserver = function () {
     }
 }
 
+CompilerProto.observeData = function (data) {
+
+    var compiler = this,
+        observer = compiler.observer
+
+    // recursively observe nested properties
+    Observer.observe(data, '', observer)
+
+    // also create binding for top level $data
+    // so it can be used in templates too
+    var $dataBinding = compiler.bindings['$data'] = new Binding(compiler, '$data')
+    $dataBinding.update(data)
+
+    // allow $data to be swapped
+    Object.defineProperty(compiler.vm, '$data', {
+        enumerable: false,
+        get: function () {
+            compiler.observer.emit('get', '$data')
+            return compiler.data
+        },
+        set: function (newData) {
+            var oldData = compiler.data
+            Observer.unobserve(oldData, '', observer)
+            compiler.data = newData
+            Observer.copyPaths(newData, oldData)
+            Observer.observe(newData, '', observer)
+            compiler.observer.emit('set', '$data', newData)
+        }
+    })
+
+    // emit $data change on all changes
+    observer.on('set', function (key) {
+        if (key !== '$data') {
+            $dataBinding.update(compiler.data)
+        }
+    })
+}
+
 /**
  *  Compile a DOM node (recursive)
  */
@@ -1177,7 +1200,7 @@ CompilerProto.compileNode = function (node) {
         prefix = config.prefix + '-'
     // parse if has attributes
     if (attrs && attrs.length) {
-        var attr, isDirective, exps, exp, directive
+        var attr, isDirective, exps, exp, directive, dirname
         // loop through all attributes
         i = attrs.length
         while (i--) {
@@ -1193,7 +1216,8 @@ CompilerProto.compileNode = function (node) {
                 j = exps.length
                 while (j--) {
                     exp = exps[j]
-                    directive = Directive.parse(attr.name.slice(prefix.length), exp, this, node)
+                    dirname = attr.name.slice(prefix.length)
+                    directive = Directive.parse(dirname, exp, this, node)
                     if (directive) {
                         this.bindDirective(directive)
                     }
@@ -1209,7 +1233,9 @@ CompilerProto.compileNode = function (node) {
                 }
             }
 
-            if (isDirective) node.removeAttribute(attr.name)
+            if (isDirective && dirname !== 'cloak') {
+                node.removeAttribute(attr.name)
+            }
         }
     }
     // recursively compile childNodes
@@ -1307,7 +1333,6 @@ CompilerProto.bindDirective = function (directive) {
         compiler = compiler || this
         binding = compiler.bindings[key] || compiler.createBinding(key)
     }
-
     binding.instances.push(directive)
     directive.binding = binding
 
@@ -1411,11 +1436,10 @@ CompilerProto.defineExp = function (key, binding) {
  */
 CompilerProto.defineComputed = function (key, binding, value) {
     this.markComputed(binding, value)
-    var def = {
+    Object.defineProperty(this.vm, key, {
         get: binding.value.$get,
         set: binding.value.$set
-    }
-    Object.defineProperty(this.vm, key, def)
+    })
 }
 
 /**
@@ -1876,7 +1900,7 @@ var ArrayProxy = Object.create(Array.prototype)
 methods.forEach(function (method) {
     def(ArrayProxy, method, function () {
         var result = Array.prototype[method].apply(this, arguments)
-        this.__observer__.emit('mutate', this.__observer__.path, this, {
+        this.__observer__.emit('mutate', null, this, {
             method: method,
             args: slice.call(arguments),
             result: result
@@ -1953,13 +1977,12 @@ function watchObject (obj) {
  *  Watch an Array, overload mutation methods
  *  and add augmentations by intercepting the prototype chain
  */
-function watchArray (arr, path) {
+function watchArray (arr) {
     var observer = arr.__observer__
     if (!observer) {
         observer = new Emitter()
         def(arr, '__observer__', observer)
     }
-    observer.path = path
     if (hasProto) {
         arr.__proto__ = ArrayProxy
     } else {
@@ -2003,7 +2026,9 @@ function convert (obj, key) {
             unobserve(oldVal, key, observer)
             values[key] = newVal
             copyPaths(newVal, oldVal)
-            observer.emit('set', key, newVal)
+            // an immediate property should notify its parent
+            // to emit set for itself too
+            observer.emit('set', key, newVal, true)
             observe(newVal, key, observer)
         }
     })
@@ -2094,40 +2119,61 @@ function ensurePath (obj, key) {
  *  Observe an object with a given path,
  *  and proxy get/set/mutate events to the provided observer.
  */
-function observe (obj, rawPath, observer) {
+function observe (obj, rawPath, parentOb) {
+
     if (!isWatchable(obj)) return
+
     var path = rawPath ? rawPath + '.' : '',
-        ob, alreadyConverted = !!obj.__observer__
+        alreadyConverted = !!obj.__observer__,
+        childOb
+
     if (!alreadyConverted) {
         def(obj, '__observer__', new Emitter())
     }
-    ob = obj.__observer__
-    ob.values = ob.values || utils.hash()
-    observer.proxies = observer.proxies || {}
-    var proxies = observer.proxies[path] = {
+
+    childOb = obj.__observer__
+    childOb.values = childOb.values || utils.hash()
+
+    // setup proxy listeners on the parent observer.
+    // we need to keep reference to them so that they
+    // can be removed when the object is un-observed.
+    parentOb.proxies = parentOb.proxies || {}
+    var proxies = parentOb.proxies[path] = {
         get: function (key) {
-            observer.emit('get', path + key)
+            parentOb.emit('get', path + key)
         },
-        set: function (key, val) {
-            observer.emit('set', path + key, val)
+        set: function (key, val, propagate) {
+            parentOb.emit('set', path + key, val)
+            // also notify observer that the object itself changed
+            // but only do so when it's a immediate property. this
+            // avoids duplicate event firing.
+            if (rawPath && propagate) {
+                parentOb.emit('set', rawPath, obj, true)
+            }
         },
         mutate: function (key, val, mutation) {
             // if the Array is a root value
             // the key will be null
             var fixedPath = key ? path + key : rawPath
-            observer.emit('mutate', fixedPath, val, mutation)
+            parentOb.emit('mutate', fixedPath, val, mutation)
             // also emit set for Array's length when it mutates
             var m = mutation.method
             if (m !== 'sort' && m !== 'reverse') {
-                observer.emit('set', fixedPath + '.length', val.length)
+                parentOb.emit('set', fixedPath + '.length', val.length)
             }
         }
     }
-    ob
+
+    // attach the listeners to the child observer.
+    // now all the events will propagate upwards.
+    childOb
         .on('get', proxies.get)
         .on('set', proxies.set)
         .on('mutate', proxies.mutate)
+
     if (alreadyConverted) {
+        // for objects that have already been converted,
+        // emit set events for everything inside
         emitSet(obj)
     } else {
         var type = typeOf(obj)
@@ -2143,14 +2189,20 @@ function observe (obj, rawPath, observer) {
  *  Cancel observation, turn off the listeners.
  */
 function unobserve (obj, path, observer) {
+
     if (!obj || !obj.__observer__) return
+
     path = path ? path + '.' : ''
     var proxies = observer.proxies[path]
     if (!proxies) return
+
+    // turn off listeners
     obj.__observer__
         .off('get', proxies.get)
         .off('set', proxies.set)
         .off('mutate', proxies.mutate)
+
+    // remove reference
     observer.proxies[path] = null
 }
 
@@ -2291,7 +2343,7 @@ function parseFilter (filter, compiler) {
  *  during initialization.
  */
 DirProto.update = function (value, init) {
-    if (!init && value === this.value) return
+    if (!init && value === this.value && utils.typeOf(value) !== 'Object') return
     this.value = value
     if (this._update) {
         this._update(
@@ -2904,6 +2956,7 @@ function reset () {
 });
 require.register("vue/src/directives/index.js", function(exports, require, module){
 var utils      = require('../utils'),
+    config     = require('../config'),
     transition = require('../transition')
 
 module.exports = {
@@ -2948,6 +3001,15 @@ module.exports = {
                 utils.addClass(this.el, value)
                 this.lastVal = value
             }
+        }
+    },
+
+    cloak: {
+        bind: function () {
+            var el = this.el
+            this.compiler.observer.once('hook:ready', function () {
+                el.removeAttribute(config.prefix + '-cloak')
+            })
         }
     }
 
@@ -3014,7 +3076,6 @@ module.exports = {
 });
 require.register("vue/src/directives/repeat.js", function(exports, require, module){
 var Observer   = require('../observer'),
-    Emitter    = require('../emitter'),
     utils      = require('../utils'),
     config     = require('../config'),
     transition = require('../transition'),
@@ -3151,7 +3212,7 @@ module.exports = {
 
         // listen for collection mutation events
         // the collection has been augmented during Binding.set()
-        if (!collection.__observer__) Observer.watchArray(collection, null, new Emitter())
+        if (!collection.__observer__) Observer.watchArray(collection)
         collection.__observer__.on('mutate', this.mutationListener)
 
         // create child-vms and append to DOM
