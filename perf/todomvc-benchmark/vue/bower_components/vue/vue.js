@@ -950,7 +950,7 @@ function Compiler (vm, options) {
     extend(data, vm)
 
     // observe the data
-    compiler.observeData(data)
+    Observer.observe(data, '', compiler.observer)
     
     // for repeated items, create an index binding
     // which should be inenumerable but configurable
@@ -959,6 +959,21 @@ function Compiler (vm, options) {
         def(data, '$index', compiler.repeatIndex, false, true)
         compiler.createBinding('$index')
     }
+
+    // allow the $data object to be swapped
+    Object.defineProperty(vm, '$data', {
+        enumerable: false,
+        get: function () {
+            return compiler.data
+        },
+        set: function (newData) {
+            var oldData = compiler.data
+            Observer.unobserve(oldData, '', compiler.observer)
+            compiler.data = newData
+            Observer.copyPaths(newData, oldData)
+            Observer.observe(newData, '', compiler.observer)
+        }
+    })
 
     // now parse the DOM, during which we will create necessary bindings
     // and bind the parsed directives
@@ -1079,44 +1094,6 @@ CompilerProto.setupObserver = function () {
             compiler.createBinding(key)
         }
     }
-}
-
-CompilerProto.observeData = function (data) {
-
-    var compiler = this,
-        observer = compiler.observer
-
-    // recursively observe nested properties
-    Observer.observe(data, '', observer)
-
-    // also create binding for top level $data
-    // so it can be used in templates too
-    var $dataBinding = compiler.bindings['$data'] = new Binding(compiler, '$data')
-    $dataBinding.update(data)
-
-    // allow $data to be swapped
-    Object.defineProperty(compiler.vm, '$data', {
-        enumerable: false,
-        get: function () {
-            compiler.observer.emit('get', '$data')
-            return compiler.data
-        },
-        set: function (newData) {
-            var oldData = compiler.data
-            Observer.unobserve(oldData, '', observer)
-            compiler.data = newData
-            Observer.copyPaths(newData, oldData)
-            Observer.observe(newData, '', observer)
-            compiler.observer.emit('set', '$data', newData)
-        }
-    })
-
-    // emit $data change on all changes
-    observer.on('set', function (key) {
-        if (key !== '$data') {
-            $dataBinding.update(compiler.data)
-        }
-    })
 }
 
 /**
@@ -1340,6 +1317,7 @@ CompilerProto.bindDirective = function (directive) {
         compiler = compiler || this
         binding = compiler.bindings[key] || compiler.createBinding(key)
     }
+
     binding.instances.push(directive)
     directive.binding = binding
 
@@ -1443,10 +1421,11 @@ CompilerProto.defineExp = function (key, binding) {
  */
 CompilerProto.defineComputed = function (key, binding, value) {
     this.markComputed(binding, value)
-    Object.defineProperty(this.vm, key, {
+    var def = {
         get: binding.value.$get,
         set: binding.value.$set
-    })
+    }
+    Object.defineProperty(this.vm, key, def)
 }
 
 /**
@@ -2034,9 +2013,7 @@ function convert (obj, key) {
             unobserve(oldVal, key, observer)
             values[key] = newVal
             copyPaths(newVal, oldVal)
-            // an immediate property should notify its parent
-            // to emit set for itself too
-            observer.emit('set', key, newVal, true)
+            observer.emit('set', key, newVal)
             observe(newVal, key, observer)
         }
     })
@@ -2141,14 +2118,8 @@ function observe (obj, rawPath, observer) {
         get: function (key) {
             observer.emit('get', path + key)
         },
-        set: function (key, val, propagate) {
+        set: function (key, val) {
             observer.emit('set', path + key, val)
-            // also notify observer that the object itself changed
-            // but only do so when it's a immediate property. this
-            // avoids duplicate event firing.
-            if (rawPath && propagate) {
-                observer.emit('set', rawPath, obj, true)
-            }
         },
         mutate: function (key, val, mutation) {
             // if the Array is a root value
@@ -2330,7 +2301,7 @@ function parseFilter (filter, compiler) {
  *  during initialization.
  */
 DirProto.update = function (value, init) {
-    if (!init && value === this.value && utils.typeOf(value) !== 'Object') return
+    if (!init && value === this.value) return
     this.value = value
     if (this._update) {
         this._update(
