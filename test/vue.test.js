@@ -742,7 +742,9 @@ var utils = module.exports = {
         node.innerHTML = template.trim()
         /* jshint boss: true */
         while (child = node.firstChild) {
-            frag.appendChild(child)
+            if (node.nodeType === 1) {
+                frag.appendChild(child)
+            }
         }
         return frag
     },
@@ -867,7 +869,7 @@ var Emitter     = require('./emitter'),
     hooks = [
         'created', 'ready',
         'beforeDestroy', 'afterDestroy',
-        'enteredView', 'leftView'
+        'attached', 'detached'
     ]
 
 /**
@@ -1031,21 +1033,10 @@ CompilerProto.setupObserver = function () {
 
     // add own listeners which trigger binding updates
     observer
-        .on('get', function (key) {
-            check(key)
-            DepsParser.catcher.emit('get', bindings[key])
-        })
-        .on('set', function (key, val) {
-            observer.emit('change:' + key, val)
-            check(key)
-            bindings[key].update(val)
-        })
-        .on('mutate', function (key, val, mutation) {
-            observer.emit('change:' + key, val, mutation)
-            check(key)
-            bindings[key].pub()
-        })
-    
+        .on('get', onGet)
+        .on('set', onSet)
+        .on('mutate', onSet)
+
     // register hooks
     hooks.forEach(function (hook) {
         var fns = options[hook]
@@ -1060,6 +1051,17 @@ CompilerProto.setupObserver = function () {
             register(hook, fns)
         }
     })
+
+    function onGet (key) {
+        check(key)
+        DepsParser.catcher.emit('get', bindings[key])
+    }
+
+    function onSet (key, val, mutation) {
+        observer.emit('change:' + key, val, mutation)
+        check(key)
+        bindings[key].update(val)
+    }
 
     function register (hook, fn) {
         observer.on('hook:' + hook, function () {
@@ -1105,11 +1107,15 @@ CompilerProto.observeData = function (data) {
     })
 
     // emit $data change on all changes
-    observer.on('set', function (key) {
+    observer
+        .on('set', onSet)
+        .on('mutate', onSet)
+
+    function onSet (key) {
         if (key !== '$data') {
             $dataBinding.update(compiler.data)
         }
-    })
+    }
 }
 
 /**
@@ -1333,7 +1339,7 @@ CompilerProto.bindDirective = function (directive) {
         compiler = compiler || this
         binding = compiler.bindings[key] || compiler.createBinding(key)
     }
-    binding.instances.push(directive)
+    binding.dirs.push(directive)
     directive.binding = binding
 
     // invoke bind hook if exists
@@ -1515,7 +1521,7 @@ CompilerProto.destroy = function () {
     if (this.destroyed) return
 
     var compiler = this,
-        i, key, dir, instances, binding,
+        i, key, dir, dirs, binding,
         vm          = compiler.vm,
         el          = compiler.el,
         directives  = compiler.dirs,
@@ -1533,11 +1539,11 @@ CompilerProto.destroy = function () {
         dir = directives[i]
         // if this directive is an instance of an external binding
         // e.g. a directive that refers to a variable on the parent VM
-        // we need to remove it from that binding's instances
+        // we need to remove it from that binding's directives
         // * empty and literal bindings do not have binding.
         if (dir.binding && dir.binding.compiler !== compiler) {
-            instances = dir.binding.instances
-            if (instances) instances.splice(instances.indexOf(dir), 1)
+            dirs = dir.binding.dirs
+            if (dirs) dirs.splice(dirs.indexOf(dir), 1)
         }
         dir.unbind()
     }
@@ -1791,7 +1797,7 @@ function Binding (compiler, key, isExp, isFn) {
     this.root = !this.isExp && key.indexOf('.') === -1
     this.compiler = compiler
     this.key = key
-    this.instances = []
+    this.dirs = []
     this.subs = []
     this.deps = []
     this.unbound = false
@@ -1806,17 +1812,19 @@ BindingProto.update = function (value) {
     if (!this.isComputed || this.isFn) {
         this.value = value
     }
-    batcher.queue(this)
+    if (this.dirs.length || this.subs.length) {
+        batcher.queue(this)
+    }
 }
 
 /**
- *  Actually update the instances.
+ *  Actually update the directives.
  */
 BindingProto._update = function () {
-    var i = this.instances.length,
+    var i = this.dirs.length,
         value = this.val()
     while (i--) {
-        this.instances[i].update(value)
+        this.dirs[i].update(value)
     }
     this.pub()
 }
@@ -1851,9 +1859,9 @@ BindingProto.unbind = function () {
     // the batcher's flush queue when its owner
     // compiler has already been destroyed.
     this.unbound = true
-    var i = this.instances.length
+    var i = this.dirs.length
     while (i--) {
-        this.instances[i].unbind()
+        this.dirs[i].unbind()
     }
     i = this.deps.length
     var subs
@@ -2343,14 +2351,16 @@ function parseFilter (filter, compiler) {
  *  during initialization.
  */
 DirProto.update = function (value, init) {
-    if (!init && value === this.value && utils.typeOf(value) !== 'Object') return
-    this.value = value
-    if (this._update) {
-        this._update(
-            this.filters
-                ? this.applyFilters(value)
-                : value
-        )
+    var type = utils.typeOf(value)
+    if (init || value !== this.value || type === 'Object' || type === 'Array') {
+        this.value = value
+        if (this._update) {
+            this._update(
+                this.filters
+                    ? this.applyFilters(value)
+                    : value
+            )
+        }
     }
 }
 
@@ -2785,7 +2795,7 @@ var transition = module.exports = function (el, stage, cb, compiler) {
 
     var changeState = function () {
         cb()
-        compiler.execHook(stage > 0 ? 'enteredView' : 'leftView')
+        compiler.execHook(stage > 0 ? 'attached' : 'detached')
     }
 
     if (compiler.init) {
@@ -3183,7 +3193,10 @@ module.exports = {
             var method = mutation.method
             mutationHandlers[method].call(self, mutation)
             if (method !== 'push' && method !== 'pop') {
-                self.updateIndex()
+                var i = arr.length
+                while (i--) {
+                    arr[i].$index = i
+                }
             }
             if (method === 'push' || method === 'unshift' || method === 'splice') {
                 self.changed()
@@ -3193,6 +3206,8 @@ module.exports = {
     },
 
     update: function (collection, init) {
+        
+        if (collection === this.collection) return
 
         this.reset()
         // attach an object to container to hold handlers
@@ -3233,6 +3248,7 @@ module.exports = {
         this.queued = true
         var self = this
         setTimeout(function () {
+            if (!self.compiler) return
             self.compiler.parseDeps()
             self.queued = false
         }, 0)
@@ -3296,16 +3312,6 @@ module.exports = {
                     }
                 })
             }
-        }
-    },
-
-    /**
-     *  Update index of each item after a mutation
-     */
-    updateIndex: function () {
-        var i = this.vms.length
-        while (i--) {
-            this.vms[i].$data.$index = i
         }
     },
 

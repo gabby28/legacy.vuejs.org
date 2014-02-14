@@ -94,6 +94,7 @@
 14
 15
 16
+17
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">form</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">v-model</span>=<span class="value">"msg"</span>&gt;</span> {&#123;msg&#125;}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
     <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> <span class="attribute">v-model</span>=<span class="value">"checked"</span>&gt;</span> {&#123;checked ? &quot;yes&quot; : &quot;no&quot;&#125;}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
@@ -109,6 +110,7 @@
         <span class="tag">&lt;/<span class="title">select</span>&gt;</span>
         {&#123;selected&#125;}
     <span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">p</span>&gt;</span>data: {&#123;$data&#125;}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">form</span>&gt;</span>
 </pre></td></tr></table></figure>
 
@@ -133,7 +135,7 @@
 </pre></td></tr></table></figure>
 
 <p><strong>Result</strong></p>
-<p><form id="demo"><p><input type="text" v-model="msg"> {&#123;msg&#125;}</p><p><input type="checkbox" v-model="checked"> {&#123;checked ? &quot;yes&quot; : &quot;no&quot;&#125;}</p><p><input type="radio" v-model="picked" name="picked" value="one"><input type="radio" v-model="picked" name="picked" value="two"> {&#123;picked&#125;}</p><p><select v-model="selected"><option>one</option><option>two</option></select> {&#123;selected&#125;}</p><p>data: {&#123;serialized&#125;}</p></form></p>
+<p><form id="demo"><p><input type="text" v-model="msg"> {&#123;msg&#125;}</p><p><input type="checkbox" v-model="checked"> {&#123;checked ? &quot;yes&quot; : &quot;no&quot;&#125;}</p><p><input type="radio" v-model="picked" name="picked" value="one"><input type="radio" v-model="picked" name="picked" value="two"> {&#123;picked&#125;}</p><p><select v-model="selected"><option>one</option><option>two</option></select> {&#123;selected&#125;}</p><p>data: {&#123;$data&#125;}</p></form></p>
 <script>
     new Vue({
         el: '#demo',
@@ -142,11 +144,6 @@
             checked: true,
             picked: 'one',
             selected: 'two'
-        },
-        computed: {
-            serialized: {$get: function () {
-                return JSON.stringify(this.$data)
-            }}
         }
     })
 </script>

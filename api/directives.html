@@ -217,11 +217,12 @@
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; my-partial&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+<h2 id="Empty_Directives">Empty Directives</h2>
+<p>Empty directives ignore their attribute value.</p>
 <h3 id="v-pre">v-pre</h3>
-<ul>
-<li>This directive is an empty direcitve (it doesn’t need a keypath or expression)</li>
-</ul>
 <p>Skip compilation for this element and all its children. Skipping large amount of nodes with no directives on them can speed up compilation.</p>
+<h3 id="v-cloak">v-cloak</h3>
+<p>This property remains on the element until the associated ViewModel finishes compilation. Combined with CSS rules such as <code>[v-cloak] { display: none }</code>, this directive can be used to hide un-compiled mustache bindings until the ViewModel is ready.</p>
 
 </div>
         

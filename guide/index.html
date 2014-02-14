@@ -132,6 +132,8 @@
 </pre></td></tr></table></figure>
 
 <p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. For more details see <a href="/guide/filters.html">Filters in Depth</a>.</p>
+<h3 id="Components">Components</h3>
+<p>In Vue.js, a component is simply a ViewModel constructor registered with an ID using <code>Vue.component(ID, constructor)</code>. By having an associated ID, they can be declaratively reused in other ViewModel’s templates with the <code>v-component</code> directive. By breaking an application into smaller components, the result is a highly decoupled and composable codebase. For more details, see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <h2 id="A_Quick_Example">A Quick Example</h2>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 2
