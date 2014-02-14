@@ -191,34 +191,24 @@
 <p>Literal directives treat their attribute value as a plain string; they do not attempt to bind themselves to anything. All they do is executing the <code>bind()</code> function with the string value once.</p>
 </blockquote>
 <h3 id="v-component">v-component</h3>
-<ul>
-<li>This directive takes a registered asset id.</li>
-</ul>
 <p>Compile this element as a child ViewModel with a registered component constructor. This can be used with <code>v-with</code> to inehrit data from the parent. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
-<h3 id="v-component-id">v-component-id</h3>
-<ul>
-<li>This directive takes a registered asset id.</li>
-</ul>
+<h3 id="v-ref">v-ref</h3>
 <p>Only respected when used in combination with <code>v-component</code>, <code>v-with</code> or <code>v-repeat</code>. The ViewModel will be accessible in its parent’s <code>$</code> object, e.g. <code>parent.$[id]</code>. When used with <code>v-repeat</code>, the value will be an Array containing the child ViewModel instances corresponding to the Array they are bound to. For examples see <a href="/guide/composition.html#Accessing_Child_Components">Accessing Child Components</a>.</p>
 <h3 id="v-transition">v-transition</h3>
-<ul>
-<li>This directive takes an optional registered asset id.</li>
-</ul>
 <p>When no value is provided, Vue.js will apply CSS transition classes to this element when adding / removing this element to / from the DOM.</p>
 <p>When an id is provided, Vue.js will execute the registered enter / leave functions before the DOM operations take place.</p>
 <p>Transitions are applied when certain transition-triggering directives modifies the element, or when the ViewModel’s DOM manipulation methods are called.</p>
 <p>For details, see <a href="/guide/transitions.html">Adding Transition Effects</a>.</p>
 <h3 id="v-partial">v-partial</h3>
-<ul>
-<li>This directive takes a registered asset id.</li>
-</ul>
 <p>Replace the element’s innerHTML with a registered partial. You can also use this syntax:</p>
 <figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; my-partial&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
 <h2 id="Empty_Directives">Empty Directives</h2>
-<p>Empty directives ignore their attribute value.</p>
+<blockquote>
+<p>Empty directives do not require and will ignore their attribute value.</p>
+</blockquote>
 <h3 id="v-pre">v-pre</h3>
 <p>Skip compilation for this element and all its children. Skipping large amount of nodes with no directives on them can speed up compilation.</p>
 <h3 id="v-cloak">v-cloak</h3>
