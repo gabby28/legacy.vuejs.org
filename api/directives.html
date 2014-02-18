@@ -74,7 +74,9 @@
 <p>Updates the element’s <code>textContent</code>.</p>
 <p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations are also compiled as a <code>v-text</code> direcitve on a textNode.</p>
 <h3 id="v-html">v-html</h3>
-<p>Updates the element’s <code>innerHTML</code>. Use with caution and avoid binding this to a user-supplied value.</p>
+<p>Updates the element’s <code>innerHTML</code>.</p>
+<p class="tip">Using <code>v-html</code> with user-supplied data can be dangerous. It is suggested that you only use <code>v-html</code> when you are absolutely sure about the security of the data source, or pipe it through a custom filter that sanitizes untrusted HTML.</p>
+
 <h3 id="v-show">v-show</h3>
 <ul>
 <li>This directive can trigger transitions.</li>
@@ -108,7 +110,9 @@
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">v-attr</span>=<span class="value">"width:w, height:h"</span>&gt;</span><span class="tag">&lt;/<span class="title">canvas</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives. One special case you might want to use this instead of interpolation is when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. If you use interpolation for <code>src</code> and the element is inserted into the DOM before being compiled, the browser will make a failed http request trying to fetch the image.</p>
+<p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives.</p>
+<p class="tip">You should use <code>v-attr</code> instead of mustache binding when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. Your templates are parsed by the browser before being compiled by Vue.js, so the mustache binding will cause a 404 when the browser tries to fetch it as the image’s URL.</p>
+
 <h3 id="v-style">v-style</h3>
 <ul>
 <li>This directive requires exactly one argument.</li>

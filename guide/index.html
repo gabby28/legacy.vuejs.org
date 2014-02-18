@@ -123,7 +123,7 @@
 
 <p class="tip">Internet Explorer will remove invalid inline <code>style</code> attributes when parsing HTML, so always use <code>v-style</code> when binding inline CSS if you want to support IE.</p>
 
-<p class="tip">You can use triple mustaches &#123;&#123;&#123; like this &#125;&#125;&#125; for unescaped HTML, which translates to <code>v-html</code> internally. However, this can open up windows for potential XSS attacks, therefore it is suggested that you only use triple mustaches when you are absolutely sure that the data source is secure.</p>
+<p class="tip">You can use triple mustaches &#123;&#123;&#123; like this &#125;&#125;&#125; for unescaped HTML, which translates to <code>v-html</code> internally. However, this can open up windows for potential XSS attacks, therefore it is suggested that you only use triple mustaches when you are absolutely sure about the security of the data source, or pipe it through a custom filter that sanitizes untrusted HTML.</p>
 
 <h3 id="Filters">Filters</h3>
 <p>Functions that are used to process the raw values before updating the View. They are denoted by a “pipe” inside directives or bindings:</p>
