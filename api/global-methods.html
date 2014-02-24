@@ -32,7 +32,9 @@
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
         <li><a href="/api/" class="nav-link current">API Reference</a></li>
+        <br class="break" />
         <li><a href="/examples/" class="nav-link">Examples</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
         <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
@@ -166,13 +168,13 @@ Vue.config({
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> or <code>Object</code> <em>optional</em></li>
 </ul>
-<p>Register or retrieve a global custom directive. For more details see <a href="/guide/directives.html#Writing_a_Custom_Directive">Writing Custom Directives</a>.</p>
+<p>Register or retrieve a global custom directive. For more details see <a href="/guide/directives.html#writing-a-custom-directive">Writing Custom Directives</a>.</p>
 <h3 id="Vue-filter-28-_id-2c-_definition_-29-">Vue.filter( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> <em>optional</em></li>
 </ul>
-<p>Register or retrieve a global custom filter. For more details see <a href="/guide/filters.html#Writing_a_Custom_Filter">Writing Custom Filters</a>.</p>
+<p>Register or retrieve a global custom filter. For more details see <a href="/guide/filters.html#writing-a-custom-filter">Writing Custom Filters</a>.</p>
 <h3 id="Vue-component-28-_id-2c-_definition_-29-">Vue.component( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
@@ -239,9 +241,10 @@ Vue.config({
 <li><strong>module</strong> <code>String</code></li>
 </ul>
 <p>Get access to Vue.js’ internal modules. This is intended for plugin authors only.</p>
-<h3 id="Vue-use-28-_plguin_-29-">Vue.use( plguin )</h3>
+<h3 id="Vue-use-28-_plugin-2c-_-5b-args-2026-5d-_-29-">Vue.use( plugin, [args…] )</h3>
 <ul>
 <li><strong>plugin</strong> <code>Object</code> or <code>Function</code></li>
+<li><strong>args…</strong> <em>optional</em></li>
 </ul>
 <p>Mount a Vue.js plugin. If the plugin is an Object, it must have an <code>install</code> method. If it is a function itself, it will be treated as the install method. The install method will be called with Vue as the argument. For more details, see <a href="/guide/plugin.html">Plugins</a>.</p>
 
