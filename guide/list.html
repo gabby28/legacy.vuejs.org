@@ -78,9 +78,9 @@
 
 <div class="content guide with-sidebar">
     <h1>Displaying a List</h1>
-    <p>You can use the <code>v-repeat</code> directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child ViewModel using that object as the data object. On and inside the template element you have access to properties of both the child ViewModel and the parent ViewModel. In addition, you also have access to the current child ViewModel’s <code>$index</code> property, which is the index of its data object in the Array.</p>
+    <p>You can use the <code>v-repeat</code> directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child ViewModel using that object as the data object. On and inside the template element you have access to properties of both the child ViewModel and the parent ViewModel. In addition, you also have access to the current child ViewModel&#39;s <code>$index</code> property, which is the index of its data object in the Array.</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -92,7 +92,7 @@
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -129,9 +129,9 @@ var demo = new Vue({
 })
 </script>
 
-<h2 id="Arrays_of_Primitive_Values">Arrays of Primitive Values</h2>
+<h2 id="arrays-of-primitive-values">Arrays of Primitive Values</h2>
 <p>For Arrays containing primitive values, you can access the value simply as <code>$value</code>:</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"tags"</span>&gt;</span>
@@ -139,7 +139,7 @@ var demo = new Vue({
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -165,15 +165,15 @@ new Vue({
 </script>
 
 
-<h2 id="Mutation_Methods">Mutation Methods</h2>
-<p>Under the hood, Vue.js intercepts an observed Array’s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates.</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<h2 id="mutation-methods">Mutation Methods</h2>
+<p>Under the hood, Vue.js intercepts an observed Array&#39;s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>demo.items.push({ childMsg: <span class="string">'Baz'</span> })
 </pre></td></tr></table></figure>
 
 <p><a href="#demo" onclick="demoPush()">Execute this</a></p>
 
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>demo.items.pop()
 </pre></td></tr></table></figure>
 
@@ -181,7 +181,7 @@ new Vue({
 
 <p class="tip">You should avoid directly setting elements of a data-bound Array with indices, because those changes will not be picked up by Vue.js. Instead, use the agumented <code>set()</code> method.</p>
 
-<h2 id="Augmentations-3a-_set-28-29-2c-_remove-28-29-_and_replace-28-29-">Augmentations: set(), remove() and replace()</h2>
+<h2 id="augmentations-set-remove-and-replace-">Augmentations: set(), remove() and replace()</h2>
 <p>In addition, Vue.js also augments data-bound Arrays with three custom mutating methods: <code>set()</code>, <code>remove()</code> and <code>replace()</code>.</p>
 <p>Their signatures:</p>
 <ul>
@@ -189,30 +189,30 @@ new Vue({
 <li><code>remove(index | value | function)</code></li>
 <li><code>replace</code> is simply an alias of <code>set</code>.</li>
 </ul>
-<h3 id="set-28-29-">set()</h3>
+<h3 id="set-">set()</h3>
 <p>Setting a value in the Array is self-explanatory:</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 </pre></td><td class="code"><pre><span class="comment">// set a random element to a new value</span>
-<span class="keyword">var</span> i = Math.floor(Math.random() * demo.items.length)
+<span class="keyword">var</span> i = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * demo.items.length)
 <span class="comment">// .set() also returns the original value</span>
 <span class="keyword">var</span> replaced = demo.items.set(i, { childMsg: <span class="string">'Changed!'</span>})
 </pre></td></tr></table></figure>
 
 <p><a href="#demo" onclick="demoSet()">Execute this</a></p>
 
-<h3 id="replace-28-29-">replace()</h3>
+<h3 id="replace-">replace()</h3>
 <p>When the first argument is not a number, <code>set()</code> and <code>replace()</code> searches for that value in the Array and replaces it with the new value:</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>demo.items.replace(demo.items[<span class="number">0</span>], { childMsg: <span class="string">'Replaced!'</span> })
 </pre></td></tr></table></figure>
 
 <p><a href="#demo" onclick="demoReplace()">Execute this</a></p>
 
 <p>You can also replace with a function. Returning undefined will skip that item, returning any other value will cause the item interated upon to be replaced with the return value. Also note that when using <code>replace()</code> with a function, it will replace <strong>ALL</strong> items that gets a valid return value.</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -226,9 +226,9 @@ new Vue({
 
 <p><a href="#demo" onclick="demoReplace2()">Execute this</a></p>
 
-<h3 id="remove-28-29-">remove()</h3>
+<h3 id="remove-">remove()</h3>
 <p><code>remove()</code> also can take either an index, a target value or a function as the argument. It will also remove <strong>ALL</strong> items that return <code>true</code>.</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -244,9 +244,9 @@ demo.items.remove(<span class="function"><span class="keyword">function</span> <
 
 <p><a href="#demo" onclick="demoRemove()">Execute this</a></p>
 
-<h2 id="Iterating_Through_An_Object">Iterating Through An Object</h2>
+<h2 id="iterating-through-an-object">Iterating Through An Object</h2>
 <p>Starting in Vue.js v0.8.8, you can also use <code>v-repeat</code> to iterate through the properties of an Object. Each repeated instance will have a special property <code>$key</code>. For primitive values, you also get <code>$value</code> which is similar to primitive values in Arrays.</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -258,7 +258,7 @@ demo.items.remove(<span class="function"><span class="keyword">function</span> <
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -319,9 +319,9 @@ new Vue({
 })
 </script>
 
-<h3 id="The_-3c-code-3e-24-repeater-3c-2f-code-3e-_Array">The <code>$repeater</code> Array</h3>
-<p>Under the hood, Vue.js creates an Array representing the iterated Object. This Array can be accessed as <code>object.$repeater</code>. It is defined as a hidden property so it won’t show up during serialization or <code>for (... in ...)</code> loops. Due to ES5’s limitations, we cannot detect when new properties are added to an Object. So in order to add properties to an Object being iterated by <code>v-repeat</code>, you can push a new object into its <code>$repeater</code>:</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<h3 id="the-repeater-array">The <code>$repeater</code> Array</h3>
+<p>Under the hood, Vue.js creates an Array representing the iterated Object. This Array can be accessed as <code>object.$repeater</code>. It is defined as a hidden property so it won&#39;t show up during serialization or <code>for (... in ...)</code> loops. Due to ES5&#39;s limitations, we cannot detect when new properties are added to an Object. So in order to add properties to an Object being iterated by <code>v-repeat</code>, you can push a new object into its <code>$repeater</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -345,7 +345,7 @@ object.$repeater.push({
 })
 </pre></td></tr></table></figure>
 
-<p><code>newProp</code> will be added back to the Object with the provided value. Similarly, other mutating operations on the <code>$repeater</code> will sync back to the original Object. For example, executing <code>$repeater.pop()</code> will delete the popped element’s <code>$key</code> in the original Object.</p>
+<p><code>newProp</code> will be added back to the Object with the provided value. Similarly, other mutating operations on the <code>$repeater</code> will sync back to the original Object. For example, executing <code>$repeater.pop()</code> will delete the popped element&#39;s <code>$key</code> in the original Object.</p>
 <p>Next up: <a href="/guide/events.html">Listening for Events</a>.</p>
 <script>
 function demoPush () {

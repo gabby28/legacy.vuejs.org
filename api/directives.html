@@ -68,29 +68,29 @@
 
 <div class="content api with-sidebar">
     <h1>Directives</h1>
-    <h2 id="Data_Binding_Directives">Data Binding Directives</h2>
+    <h2 id="data-binding-directives">Data Binding Directives</h2>
 <blockquote>
 <p>These directives can bind themselves to a property on the ViewModel, or to an expression which is evaluated in the context of the ViewModel. When the value of the underlying property or expression changes, the <code>update()</code> function of these directives will be called asynchronously on next tick.</p>
 </blockquote>
 <h3 id="v-text">v-text</h3>
-<p>Updates the element’s <code>textContent</code>.</p>
+<p>Updates the element&#39;s <code>textContent</code>.</p>
 <p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations are also compiled as a <code>v-text</code> direcitve on a textNode.</p>
 <h3 id="v-html">v-html</h3>
-<p>Updates the element’s <code>innerHTML</code>.</p>
+<p>Updates the element&#39;s <code>innerHTML</code>.</p>
 <p class="tip">Using <code>v-html</code> with user-supplied data can be dangerous. It is suggested that you only use <code>v-html</code> when you are absolutely sure about the security of the data source, or pipe it through a custom filter that sanitizes untrusted HTML.</p>
 
 <h3 id="v-show">v-show</h3>
 <ul>
 <li>This directive can trigger transitions.</li>
 </ul>
-<p>Set the element’s display to <code>none</code> or its original value, depending on the truthy-ness of the binding’s value.</p>
+<p>Set the element&#39;s display to <code>none</code> or its original value, depending on the truthy-ness of the binding&#39;s value.</p>
 <h3 id="v-class">v-class</h3>
 <ul>
 <li>This directive takes an optional argument.</li>
 </ul>
-<p>If no argument is provided, it will add the binding’s value to the element’s classList, and update the class as the value changes.</p>
-<p>If a directive argument is provided, the argument will be the class to be toggled depending on the binding value’s truthy-ness. Combined with multiple clauses this can be pretty useful:</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<p>If no argument is provided, it will add the binding&#39;s value to the element&#39;s classList, and update the class as the value changes.</p>
+<p>If a directive argument is provided, the argument will be the class to be toggled depending on the binding value&#39;s truthy-ness. Combined with multiple clauses this can be pretty useful:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -106,14 +106,14 @@
 <ul>
 <li>This directive requires exactly one argument.</li>
 </ul>
-<p>Updates the element’s given attribute (indicated by the argument).</p>
+<p>Updates the element&#39;s given attribute (indicated by the argument).</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">v-attr</span>=<span class="value">"width:w, height:h"</span>&gt;</span><span class="tag">&lt;/<span class="title">canvas</span>&gt;</span>
 </pre></td></tr></table></figure>
 
 <p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives.</p>
-<p class="tip">You should use <code>v-attr</code> instead of mustache binding when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. Your templates are parsed by the browser before being compiled by Vue.js, so the mustache binding will cause a 404 when the browser tries to fetch it as the image’s URL.</p>
+<p class="tip">You should use <code>v-attr</code> instead of mustache binding when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. Your templates are parsed by the browser before being compiled by Vue.js, so the mustache binding will cause a 404 when the browser tries to fetch it as the image&#39;s URL.</p>
 
 <h3 id="v-style">v-style</h3>
 <ul>
@@ -123,7 +123,7 @@
 <p>When there is no argument, Vue.js will use the value to set <code>el.style.cssText</code>.</p>
 <p>When there is an argument, it will be used as the CSS property to apply. Combined with multiple clause you can set multiple properties together:</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -135,8 +135,8 @@
 "</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>When the argument is prefixed with <code>$</code>, Vue.js will automatically apply prefixed version of the CSS rule too, so you don’t have to manually write all the prefixes inline. In the following example Vue.js will apply <code>transform</code>, <code>webkitTransform</code>, <code>mozTransform</code> and <code>msTransform</code>:</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<p>When the argument is prefixed with <code>$</code>, Vue.js will automatically apply prefixed version of the CSS rule too, so you don&#39;t have to manually write all the prefixes inline. In the following example Vue.js will apply <code>transform</code>, <code>webkitTransform</code>, <code>mozTransform</code> and <code>msTransform</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"$transform: 'scale(' + scale + ')'"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
@@ -171,7 +171,7 @@
 </ul>
 <p>Compile this element as a child ViewModel, using the binding value as the <code>data</code> option. Inside the template you can directly access properties on the binding value. This can be used in combination with <code>v-component</code>.</p>
 <p>Suppose our data looks like this:</p>
-<figure class="highlight lang-js"><table><tr><td class="gutter"><pre>1
+<figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -186,7 +186,7 @@
 </pre></td></tr></table></figure>
 
 <p>You can simplify the template like this:</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-with</span>=<span class="value">"user"</span>&gt;</span>
@@ -194,38 +194,33 @@
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h2 id="Literal_Directives">Literal Directives</h2>
+<h2 id="literal-directives">Literal Directives</h2>
 <blockquote>
 <p>Literal directives treat their attribute value as a plain string; they do not attempt to bind themselves to anything. All they do is executing the <code>bind()</code> function with the string value once.</p>
 </blockquote>
 <h3 id="v-component">v-component</h3>
 <p>Compile this element as a child ViewModel with a registered component constructor. This can be used with <code>v-with</code> to inehrit data from the parent. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <h3 id="v-ref">v-ref</h3>
-<p>Only respected when used in combination with <code>v-component</code>, <code>v-with</code> or <code>v-repeat</code>. The ViewModel will be accessible in its parent’s <code>$</code> object, e.g. <code>parent.$[id]</code>. When used with <code>v-repeat</code>, the value will be an Array containing the child ViewModel instances corresponding to the Array they are bound to. For examples see <a href="/guide/composition.html#accessing-child-components">Accessing Child Components</a>.</p>
-<h3 id="v-transition">v-transition</h3>
-<p>When no value is provided, Vue.js will apply CSS transition classes to this element when adding / removing this element to / from the DOM.</p>
-<p>When an id is provided, Vue.js will execute the registered enter / leave functions before the DOM operations take place.</p>
-<p>Transitions are applied when certain transition-triggering directives modifies the element, or when the ViewModel’s DOM manipulation methods are called.</p>
-<p>For details, see <a href="/guide/transitions.html">Adding Transition Effects</a>.</p>
+<p>Only respected when used in combination with <code>v-component</code>, <code>v-with</code> or <code>v-repeat</code>. The ViewModel will be accessible in its parent&#39;s <code>$</code> object, e.g. <code>parent.$[id]</code>. When used with <code>v-repeat</code>, the value will be an Array containing the child ViewModel instances corresponding to the Array they are bound to. For examples see <a href="/guide/composition.html#accessing-child-components">Accessing Child Components</a>.</p>
 <h3 id="v-partial">v-partial</h3>
-<p>Replace the element’s innerHTML with a registered partial. You can also use this syntax:</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+<p>Replace the element&#39;s innerHTML with a registered partial. Partials can be registered with <code>Vue.partial()</code> or passed inside the <code>partials</code> option. You can also use this syntax:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; my-partial&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3 id="v-data">v-data</h3>
-<p>Attach inline data to a child Component’s <code>$data</code>. For example:</p>
-<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">component</span> <span class="attribute">v-data</span>=<span class="value">"msg:hello, width:100, height:60"</span>&gt;</span><span class="tag">&lt;/<span class="title">component</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<p><code>msg</code>, <code>width</code> and <code>height</code> will be mixed into <code>vm.$data</code> during compilation. This is a literal directive and is intended for simple inline data only, similar to <code>data-</code> attributes. It does not accpet nested paths or expressions.</p>
-<p>All values will be treated as strings, except all-digit values will be converted to numbers. Because values are not wrapped in quotes, you’ll have to escape commas, e.g. <code>\,</code>.</p>
-<p>For data with a nested structure, you should pass an object with <code>v-with</code> from the parent VM.</p>
-<h2 id="Empty_Directives">Empty Directives</h2>
+<h3 id="v-effect">v-effect</h3>
+<p>Apply a registered JavaScript effect to the element. JavaScript effects can be registered with <code>Vue.effect()</code> or passed inside the <code>effects</code> option.</p>
+<p>For details, see <a href="/guide/transitions.html#javascript-functions">the guide</a>.</p>
+<h2 id="empty-directives">Empty Directives</h2>
 <blockquote>
 <p>Empty directives do not require and will ignore their attribute value.</p>
 </blockquote>
+<h3 id="v-transition">v-transition</h3>
+<p>Notify Vue.js to apply transition CSS classes to this element. The transition classes are applied when certain transition-triggering directives modifies the element, or when the ViewModel&#39;s DOM manipulation methods are called.</p>
+<p>For details, see <a href="/guide/transitions.html#css-transitions">the guide</a>.</p>
+<h2 id="v-animation">v-animation</h2>
+<p>Notify Vue.js to apply animation CSS classes to this element. The order of CSS class application is different from <code>v-transition</code>.</p>
+<p>For details, see <a href="/guide/transitions.html#css-animations">the guide</a>.</p>
 <h3 id="v-pre">v-pre</h3>
 <p>Skip compilation for this element and all its children. Skipping large amount of nodes with no directives on them can speed up compilation.</p>
 <h3 id="v-cloak">v-cloak</h3>
