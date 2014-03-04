@@ -46,9 +46,9 @@
     <h1>Performance Comparisons</h1>
     <h2 id="todomvc-benchmark">TodoMVC Benchmark</h2>
 <blockquote>
-<p><em>Last Updated: 2014-03-02</em></p>
+<p><em>Last Updated: 2014-03-04</em></p>
 <p>This is a benchmark found in the <a href="https://github.com/WebKit/webkit/tree/master/PerformanceTests/DoYouEvenBench" target="_blank">webkit performance tests</a> based on the <a href="http://todomvc.com/" target="_blank">TodoMVC</a> project. For each framework implementation, add 100 todos, toggle them one by one, then delete them one by one. In addition to the most popular MV* libraries, I also included <a href="https://github.com/swannodette/om" target="_blank">Om</a> (a ClojureScript interface on top of React which boasts of performance) and <a href="http://www.ractivejs.org/" target="_blank">Ractive</a> (very similar in terms of use case and API).</p>
-<p>It is important to note that the original benchmark was written to compare the performance of different browsers, rather than that of the frameworks. The results of this benchmark only speak for this specific scenario and in no way reflect the user experience in a real product. You should take these numbers with a grain of salt.</p>
+<p><strong>Disclaimer</strong>: the original benchmark was written to compare the performance of different browsers rather than that of the frameworks. The results here are merely for technical reference and do not reflect the user experience in real products.</p>
 </blockquote>
 <h3 id="compared-libraries">Compared libraries</h3>
 <ul>
@@ -65,7 +65,7 @@
 <p>10 runs average, faster is better. Data collected on an <span id="_machine"></span> with a <span id="_cpu"></span> Processor under <span id="_os"></span>.</p>
 <ul id="benchmark-results"></ul>
 
-<p>You can run these benchmarks in your browser <a href="/perf/todomvc-benchmark/">here</a>.</p>
+<p>You can run these benchmarks in your browser <a href="/perf/todomvc-benchmark/">here</a>. You can also check out the source <a href="https://github.com/vuejs/vuejs.org/tree/master/perf/todomvc-benchmark" target="_blank">here</a>.</p>
 <p><script src="/js/benchmark.js"></script></p>
 <link rel="stylesheet" type="text/css" href="/css/benchmark.css">
 
