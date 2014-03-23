@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata' rel='stylesheet' type='text/css'>
         <link rel="icon" href="/images/logo.png" type="image/x-icon">
         <script>
             window.PAGE_TYPE = "api"
@@ -202,6 +202,7 @@ vm.a <span class="comment">// 2</span>
 })
 </pre></td></tr></table></figure>
 
+<p>Param attributes can also contain interpolation tags, but they will only be evaluated once, and changes inside the component will not affect the source data.</p>
 <h2 id="dom-element">DOM Element</h2>
 <h3 id="el">el</h3>
 <ul>
@@ -247,7 +248,7 @@ vm.a <span class="comment">// 2</span>
 </ul>
 <p>A hash of HTML attributes to be set on <code>vm.$el</code>.</p>
 <h2 id="lifecycle-hooks">Lifecycle Hooks</h2>
-<p>All lifecycle hooks have their <code>this</code> context bound to the ViewModel instance they belong to. For <code>&#39;enteredView&#39;</code>, <code>&#39;leftView&#39;</code>, <code>&#39;beforeDestroy&#39;</code>, <code>&#39;afterDestroy&#39;</code>, the ViewModel instance will also emit events in the form of <code>&#39;hook:eventName&#39;</code>.</p>
+<p>All lifecycle hooks have their <code>this</code> context bound to the ViewModel instance they belong to. For <code>&#39;attached&#39;</code>, <code>&#39;detached&#39;</code>, <code>&#39;beforeDestroy&#39;</code>, <code>&#39;afterDestroy&#39;</code>, the ViewModel instance will also emit events in the form of <code>&#39;hook:eventName&#39;</code>.</p>
 <h3 id="created">created</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
@@ -277,7 +278,7 @@ vm.a <span class="comment">// 2</span>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called after a ViewModel has been destroyed.</p>
+<p>Called after a ViewModel has been destroyed. When this hook is called, all bindings and directives of the ViewModel have been unbound and all child ViewModels have also been destroyed.</p>
 <h2 id="private-assets">Private Assets</h2>
 <p>These are private assets that will be available only to this ViewModel and its children during compilation.</p>
 <h3 id="directives">directives</h3>
