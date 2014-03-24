@@ -400,7 +400,7 @@ EmitterProto.on = function(event, fn){
     return this
 }
 
-Emitter.prototype.once = function(event, fn){
+EmitterProto.once = function(event, fn){
     var self = this
     this._cbs = this._cbs || {}
 
@@ -414,7 +414,7 @@ Emitter.prototype.once = function(event, fn){
     return this
 }
 
-Emitter.prototype.off = function(event, fn){
+EmitterProto.off = function(event, fn){
     this._cbs = this._cbs || {}
 
     // all
@@ -445,7 +445,7 @@ Emitter.prototype.off = function(event, fn){
     return this
 }
 
-Emitter.prototype.emit = function(event, a, b, c){
+EmitterProto.emit = function(event, a, b, c){
     this._cbs = this._cbs || {}
     var callbacks = this._cbs[event]
 
@@ -1136,12 +1136,11 @@ CompilerProto.setupObserver = function () {
     var compiler = this,
         bindings = compiler.bindings,
         options  = compiler.options,
-        observer = compiler.observer = new Emitter()
+        observer = compiler.observer = new Emitter(compiler.vm)
 
     // a hash to hold event proxies for each root level key
     // so they can be referenced and removed later
     observer.proxies = {}
-    observer._ctx = compiler.vm
 
     // add own listeners which trigger binding updates
     observer
