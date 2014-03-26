@@ -253,27 +253,28 @@ vm.a <span class="comment">// 2</span>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called synchronously before the compilation starts. Can be used to attach additional data to be observed on the ViewModel.</p>
+<p>Called synchronously before the compilation starts. At this stage, instance properties like <code>$el</code>, <code>$data</code> are available, but the DOM is in a pre-compile state, and the data has not been observed yet. Usually the created hook is used to attach additional initial states to the ViewModel. Any non-function properties attached to the ViewModel in the created hook will be copied to the data object and observed later.</p>
+<p>If you use <code>$watch</code> in the created hook, the callback will also be called when the data is freshly observed. If you want to watch for changes only, attach the watcher in the ready hook.</p>
 <h3 id="ready">ready</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called synchronously after the compilation has ended and the ViewModel instance is ready.</p>
+<p>Called synchronously after the compilation has ended and the ViewModel instance is ready. At this stage, the DOM is fully compiled and the data has been observed, so changing existing data properties will trigger View updates. Additional properties attached to the ViewModel or the data object in the ready hook will <strong>not</strong> be observed.</p>
 <h3 id="attached">attached</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called when <code>vm.$el</code> is attached to DOM by a VueJS directive. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
+<p>Called when <code>vm.$el</code> is attached to DOM by a directive or a VM instance method such as <code>$appendTo()</code>. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
 <h3 id="detached">detached</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called when <code>vm.$el</code> is removed from the DOM by a VueJS directive. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
+<p>Called when <code>vm.$el</code> is removed from the DOM by a directive or a VM instance method. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
 <h3 id="beforedestroy">beforeDestroy</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called before a ViewModel is destroyed.</p>
+<p>Called before a ViewModel is destroyed. At this stage, the data is still observed, and all bindings and directive instances are still in effect. All child VMs of the current instance are also still active. This hook is mostly used internally but you can use it to clean up things you set up in the created or ready hook. There&#39;s no need to turn off <code>$on</code> and <code>$watch</code> listeners in here because all of them will be automatically turned off during <code>$destroy</code>.</p>
 <h3 id="afterdestroy">afterDestroy</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
