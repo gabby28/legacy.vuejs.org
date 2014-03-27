@@ -1496,7 +1496,7 @@ CompilerProto.bindDirective = function (directive, bindingOwner) {
         directive.bind(value)
     }
     // set initial value
-    directive.update(value, true)
+    directive.$update(value, true)
 }
 
 /**
@@ -1770,7 +1770,7 @@ CompilerProto.destroy = function () {
                 if (j > -1) dirs.splice(j, 1)
             }
         }
-        dir.unbind()
+        dir.$unbind()
     }
 
     // unbind all computed, anonymous bindings
@@ -2061,7 +2061,7 @@ BindingProto._update = function () {
     var i = this.dirs.length,
         value = this.val()
     while (i--) {
-        this.dirs[i].update(value)
+        this.dirs[i].$update(value)
     }
     this.pub()
 }
@@ -2098,7 +2098,7 @@ BindingProto.unbind = function () {
     this.unbound = true
     var i = this.dirs.length
     while (i--) {
-        this.dirs[i].unbind()
+        this.dirs[i].$unbind()
     }
     i = this.deps.length
     var subs
@@ -2589,14 +2589,10 @@ function Directive (name, ast, definition, compiler, el) {
 
     // mix in properties from the directive definition
     if (typeof definition === 'function') {
-        this[isEmpty ? 'bind' : '_update'] = definition
+        this[isEmpty ? 'bind' : 'update'] = definition
     } else {
         for (var prop in definition) {
-            if (prop === 'unbind' || prop === 'update') {
-                this['_' + prop] = definition[prop]
-            } else {
-                this[prop] = definition[prop]
-            }
+            this[prop] = definition[prop]
         }
     }
 
@@ -2652,13 +2648,14 @@ var DirProto = Directive.prototype
  *  for computed properties, this will only be called once
  *  during initialization.
  */
-DirProto.update = function (value, init) {
+DirProto.$update = function (value, init) {
+    if (this.$lock) return
     if (init || value !== this.value || (value && typeof value === 'object')) {
         this.value = value
-        if (this._update) {
-            this._update(
+        if (this.update) {
+            this.update(
                 this.filters && !this.computeFilters
-                    ? this.applyFilters(value)
+                    ? this.$applyFilters(value)
                     : value,
                 init
             )
@@ -2669,7 +2666,7 @@ DirProto.update = function (value, init) {
 /**
  *  pipe the value through filters
  */
-DirProto.applyFilters = function (value) {
+DirProto.$applyFilters = function (value) {
     var filtered = value, filter
     for (var i = 0, l = this.filters.length; i < l; i++) {
         filter = this.filters[i]
@@ -2681,10 +2678,10 @@ DirProto.applyFilters = function (value) {
 /**
  *  Unbind diretive
  */
-DirProto.unbind = function () {
+DirProto.$unbind = function () {
     // this can be called before the el is even assigned...
     if (!this.el || !this.vm) return
-    if (this._unbind) this._unbind()
+    if (this.unbind) this.unbind()
     this.vm = this.el = this.binding = this.compiler = null
 }
 
@@ -3811,7 +3808,7 @@ module.exports = {
     update: function (value) {
 
         if (!value) {
-            this._unbind()
+            this.unbind()
         } else if (!this.childVM) {
             this.childVM = new this.Ctor({
                 el: this.el.cloneNode(true),
@@ -4113,7 +4110,7 @@ module.exports = {
             utils.warn('Directive "v-on:' + this.expression + '" expects a method.')
             return
         }
-        this._unbind()
+        this.unbind()
         var vm = this.vm,
             context = this.context
         this.handler = function (e) {
@@ -4529,7 +4526,7 @@ module.exports = {
 
     update: function(value) {
 
-        this._unbind()
+        this.unbind()
 
         var Ctor  = this.compiler.getOption('components', value)
         if (!Ctor) return

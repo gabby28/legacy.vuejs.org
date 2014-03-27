@@ -104,7 +104,7 @@ vm.a <span class="comment">// 3</span>
 </pre></td></tr></table></figure>
 
 <p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. You can also share it between multiple ViewModels.</p>
-<p class="tip">Under the hood, vue.js attaches an hidden property <code>__observer__</code> and recursively converts the object&#39;s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
+<p class="tip">Under the hood, vue.js attaches a hidden property <code>__emitter__</code> and recursively converts the object&#39;s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
 
 <h3 id="methods">methods</h3>
 <ul>
@@ -156,10 +156,21 @@ vm.a <span class="comment">// 2</span>
 14
 15
 16
+17
+18
+19
+20
+21
+22
 </pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
     data: { a: <span class="number">1</span> },
     computed: {
-        aplus: {
+        <span class="comment">// get only, just need a function</span>
+        aDouble: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+            <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="number">2</span>
+        },
+        <span class="comment">// both get and set</span>
+        aPlus: {
             $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
                 <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>
             },
@@ -169,9 +180,10 @@ vm.a <span class="comment">// 2</span>
         }
     }
 })
-vm.aplus <span class="comment">// 2</span>
-vm.aplus = <span class="number">3</span>
+vm.aPlus <span class="comment">// 2</span>
+vm.aPlus = <span class="number">3</span>
 vm.a <span class="comment">// 2</span>
+vm.aDouble <span class="comment">// 4</span>
 </pre></td></tr></table></figure>
 
 <h3 id="paramattributes">paramAttributes</h3>
