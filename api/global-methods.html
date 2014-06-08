@@ -68,11 +68,11 @@
 
 <div class="content api with-sidebar">
     <h1>Global Methods</h1>
-    <h3 id="vue-extend-options-">Vue.extend( options )</h3>
+    <h3 id="Vue-extend(_options_)">Vue.extend( options )</h3>
 <ul>
 <li><strong>options</strong> <code>Object</code></li>
 </ul>
-<p>Create a subclass of the Vue class. Most <a href="/api/instantiation-options.html">instantiation options</a> can be used here, with the exception of the <code>el</code> option because you can&#39;t create multiple ViewModel instances on the same element. Also see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
+<p>Create a subclass of the Vue class. Most <a href="/api/instantiation-options.html">instantiation options</a> can be used here, with the exception of the <code>el</code> option because you can’t create multiple ViewModel instances on the same element. Also see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <p><strong>Example</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -104,12 +104,14 @@
 profile.$appendTo(<span class="string">'body'</span>)
 </pre></td></tr></table></figure>
 
+
 <p>Will result in:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">p</span>&gt;</span>Walter White aka Heisenberg<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3 id="vue-config-options-key-value-">Vue.config( options | key, [value] )</h3>
+
+<h3 id="Vue-config(_options_|_key,_[value]_)">Vue.config( options | key, [value] )</h3>
 <ul>
 <li><strong>options</strong> <code>Object</code></li>
 <li><strong>key</strong> <code>String</code></li>
@@ -135,6 +137,7 @@ Vue.config({
     prefix: <span class="string">'my'</span>
 })
 </pre></td></tr></table></figure>
+
 
 <p>Here are all the options with their default values:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
@@ -185,31 +188,32 @@ Vue.config({
 }
 </pre></td></tr></table></figure>
 
-<h3 id="vue-directive-id-definition-">Vue.directive( id, [definition] )</h3>
+
+<h3 id="Vue-directive(_id,_[definition]_)">Vue.directive( id, [definition] )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> or <code>Object</code> <em>optional</em></li>
 </ul>
 <p>Register or retrieve a global custom directive. For more details see <a href="/guide/directives.html#writing-a-custom-directive">Writing Custom Directives</a>.</p>
-<h3 id="vue-filter-id-definition-">Vue.filter( id, definition )</h3>
+<h3 id="Vue-filter(_id,_definition_)">Vue.filter( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> <em>optional</em></li>
 </ul>
 <p>Register or retrieve a global custom filter. For more details see <a href="/guide/filters.html#writing-a-custom-filter">Writing Custom Filters</a>.</p>
-<h3 id="vue-component-id-definition-">Vue.component( id, definition )</h3>
+<h3 id="Vue-component(_id,_definition_)">Vue.component( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function Constructor</code> or <code>Object</code> <em>optional</em></li>
 </ul>
 <p>Register or retrieve a global component. For more details see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
-<h3 id="vue-effect-id-definition-">Vue.effect( id, definition )</h3>
+<h3 id="Vue-effect(_id,_definition_)">Vue.effect( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Object</code> <em>optional</em></li>
 </ul>
 <p>Register or retrieve a global JavaScript transition effect definition. For more details see <a href="/guide/transitions.html#javascript-functions">Adding Transition Effects</a>.</p>
-<h3 id="vue-partial-id-definition-">Vue.partial( id, definition )</h3>
+<h3 id="Vue-partial(_id,_definition_)">Vue.partial( id, definition )</h3>
 <ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>String</code> or <code>HTMLElement</code> <em>optional</em></li>
@@ -224,6 +228,7 @@ Vue.config({
     &#123;&#123;&gt; avatar&#125;&#125;
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
+
 
 <p>JavaScript</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
@@ -244,6 +249,7 @@ Vue.config({
 })
 </pre></td></tr></table></figure>
 
+
 <p>Will result in:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -253,26 +259,27 @@ Vue.config({
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3 id="vue-nexttick-callback-">Vue.nextTick( callback )</h3>
+
+<h3 id="Vue-nextTick(_callback_)">Vue.nextTick( callback )</h3>
 <ul>
 <li><strong>callback</strong> <code>Function</code></li>
 </ul>
 <p>Vue.js batches view updates and execute them all asynchronously. It uses <code>requestAnimationFrame</code> if available and fallsback to <code>setTimeout(fn, 0)</code>. This method calls the callback after the next view update, which can be useful when you want to wait until the view has been updated.</p>
-<h3 id="vue-require-module-">Vue.require( module )</h3>
+<h3 id="Vue-require(_module_)">Vue.require( module )</h3>
 <ul>
 <li><strong>module</strong> <code>String</code></li>
 </ul>
-<p>Get access to Vue.js&#39; internal modules. This is intended for plugin authors and only the following modules are exposed:</p>
+<p>Get access to Vue.js’ internal modules. This is intended for plugin authors and only the following modules are exposed:</p>
 <ul>
 <li><code>utils</code></li>
 <li><code>config</code></li>
 <li><code>transition</code></li>
 <li><code>observer</code>.</li>
 </ul>
-<h3 id="vue-use-plugin-args-">Vue.use( plugin, [args...] )</h3>
+<h3 id="Vue-use(_plugin,_[args…]_)">Vue.use( plugin, [args…] )</h3>
 <ul>
 <li><strong>plugin</strong> <code>Object</code> or <code>Function</code></li>
-<li><strong>args...</strong> <em>optional</em></li>
+<li><strong>args…</strong> <em>optional</em></li>
 </ul>
 <p>Mount a Vue.js plugin. If the plugin is an Object, it must have an <code>install</code> method. If it is a function itself, it will be treated as the install method. The install method will be called with Vue as the argument. For more details, see <a href="/guide/plugin.html">Plugins</a>.</p>
 

@@ -270,4 +270,33 @@ describe('Misc Features', function () {
 
     })
 
+    describe('interpolation in directive values', function () {
+        
+        it('should be evaled by the compiler', function () {
+            var t = new Vue({
+                template: '<input v-model="{{field}}">',
+                data: {
+                    field: 'test',
+                    test: 'hello'
+                }
+            })
+            assert.equal(t.$el.childNodes[0].value, 'hello')
+        })
+
+    })
+
+    describe('attribute names with colons', function () {
+        
+        it('should be parsed properly', function () {
+            var t = new Vue({
+                template: '<use xlink:href="{{icon}}"></use>',
+                data: {
+                    icon: 'test'
+                }
+            })
+            assert.equal(t.$el.firstChild.getAttribute('xlink:href'), 'test')
+        })
+
+    })
+
 })

@@ -120,7 +120,6 @@ describe('Directives', function () {
             dir.el = comment
 
             dir.bind()
-            assert.ok(dir.holder)
             assert.ok(dir.nodes)
 
             var pre = 'what!',
@@ -660,18 +659,17 @@ describe('Directives', function () {
             var d = mockDirective('style')
             d.arg = 'text-align'
             d.bind()
-            assert.strictEqual(d.prop, 'textAlign')
+            assert.strictEqual(d.prop, 'text-align')
             d.update('center')
             assert.strictEqual(d.el.style.textAlign, 'center')
         })
 
-        it('should apply prefixed style', function () {
+        it('should apply style with !important priority', function () {
             var d = mockDirective('style')
-            d.arg = '-webkit-transform'
+            d.arg = 'font-size'
             d.bind()
-            assert.strictEqual(d.prop, 'webkitTransform')
-            d.update('scale(2)')
-            assert.strictEqual(d.el.style.webkitTransform, 'scale(2)')
+            d.update('100px !important')
+            assert.strictEqual(d.el.style.getPropertyPriority('font-size'), 'important')
         })
 
         it('should auto prefix styles', function () {
@@ -680,12 +678,33 @@ describe('Directives', function () {
             d.bind()
             assert.ok(d.prefixed)
             assert.strictEqual(d.prop, 'transform')
+
+            // mock the el's CSSStyleDeclaration object
+            // so we can test setProperty calls
+            var results = []
+            d.el = {
+                style: {
+                    setProperty: function (prop, value) {
+                        results.push({
+                            prop: prop,
+                            value: value
+                        })
+                    }
+                }
+            }
+
             var val = 'scale(2)'
             d.update(val)
-            assert.strictEqual(d.el.style.transform, val)
-            assert.strictEqual(d.el.style.webkitTransform, val)
-            assert.strictEqual(d.el.style.mozTransform, val)
-            assert.strictEqual(d.el.style.msTransform, val)
+            assert.strictEqual(results.length, 4)
+            assert.strictEqual(results[0].prop, 'transform')
+            assert.strictEqual(results[1].prop, '-ms-transform')
+            assert.strictEqual(results[2].prop, '-moz-transform')
+            assert.strictEqual(results[3].prop, '-webkit-transform')
+
+            assert.strictEqual(results[0].value, val)
+            assert.strictEqual(results[1].value, val)
+            assert.strictEqual(results[2].value, val)
+            assert.strictEqual(results[3].value, val)
         })
 
         it('should set cssText if no arg', function () {
@@ -853,17 +872,11 @@ describe('Directives', function () {
             }
         })
 
-        it('should work with primitive values', function (done) {
-            var triggeredChange = 0
+        it('should work with primitive values', function () {
             var v = new Vue({
-                template: '<span v-repeat="tags" v-ref="tags">{{$value}}</span>',
+                template: '<span v-repeat="tags">{{$value}}</span>',
                 data: {
                     tags: ['a', 'b', 'c']
-                },
-                created: function () {
-                    this.$watch('tags', function () {
-                        triggeredChange++
-                    })
                 },
                 computed: {
                     concat: function () {
@@ -873,13 +886,6 @@ describe('Directives', function () {
             })
             assert.strictEqual(v.concat, 'a,b,c')
             assert.strictEqual(v.$el.textContent, 'abc')
-            v.$.tags[0].$value = 'd'
-            assert.strictEqual(v.tags[0], 'd')
-            nextTick(function () {
-                assert.strictEqual(triggeredChange, 1)
-                assert.strictEqual(v.concat, 'd,b,c')
-                done()
-            })
         })
 
         it('should diff and reuse existing VMs when reseting arrays', function (done) {
@@ -956,41 +962,27 @@ describe('Directives', function () {
            
         })
 
-        it('should accept arg for aliasing on primitive arrays', function (done) {
+        it('should accept arg for aliasing on primitive arrays', function () {
             
             var v = new Vue({
-                template: '<span v-repeat="item:items" v-ref="items">{{item}}</span>',
+                template: '<span v-repeat="item:items" >{{item}}</span>',
                 data: {
                     items: [1,2,3]
                 }
             })
             assert.strictEqual(v.$el.textContent, '123')
-            v.$.items[0].item = 2
-
-            nextTick(function () {
-                assert.strictEqual(v.$el.textContent, '223')
-                assert.deepEqual(v.items, [2,2,3])
-                done()
-            })
 
         })
 
-        it('should accept arg for aliasing on object arrays', function (done) {
+        it('should accept arg for aliasing on object arrays', function () {
             
             var v = new Vue({
-                template: '<span v-repeat="item:items" v-ref="items">{{item.id}}</span>',
+                template: '<span v-repeat="item:items">{{item.id}}</span>',
                 data: {
                     items: [{id:1},{id:2},{id:3}]
                 }
             })
             assert.strictEqual(v.$el.textContent, '123')
-            v.$.items[0].item = { id: 2 }
-
-            nextTick(function () {
-                assert.strictEqual(v.$el.textContent, '223')
-                assert.strictEqual(v.items[0].id, 2)
-                done()
-            })
 
         })
 

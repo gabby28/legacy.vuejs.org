@@ -81,8 +81,8 @@
     <blockquote>
 <p><em>This is a very early preview for the plugin API and this may change in furture versions. You might want to wait for a few official plugins as reference before writing your own.</em></p>
 </blockquote>
-<h2 id="using-a-plugin">Using a Plugin</h2>
-<h3 id="verbose-version">Verbose version</h3>
+<h2 id="Using_a_Plugin">Using a Plugin</h2>
+<h3 id="Verbose_version">Verbose version</h3>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -103,23 +103,26 @@ Vue.use(vueTouch)
 MyComponent.use(awesomePlugin)
 </pre></td></tr></table></figure>
 
-<h3 id="shorthand-equivalent">Shorthand equivalent</h3>
+
+<h3 id="Shorthand_equivalent">Shorthand equivalent</h3>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre><span class="comment">// will auto require('vue-touch')</span>
 Vue.use(<span class="string">'vue-touch'</span>)
 </pre></td></tr></table></figure>
 
+
 <p class="tip">The shorthand only works in Component, not in Browserify! Browserify uses static parsing to extract dependencies and cannot handle dynamic <code>require()</code>.</p>
 
-<h3 id="optional-arguments">Optional arguments</h3>
+<h3 id="Optional_arguments">Optional arguments</h3>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre><span class="comment">// every additional argument will be passed to the plugin</span>
 Vue.use(<span class="string">'vue-touch'</span>, { moveTolerance: <span class="number">12</span> })
 </pre></td></tr></table></figure>
 
-<h2 id="plugin-implementation">Plugin Implementation</h2>
+
+<h2 id="Plugin_Implementation">Plugin Implementation</h2>
 <p>Note that the passed in <code>Vue</code> constructor could be an extended Component constructor. Assume that only <code>Vue.require()</code> and asset registration methods are available. Do not use <code>Vue.config()</code> inside plugins.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -130,6 +133,7 @@ Vue.use(<span class="string">'vue-touch'</span>, { moveTolerance: <span class="n
     <span class="keyword">var</span> utils = Vue.require(<span class="string">'utils'</span>)
 }
 </pre></td></tr></table></figure>
+
 
 
 </div>

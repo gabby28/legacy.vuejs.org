@@ -78,7 +78,7 @@
 
 <div class="content guide with-sidebar">
     <h1>Displaying a List</h1>
-    <p>You can use the <code>v-repeat</code> directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child ViewModel using that object as the data object. On and inside the template element you have access to properties of both the child ViewModel and the parent ViewModel. In addition, you also have access to the current child ViewModel&#39;s <code>$index</code> property, which is the index of its data object in the Array.</p>
+    <p>You can use the <code>v-repeat</code> directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child ViewModel using that object as the data object. On and inside the template element you have access to properties of both the child ViewModel and the parent ViewModel. In addition, you also have access to the current child ViewModel’s <code>$index</code> property, which is the index of its data object in the Array.</p>
 <p><strong>Example:</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -91,6 +91,9 @@
     <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -114,6 +117,7 @@
 })
 </pre></td></tr></table></figure>
 
+
 <p><strong>Result:</strong></p>
 <p><ul id="demo"><li v-repeat="items" class="item-{&#123;$index&#125;}">{&#123;$index&#125;} - {&#123;parentMsg&#125;} {&#123;childMsg&#125;}</li></ul></p>
 <script>
@@ -129,7 +133,7 @@ var demo = new Vue({
 })
 </script>
 
-<h2 id="arrays-of-primitive-values">Arrays of Primitive Values</h2>
+<h2 id="Arrays_of_Primitive_Values">Arrays of Primitive Values</h2>
 <p>For Arrays containing primitive values, you can access the value simply as <code>$value</code>:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -142,6 +146,9 @@ var demo = new Vue({
     <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -157,6 +164,7 @@ var demo = new Vue({
 })
 </pre></td></tr></table></figure>
 
+
 <p><strong>Result:</strong></p>
 <p><ul id="tags" class="demo"><li v-repeat="tags">{&#123;$value&#125;}</li></ul></p>
 <script>
@@ -168,7 +176,7 @@ new Vue({
 })
 </script>
 
-<h2 id="using-an-identifier">Using an identifier</h2>
+<h2 id="Using_an_identifier">Using an identifier</h2>
 <p>Sometimes we might want to have more explicit variable access instead of implicitly falling back to parent scope. You can do that by providing an argument to the <code>v-repeat</code> directive and use it as the identifier for the item being iterated:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -184,8 +192,9 @@ new Vue({
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h2 id="mutation-methods">Mutation Methods</h2>
-<p>Under the hood, Vue.js intercepts an observed Array&#39;s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates.</p>
+
+<h2 id="Mutation_Methods">Mutation Methods</h2>
+<p>Under the hood, Vue.js intercepts an observed Array’s mutating methods (<code>push()</code>, <code>pop()</code>, <code>shift()</code>, <code>unshift()</code>, <code>splice()</code>, <code>sort()</code> and <code>reverse()</code>) so they will also trigger View updates.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -194,8 +203,9 @@ demo.items.unshift({ childMsg: <span class="string">'Baz'</span> })
 demo.items.pop()
 </pre></td></tr></table></figure>
 
+
 <p>You should avoid directly setting elements of a data-bound Array with indices, because those changes will not be picked up by Vue.js. Instead, use the agumented <code>$set()</code> method. Vue.js augments observed Arrays with two convenience methods: <code>$set()</code> and <code>$remove()</code>:</p>
-<h3 id="-set-index-value-">$set( index, value )</h3>
+<h3 id="$set(_index,_value_)">$set( index, value )</h3>
 <p>Setting a value in the Array is self-explanatory:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -203,7 +213,8 @@ demo.items.pop()
 demo.items.$set(<span class="number">0</span>, { childMsg: <span class="string">'Changed!'</span>})
 </pre></td></tr></table></figure>
 
-<h3 id="-remove-index-value-">$remove( index | value )</h3>
+
+<h3 id="$remove(_index_|_value_)">$remove( index | value )</h3>
 <p><code>$remove()</code> is just syntax sugar for <code>splice()</code>. will remove the element at the given index. When the argument is not a number, <code>$remove()</code> will search for that value in the array and remove the first occurrence.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -211,7 +222,8 @@ demo.items.$set(<span class="number">0</span>, { childMsg: <span class="string">
 demo.items.$remove(<span class="number">0</span>)
 </pre></td></tr></table></figure>
 
-<h2 id="setting-a-new-array">Setting a new Array</h2>
+
+<h2 id="Setting_a_new_Array">Setting a new Array</h2>
 <p>When you are using non-mutating methods, e.g. <code>filter()</code>, <code>concat()</code> or <code>slice()</code>, the returned Array will be a different instance. In that case, you can just set the value to the new Array:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -221,10 +233,11 @@ demo.items.$remove(<span class="number">0</span>)
 })
 </pre></td></tr></table></figure>
 
+
 <p>You might think this will blow away the existing DOM and re-build everything. But worry not - Vue.js uses some smart algorithms internally that reuses existing ViewModels and DOM nodes, and incurrs the least amount of DOM manipulations possible. Also, because of update batching, multiple changes to an Array in the same event loop will only trigger one comparison.</p>
-<h2 id="array-filters">Array Filters</h2>
+<h2 id="Array_Filters">Array Filters</h2>
 <p>Sometimes we only need to display a filtered or sorted version of the Array without actually mutating or resetting the original data. Vue provides two built-in filters to simplify such usage: <code>filterBy</code> and <code>orderBy</code>. Check out their <a href="/api/filters.html#filterby">documentations</a> for more details.</p>
-<h2 id="iterating-through-an-object">Iterating Through An Object</h2>
+<h2 id="Iterating_Through_An_Object">Iterating Through An Object</h2>
 <p>Starting in Vue.js v0.8.8, you can also use <code>v-repeat</code> to iterate through the properties of an Object. Each repeated instance will have a special property <code>$key</code>. For primitive values, you also get <code>$value</code> which is similar to primitive values in Arrays.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -237,6 +250,9 @@ demo.items.$remove(<span class="number">0</span>)
     <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"objectValues"</span>&gt;</span>{&#123;$key&#125;} : {&#123;msg&#125;}<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -276,6 +292,7 @@ demo.items.$remove(<span class="number">0</span>)
 })
 </pre></td></tr></table></figure>
 
+
 <p><strong>Result:</strong></p>
 <p><ul id="repeat-object" class="demo"><li v-repeat="primitiveValues">{&#123;$key&#125;} : {&#123;$value&#125;}</li><li>===</li><li v-repeat="objectValues">{&#123;$key&#125;} : {&#123;msg&#125;}</li></ul></p>
 <script>
@@ -299,7 +316,7 @@ new Vue({
 })
 </script>
 
-<h2 id="-add-and-delete-">$add() and $delete()</h2>
+<h2 id="$add()_and_$delete()">$add() and $delete()</h2>
 <p>In ECMAScript 5 there is no way to detect when a new property is added to an Object, or when a property is deleted from an Object. To counter for that, observed objects will be augmented with two methods: <code>$add(key, value)</code> and <code>$delete(key)</code>. These methods can be used to add / delete properties from observed objects while triggering the desired View updates.</p>
 <p>Next up: <a href="/guide/events.html">Listening for Events</a>.</p>
 

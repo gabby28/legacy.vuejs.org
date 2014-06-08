@@ -69,11 +69,11 @@
 <div class="content api with-sidebar">
     <h1>Filters</h1>
     <h3 id="capitalize">capitalize</h3>
-<p><em>&#39;abc&#39; =&gt; &#39;Abc&#39;</em></p>
+<p><em>‘abc’ =&gt; ‘Abc’</em></p>
 <h3 id="uppercase">uppercase</h3>
-<p><em>&#39;abc&#39; =&gt; &#39;ABC&#39;</em></p>
+<p><em>‘abc’ =&gt; ‘ABC’</em></p>
 <h3 id="lowercase">lowercase</h3>
-<p><em>&#39;ABC&#39; =&gt; &#39;abc&#39;</em></p>
+<p><em>‘ABC’ =&gt; ‘abc’</em></p>
 <h3 id="currency">currency</h3>
 <ul>
 <li>this filter takes one optional argument</li>
@@ -84,18 +84,16 @@
 <ul>
 <li>this filter takes at least one argument</li>
 </ul>
-<p><em>1 =&gt; &#39;1 item&#39;</em><br><em>2 =&gt; &#39;2 items&#39;</em></p>
-<p>When there is exactly one arg, plural forms simply add an &quot;s&quot; at the end. When there are more than one argument, the arguments will be used as array of strings corresponding to the single, double, triple ... forms of the word to be pluralized. When the number to be pluralized exceeds the length of the args, it will use the last entry in the array.</p>
+<p><em>1 =&gt; ‘1 item’</em><br><em>2 =&gt; ‘2 items’</em></p>
+<p>When there is exactly one arg, plural forms simply add an “s” at the end. When there are more than one argument, the arguments will be used as array of strings corresponding to the single, double, triple … forms of the word to be pluralized. When the number to be pluralized exceeds the length of the args, it will use the last entry in the array.</p>
 <p><strong>Example:</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-text</span>=<span class="value">"date | st nd rd th"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+
 <p>Will result in:</p>
-<p><em>1 =&gt; &#39;1 st&#39;</em><br><em>2 =&gt; &#39;2 nd&#39;</em>
-<em>3 =&gt; &#39;3 rd&#39;</em>
-<em>4 =&gt; &#39;4 th&#39;</em>
-<em>5 =&gt; &#39;5 th&#39;</em></p>
+<p><em>1 =&gt; ‘1 st’</em><br><em>2 =&gt; ‘2 nd’</em><br><em>3 =&gt; ‘3 rd’</em><br><em>4 =&gt; ‘4 th’</em><br><em>5 =&gt; ‘5 th’</em></p>
 <h3 id="key">key</h3>
 <ul>
 <li>this filter only works in <code>v-on</code></li>
@@ -117,8 +115,9 @@
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:doSomething | key enter"</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+
 <p><code>doSomething</code> will only be called when the Enter key is pressed.</p>
-<h3 id="filterby">filterBy</h3>
+<h3 id="filterBy">filterBy</h3>
 <p><strong>Syntax:</strong> <code>filterBy searchKey [in dataKey]</code>.</p>
 <ul>
 <li>this filter only works in <code>v-repeat</code></li>
@@ -135,6 +134,7 @@
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+
 <p>When the filter is applied, it will filter the <code>users</code> Array by recursively searching for the current value of <code>searchText</code> on each item in the Array. For example, if an item is <code>{ name: &#39;Jack&#39;, phone: &#39;555-123-4567&#39; }</code> and <code>searchText</code> has value <code>&#39;555&#39;</code>, the item will be considered a match.</p>
 <p>Optionally, you can narrow down which specific property to search in with the optional <code>in dataKey</code> argument:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
@@ -147,6 +147,7 @@
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+
 <p>Now the item will only match if the value of <code>searchText</code> is found in its <code>name</code> property. So <code>searchText</code> with value <code>&#39;555&#39;</code> will no longer match this item, but <code>&#39;Jack&#39;</code> will.</p>
 <p>Finally, you can use quotes to indicate literal arguments:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
@@ -157,13 +158,14 @@
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3 id="orderby">orderBy</h3>
+
+<h3 id="orderBy">orderBy</h3>
 <p><strong>Syntax:</strong> <code>orderBy sortKey [reverseKey]</code>.</p>
 <ul>
 <li>this filter only works in <code>v-repeat</code></li>
 <li>this is a computed filter</li>
 </ul>
-<p>Sort <code>v-repeat</code>&#39;s displayed result. The <code>sorKey</code> argument is a property key on the context ViewModel. The value of that property will be used as the key to sort the Array items with. The optional <code>reverseKey</code> argument is also a property key on the context ViewModel, but the value&#39;s truthiness will determine whether the result should be reversed.</p>
+<p>Sort <code>v-repeat</code>‘s displayed result. The <code>sorKey</code> argument is a property key on the context ViewModel. The value of that property will be used as the key to sort the Array items with. The optional <code>reverseKey</code> argument is also a property key on the context ViewModel, but the value’s truthiness will determine whether the result should be reversed.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -171,6 +173,9 @@
     <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users | orderBy field reverse"</span>&gt;</span>{&#123;name&#125;}<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -188,6 +193,7 @@
 })
 </pre></td></tr></table></figure>
 
+
 <p>You can also use quotes for literal sort key. To indicate a literal reverse, use <code>-1</code>:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -196,6 +202,7 @@
     <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users | orderBy 'name' -1"</span>&gt;</span>{&#123;name&#125;}<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
+
 
 
 </div>

@@ -17,6 +17,12 @@ describe('Utils', function () {
             assert.strictEqual(utils.get(obj, 'a.b.c'), 123)
         })
 
+        it('should work on keypath with brackets', function () {
+            var obj = { a: { 'key-with-dash': { b: 123 } }}
+            assert.strictEqual(utils.get(obj, 'a["key-with-dash"].b'), 123)
+            assert.strictEqual(utils.get(obj, "a['key-with-dash'].b"), 123)
+        })
+
         it('should return undefined if path does not exist', function () {
             var obj = { a: {}}
             assert.strictEqual(utils.get(obj, 'a.b.c'), undefined)
@@ -30,6 +36,14 @@ describe('Utils', function () {
             var obj = { a: { b: { c: 0 }}}
             utils.set(obj, 'a.b.c', 123)
             assert.strictEqual(obj.a.b.c, 123)
+        })
+
+        it('should work on keypath with brackets', function () {
+            var obj = { a: { 'key-with-dash': { b: 1 }}}
+            utils.set(obj, 'a["key-with-dash"].b', 2)
+            assert.strictEqual(obj.a['key-with-dash'].b, 2)
+            utils.set(obj, "a['key-with-dash'].b", 3)
+            assert.strictEqual(obj.a['key-with-dash'].b, 3)
         })
 
         it('should set even if path does not exist', function () {
@@ -221,6 +235,19 @@ describe('Utils', function () {
             assert.ok(frag instanceof window.DocumentFragment)
             assert.equal(frag.querySelector('.a').textContent, 'hi')
             assert.equal(frag.querySelector('p').textContent, 'ha')
+        })
+
+        it('should work with table elements', function () {
+            var frag = utils.toFragment('<td></td>')
+            assert.ok(frag instanceof window.DocumentFragment)
+            assert.equal(frag.firstChild.tagName, 'TD')
+        })
+
+        it('should work with SVG elements', function () {
+            var frag = utils.toFragment('<polygon></polygon>')
+            assert.ok(frag instanceof window.DocumentFragment)
+            assert.equal(frag.firstChild.tagName.toLowerCase(), 'polygon')
+            assert.equal(frag.firstChild.namespaceURI, 'http://www.w3.org/2000/svg')
         })
 
     })

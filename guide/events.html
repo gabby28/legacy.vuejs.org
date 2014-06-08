@@ -89,6 +89,9 @@
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+
+
+
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -115,7 +118,8 @@
 })
 </pre></td></tr></table></figure>
 
-<h2 id="invoke-handler-with-expression">Invoke Handler with Expression</h2>
+
+<h2 id="Invoke_Handler_with_Expression">Invoke Handler with Expression</h2>
 <p><code>targetVM</code> could be useful when <code>v-on</code> is used with <code>v-repeat</code>, since the latter creates a lot of child ViewModels. However, it is often more convenient to use an invocation expression passing in <code>this</code>, which equals the current context ViewModel:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -124,6 +128,9 @@
     <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"items"</span> <span class="attribute">v-on</span>=<span class="value">"click: toggle(this)"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -155,10 +162,14 @@
 })
 </pre></td></tr></table></figure>
 
+
 <p>When you want to access the original DOM event in an expression handler, you can pass it in as <code>$event</code>:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">button</span> <span class="attribute">v-on</span>=<span class="value">"click: submit('hello!', $event)"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -180,13 +191,15 @@
 <span class="comment">/* ... */</span>
 </pre></td></tr></table></figure>
 
-<h2 id="the-special-key-filter">The Special <code>key</code> Filter</h2>
+
+<h2 id="The_Special_key_Filter">The Special <code>key</code> Filter</h2>
 <p>When listening for keyboard events, we often need to check for common key codes. Vue.js provides a special <code>key</code> filter that can only be used with <code>v-on</code> directives. It takes a single argument that denotes the key code to check for:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre><span class="comment">&lt;!-- only call vm.submit() when the keyCode is 13 --&gt;</span>
 <span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:submit | key 13"</span>&gt;</span>
 </pre></td></tr></table></figure>
+
 
 <p>It also has a few presets for commonly used keys:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -195,13 +208,14 @@
 <span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:submit | key enter"</span>&gt;</span>
 </pre></td></tr></table></figure>
 
+
 <p>Check the API reference for a <a href="/api/filters.html#key">full list of key filter presets</a>.</p>
-<h2 id="why-listeners-in-html-">Why Listeners in HTML?</h2>
-<p>You might be concerned about this whole event listening approach violates the good old rules about &quot;separation of concern&quot;. Rest assured - since all Vue.js handler functions and expressions are strictly bound to the ViewModel that&#39;s handling the current View, it won&#39;t cause any maintainance difficulty. In fact, there are several benefits in using <code>v-on</code>:</p>
+<h2 id="Why_Listeners_in_HTML?">Why Listeners in HTML?</h2>
+<p>You might be concerned about this whole event listening approach violates the good old rules about “separation of concern”. Rest assured - since all Vue.js handler functions and expressions are strictly bound to the ViewModel that’s handling the current View, it won’t cause any maintainance difficulty. In fact, there are several benefits in using <code>v-on</code>:</p>
 <ol>
 <li>It makes it easier to locate the handler function implementations within your JS code by simply skimming the HTML template.</li>
-<li>Since you don&#39;t have to manually attach event listeners in JS, your ViewModel code can be pure logic and DOM-free. This makes it easier to test.</li>
-<li>When a ViewModel is destroyed, all event listeners are automatically removed. You don&#39;t need to worry about cleaning it up yourself.</li>
+<li>Since you don’t have to manually attach event listeners in JS, your ViewModel code can be pure logic and DOM-free. This makes it easier to test.</li>
+<li>When a ViewModel is destroyed, all event listeners are automatically removed. You don’t need to worry about cleaning it up yourself.</li>
 </ol>
 <p>Next up: <a href="/guide/forms.html">Handling Forms</a>.</p>
 

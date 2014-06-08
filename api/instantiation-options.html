@@ -68,7 +68,7 @@
 
 <div class="content api with-sidebar">
     <h1>Instantiation Options</h1>
-    <h2 id="data-logic">Data &amp; Logic</h2>
+    <h2 id="Data_&amp;_Logic">Data &amp; Logic</h2>
 <h3 id="data">data</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
@@ -85,6 +85,7 @@
 })
 vm.$data === data <span class="comment">// true</span>
 </pre></td></tr></table></figure>
+
 
 <p>The ViewModel will proxy access to all its properties, therefore you can manipulate the properties on the ViewModel and the changes get synced back to the actual data object:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
@@ -103,8 +104,9 @@ data.a = <span class="number">3</span>
 vm.a <span class="comment">// 3</span>
 </pre></td></tr></table></figure>
 
+
 <p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. You can also share it between multiple ViewModels.</p>
-<p class="tip">Under the hood, vue.js attaches a hidden property <code>__emitter__</code> and recursively converts the object&#39;s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
+<p class="tip">Under the hood, vue.js attaches a hidden property <code>__emitter__</code> and recursively converts the object’s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
 
 <h3 id="methods">methods</h3>
 <ul>
@@ -133,6 +135,7 @@ vm.a <span class="comment">// 3</span>
 vm.plus()
 vm.a <span class="comment">// 2</span>
 </pre></td></tr></table></figure>
+
 
 <h3 id="computed">computed</h3>
 <ul>
@@ -186,7 +189,8 @@ vm.a <span class="comment">// 2</span>
 vm.aDouble <span class="comment">// 4</span>
 </pre></td></tr></table></figure>
 
-<h3 id="paramattributes">paramAttributes</h3>
+
+<h3 id="paramAttributes">paramAttributes</h3>
 <ul>
 <li><strong>Type:</strong> <code>Array</code></li>
 </ul>
@@ -195,6 +199,9 @@ vm.aDouble <span class="comment">// 4</span>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"test"</span> <span class="attribute">size</span>=<span class="value">"100"</span> <span class="attribute">message</span>=<span class="value">"hello!"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
+
+
+
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
@@ -214,8 +221,9 @@ vm.aDouble <span class="comment">// 4</span>
 })
 </pre></td></tr></table></figure>
 
+
 <p>Param attributes can also contain interpolation tags, but they will only be evaluated once, and changes inside the component will not affect the source data.</p>
-<h2 id="dom-element">DOM Element</h2>
+<h2 id="DOM_Element">DOM Element</h2>
 <h3 id="el">el</h3>
 <ul>
 <li><strong>Type:</strong> <code>String</code> or <code>HTMLElement</code></li>
@@ -227,7 +235,7 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Type:</strong> <code>String</code></li>
 </ul>
 <p>A string template to be inserted into <code>vm.$el</code>. Any existing markup inside <code>vm.$el</code> will be overwriiten. If the <strong>replace</strong> option is <code>true</code>, the template will replace <code>vm.$el</code> entirely.</p>
-<p>If it starts with <code>#</code> it will be used as a querySelector and use the selected element&#39;s innerHTML and the template string. This allows the use of the common <code>&lt;script type=&quot;x-template&quot;&gt;</code> trick to include templates.</p>
+<p>If it starts with <code>#</code> it will be used as a querySelector and use the selected element’s innerHTML and the template string. This allows the use of the common <code>&lt;script type=&quot;x-template&quot;&gt;</code> trick to include templates.</p>
 <p class="tip">Vue.js uses DOM-based templating. The compiler walks through DOM elements and looks for directives and creates data bindings. This means all vue.js templates are parsable HTML that can be converted into actual DOM elements by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more ViewModel instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with <code>data-</code>.</p>
 
 <h3 id="replace">replace</h3>
@@ -236,8 +244,8 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Default:</strong> <code>false</code></li>
 <li><strong>Restriction:</strong> only respected if the <strong>template</strong> option is present and the template contains exactly 1 top level element.</li>
 </ul>
-<p>Whether to replace <code>vm.$el</code> with the template&#39;s top level element.</p>
-<h3 id="tagname">tagName</h3>
+<p>Whether to replace <code>vm.$el</code> with the template’s top level element.</p>
+<h3 id="tagName">tagName</h3>
 <ul>
 <li><strong>Type:</strong> <code>String</code>  </li>
 <li><strong>Default:</strong> <code>&#39;div&#39;</code></li>
@@ -249,7 +257,7 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Type:</strong> <code>String</code></li>
 </ul>
 <p>Set as <code>vm.$el.id</code>.</p>
-<h3 id="classname">className</h3>
+<h3 id="className">className</h3>
 <ul>
 <li><strong>Type:</strong> <code>String</code></li>
 </ul>
@@ -259,7 +267,7 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
 <p>A hash of HTML attributes to be set on <code>vm.$el</code>.</p>
-<h2 id="lifecycle-hooks">Lifecycle Hooks</h2>
+<h2 id="Lifecycle_Hooks">Lifecycle Hooks</h2>
 <p>All lifecycle hooks have their <code>this</code> context bound to the ViewModel instance they belong to. For <code>&#39;attached&#39;</code>, <code>&#39;detached&#39;</code>, <code>&#39;beforeDestroy&#39;</code>, <code>&#39;afterDestroy&#39;</code>, the ViewModel instance will also emit events in the form of <code>&#39;hook:eventName&#39;</code>.</p>
 <h3 id="created">created</h3>
 <ul>
@@ -282,17 +290,17 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
 <p>Called when <code>vm.$el</code> is removed from the DOM by a directive or a VM instance method. Direct manipulation of <code>vm.$el</code> will <strong>not</strong> trigger this hook.</p>
-<h3 id="beforedestroy">beforeDestroy</h3>
+<h3 id="beforeDestroy">beforeDestroy</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
-<p>Called before a ViewModel is destroyed. At this stage, the data is still observed, and all bindings and directive instances are still in effect. All child VMs of the current instance are also still active. This hook is mostly used internally but you can use it to clean up things you set up in the created or ready hook. There&#39;s no need to turn off <code>$on</code> and <code>$watch</code> listeners in here because all of them will be automatically turned off during <code>$destroy</code>.</p>
-<h3 id="afterdestroy">afterDestroy</h3>
+<p>Called before a ViewModel is destroyed. At this stage, the data is still observed, and all bindings and directive instances are still in effect. All child VMs of the current instance are also still active. This hook is mostly used internally but you can use it to clean up things you set up in the created or ready hook. There’s no need to turn off <code>$on</code> and <code>$watch</code> listeners in here because all of them will be automatically turned off during <code>$destroy</code>.</p>
+<h3 id="afterDestroy">afterDestroy</h3>
 <ul>
 <li><strong>Type:</strong> <code>Function</code></li>
 </ul>
 <p>Called after a ViewModel has been destroyed. When this hook is called, all bindings and directives of the ViewModel have been unbound and all child ViewModels have also been destroyed.</p>
-<h2 id="private-assets">Private Assets</h2>
+<h2 id="Private_Assets">Private Assets</h2>
 <p>These are private assets that will be available only to this ViewModel and its children during compilation.</p>
 <h3 id="directives">directives</h3>
 <ul>
@@ -319,14 +327,14 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
 <p>A hash of transitions to be made available to the ViewModel. For details see <a href="/guide/transitions.html">Adding Transition Effects</a>.</p>
-<h2 id="others">Others</h2>
+<h2 id="Others">Others</h2>
 <h3 id="parent">parent</h3>
 <ul>
 <li><strong>Type:</strong> <code>ViewModel</code></li>
 </ul>
 <p>A parent ViewModel instance. Passing in this option establishes a parent-child relationship between the newly created instance and the parent instance. This enables the same benefits with <code>v-component</code> style composition:</p>
 <ol>
-<li>The child can bind to data from the parent&#39;s scope in its template;</li>
+<li>The child can bind to data from the parent’s scope in its template;</li>
 <li>The child can access the parent as <code>this.$parent</code>;</li>
 <li>The parent and child can communicate using the <a href="/api/instance-methods.html#cross-viewmodel-events">Event Communication Methods</a>.</li>
 <li>When the parent is destroyed, the child will be destroyed too.</li>
@@ -338,6 +346,7 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Default:</strong> <code>false</code></li>
 </ul>
 <p>Whether to trigger <code>v-model</code> updates only on <code>change</code> event (hit enter or lose focus) or on every <code>input</code> event (on every keystroke).</p>
+<p><strong>Note:</strong> since 0.10.5 child ViewModels will inherit their parents’ <code>lazy</code> option if they don’t have the option set on themselves.</p>
 
 </div>
         
