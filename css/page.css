@@ -442,6 +442,14 @@ ul.demo li {
   font-weight: bold;
   font-family: Georgia;
 }
+.footer {
+  color: #7f8c8d;
+  margin-top: 4em;
+  padding-top: 2em;
+  border-top: 1px solid #e5e5e5;
+  margin-left: 0.8em;
+  font-size: 0.9em;
+}
 @media screen and (min-width: 720px) {
   #main.fix-sidebar .sidebar {
     position: fixed;
@@ -523,5 +531,9 @@ ul.demo li {
   .content ul,
   .content p.tip {
     margin-left: 0;
+  }
+  .footer {
+    margin-left: 0;
+    text-align: center;
   }
 }

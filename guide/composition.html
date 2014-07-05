@@ -79,7 +79,7 @@
 <div class="content guide with-sidebar">
     <h1>Composing Components</h1>
     <h2 id="Registering_a_Component">Registering a Component</h2>
-<p>Vue.js allows you to treat registered ViewModel constructors as reusable components that is conceptually similar to <a href="http://www.w3.org/TR/components-intro/" target="_blank">Web Components</a>, without requiring any polyfills. To register a component, first create a subclass constructor of Vue using <code>Vue.extend()</code>, then use the global <code>Vue.component()</code> method to register that constructor:</p>
+<p>Vue.js allows you to treat registered ViewModel constructors as reusable components that are conceptually similar to <a href="http://www.w3.org/TR/components-intro/" target="_blank">Web Components</a>, without requiring any polyfills. To register a component, first create a subclass constructor of Vue using <code>Vue.extend()</code>, then use the global <code>Vue.component()</code> method to register that constructor:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -128,7 +128,7 @@ Vue.component(<span class="string">'my-component'</span>, {
 <p class="tip">To avoid naming collisions with native elements and stay consistent with the W3C Custom Elements specification, the component’s ID <strong>must</strong> contain a hyphen <code>-</code> to be usable as a custom tag.</p>
 
 <p>It is important to understand the difference between <code>Vue.extend()</code> and <code>Vue.component()</code>. Since <code>Vue</code> itself is a constructor, <code>Vue.extend()</code> is a <strong>class inheritance method</strong>. Its task is to create a sub-class of <code>Vue</code> and return the constructor. <code>Vue.component()</code>, on the other hand, is an <strong>asset registration method</strong> similar to <code>Vue.directive()</code> and <code>Vue.filter()</code>. Its task is to associate a given constructor with a string ID so Vue.js can pick it up in templates. When directly passing in options to <code>Vue.component()</code>, it calls <code>Vue.extend()</code> under the hood.</p>
-<p>Vue.js supports two different API paradigms: the class-based, imperative, Backbone style API, and the markup-based, declarative, Web Components style API. If you are confused, think about how you can create an image element with <code>new Image()</code>, or with an <code>&lt;img&gt;</code> tag. Both are useful in its own right and Vue.js tries to provide both for maximum flexibility.</p>
+<p>Vue.js supports two different API paradigms: the class-based, imperative, Backbone style API, and the markup-based, declarative, Web Components style API. If you are confused, think about how you can create an image element with <code>new Image()</code>, or with an <code>&lt;img&gt;</code> tag. Each is useful in its own right and Vue.js tries to provide both for maximum flexibility.</p>
 <h2 id="Data_Inheritance">Data Inheritance</h2>
 <h3 id="Inheriting_Objects_from_Parent_as_$data">Inheriting Objects from Parent as <code>$data</code></h3>
 <p>A child component can inherit data from its parent’s data by combining <code>v-component</code> with <code>v-with</code>. When given a single keypath without an argument, the child Component will use that value as its <code>$data</code> (hence that value must be an Object):</p>
@@ -345,7 +345,7 @@ var parent2 = new Vue({
 
 <p>When <code>v-ref</code> is used together with <code>v-repeat</code>, the value you get will be an Array containing the child components mirroring the data Array.</p>
 <h2 id="Event_Communication_Between_Nested_Components">Event Communication Between Nested Components</h2>
-<p>Although you can directly access a ViewModels children and parent, it is more convenient to use the built-in event system for cross-component communication. It also makes your code less coupled and easier to maintain. Once a parent-child relationship is established, you can dispatch and trigger events using each ViewModel’s <a href="/api/instance-methods.html#cross-viewmodel-events">event instance methods</a>.</p>
+<p>Although you can directly access a ViewModels children and parent, it is more convenient to use the built-in event system for cross-component communication. It also makes your code less coupled and easier to maintain. Once a parent-child relationship is established, you can dispatch and trigger events using each ViewModel’s <a href="/api/instance-methods.html#Cross-ViewModel_Events">event instance methods</a>.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -453,7 +453,7 @@ var parent = new Vue({
 </pre></td></tr></table></figure>
 
 
-<p>Alternatively, you can add private assets to an existing Component constructor using a chaining API similar to the global asset registeration methods:</p>
+<p>Alternatively, you can add private assets to an existing Component constructor using a chaining API similar to the global asset registration methods:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -469,7 +469,7 @@ var parent = new Vue({
 
 <h2 id="Content_Insertion_Points">Content Insertion Points</h2>
 <h3 id="Single_insertion_point">Single insertion point</h3>
-<p>When creating reusable components, we often need to access and reuse the original content in the hosting element, which are not part of the component. Vue.js implements a content insertion mechanism that is compatible with the current Web Components spec draft, using the special <code>&lt;content&gt;</code> element to serve as insertion points for the original content. When there is only one <code>&lt;content&gt;</code> tag with no attributes, the entire original content will be inserted at its position in the DOM and replaces it. Anything originally inside the <code>&lt;content&gt;</code> tags are considered <strong>fallback content</strong>. Fallback content will only be displayed if the hosting element is empty and has no content to be inserted. For example:</p>
+<p>When creating reusable components, we often need to access and reuse the original content in the hosting element, which are not part of the component. Vue.js implements a content insertion mechanism that is compatible with the current Web Components spec draft, using the special <code>&lt;content&gt;</code> element to serve as insertion points for the original content. When there is only one <code>&lt;content&gt;</code> tag with no attributes, the entire original content will be inserted at its position in the DOM and replaces it. Anything originally inside the <code>&lt;content&gt;</code> tags is considered <strong>fallback content</strong>. Fallback content will only be displayed if the hosting element is empty and has no content to be inserted. For example:</p>
 <p>Template for <code>my-component</code>:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -547,6 +547,7 @@ var parent = new Vue({
 <p>The content insertion mechanism provides fine control over how original content should be manipulated or displayed, making components extremely flexible and composable.</p>
 <p>Next: <a href="/guide/application.html">Building Larger Apps</a>.</p>
 
+    <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
         
         </div>

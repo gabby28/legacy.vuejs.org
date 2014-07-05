@@ -63,18 +63,18 @@
 <p>See the <a href="/guide/installation.html">Installation</a> page for the latest builds.</p>
 <h3 id="New">New</h3>
 <ul>
-<li>Literal directives can now contain interpolation tags. These tags will be evaluated only once at compile time. An example usage is conditionally decide which component to instantiate with <code>v-component=&quot;{{type}}&quot;</code>. <a href="/guide/directives.html#literal-directives">Doc</a>.</li>
+<li>Literal directives can now contain interpolation tags. These tags will be evaluated only once at compile time. An example usage is conditionally decide which component to instantiate with <code>v-component=&quot;{{type}}&quot;</code>. <a href="/guide/directives.html#Literal_Directives">Doc</a>.</li>
 <li>Attributes listed in the <code>paramAttributes</code> option now accept mustache interpolations too. They will also only be evaluated once.</li>
-<li><code>v-repeat</code> now accepts an argument which will be used as the identifier for the wrapped object. This allows more explicit property access in repeaters. <a href="/guide/list.html#using-an-identifier">Doc</a>.</li>
+<li><code>v-repeat</code> now accepts an argument which will be used as the identifier for the wrapped object. This allows more explicit property access in repeaters. <a href="/guide/list.html#Using_an_Identifier">Doc</a>.</li>
 <li>Added <code>v-view</code> directive which binds to a string value and dynamically instantiate different components using that string as the component ID. <a href="/api/directives.html#v-view">Doc</a>.</li>
-<li>Added <code>filterBy</code> and <code>orderBy</code> filters for <code>v-repeat</code>. <a href="/api/filters.html#filterby">Doc</a>.</li>
-<li>Custom filters that access properties on its <code>this</code> context will be considered <strong>computed filters</strong>. <a href="/guide/filters.html#computed-filters">Doc</a>.</li>
+<li>Added <code>filterBy</code> and <code>orderBy</code> filters for <code>v-repeat</code>. <a href="/api/filters.html#filterBy">Doc</a>.</li>
+<li>Custom filters that access properties on its <code>this</code> context will be considered <strong>computed filters</strong>. <a href="/guide/filters.html#Computed_Filters">Doc</a>.</li>
 <li>You can now access the event in <code>v-on</code> handler expressions as <code>$event</code>. Example: <code>&lt;a v-on=&quot;click:handle(&#39;hello&#39;, $event)&quot;&gt;Hello&lt;/a&gt;</code></li>
 <li>Interpolation delimiters can now be customized via the <code>delimiters</code> global config option. Example: <code>Vue.config({ delimiters: [&quot;[&quot;, &quot;]&quot;] })</code> will change the matched interpolation tags to <code>[[ ]]</code> for text bindings and <code>[[[ ]]]</code> for html bindings.</li>
 </ul>
 <h3 id="Changed">Changed</h3>
 <ul>
-<li><code>{{&gt;yield}}</code> syntax has been deprecated. A Web Components spec compatible content insertion mechanism using <code>&lt;content&gt;</code> elements has been introduced. <a href="/guide/composition.html#content-insertion-points">Doc</a>.</li>
+<li><code>{{&gt;yield}}</code> syntax has been deprecated. A Web Components spec compatible content insertion mechanism using <code>&lt;content&gt;</code> elements has been introduced. <a href="/guide/composition.html#Content_Insertion_Points">Doc</a>.</li>
 <li>To use a component as a custom element, the component ID must now contain a hyphen (<code>-</code>). This is consistent with the current custom element spec draft.</li>
 <li><code>v-repeat</code> Arrays’ augmented methods have been renamed from <code>set</code> to <code>$set(index, value)</code> and <code>remove</code> to <code>$remove(index | value)</code>. The prefix better differentiates them from native methods. The <code>replace</code> method has been removed.</li>
 <li>When iterating over an Object with <code>v-repeat</code>, the object no longer gets a <code>$repeater</code> array. Instead, the object is now augmented with two methods: <code>$add(key, value)</code> and <code>$delete(key)</code>, which will trigger corresponding view updates.</li>

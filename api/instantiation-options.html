@@ -106,7 +106,7 @@ vm.a <span class="comment">// 3</span>
 
 
 <p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. You can also share it between multiple ViewModels.</p>
-<p class="tip">Under the hood, vue.js attaches a hidden property <code>__emitter__</code> and recursively converts the object’s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
+<p class="tip">Under the hood, Vue.js attaches a hidden property <code>__emitter__</code> and recursively converts the object’s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
 
 <h3 id="methods">methods</h3>
 <ul>
@@ -236,7 +236,7 @@ vm.aDouble <span class="comment">// 4</span>
 </ul>
 <p>A string template to be inserted into <code>vm.$el</code>. Any existing markup inside <code>vm.$el</code> will be overwriiten. If the <strong>replace</strong> option is <code>true</code>, the template will replace <code>vm.$el</code> entirely.</p>
 <p>If it starts with <code>#</code> it will be used as a querySelector and use the selected element’s innerHTML and the template string. This allows the use of the common <code>&lt;script type=&quot;x-template&quot;&gt;</code> trick to include templates.</p>
-<p class="tip">Vue.js uses DOM-based templating. The compiler walks through DOM elements and looks for directives and creates data bindings. This means all vue.js templates are parsable HTML that can be converted into actual DOM elements by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more ViewModel instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with <code>data-</code>.</p>
+<p class="tip">Vue.js uses DOM-based templating. The compiler walks through DOM elements and looks for directives and creates data bindings. This means all Vue.js templates are parsable HTML that can be converted into actual DOM elements by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more ViewModel instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with <code>data-</code>.</p>
 
 <h3 id="replace">replace</h3>
 <ul>
@@ -306,12 +306,12 @@ vm.aDouble <span class="comment">// 4</span>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
-<p>An hash of directives to be made available to the ViewModel. For details on how to write a custom directive, see <a href="/guide/directives.html#writing-a-custom-directive">Writing Custom Directives</a>.</p>
+<p>A hash of directives to be made available to the ViewModel. For details on how to write a custom directive, see <a href="/guide/directives.html#Writing_a_Custom_Directive">Writing Custom Directives</a>.</p>
 <h3 id="filters">filters</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
-<p>A hash of filters to be made available to the ViewModel. For details on how to write a custom filter, see <a href="/guide/filters.html#writing-a-custom-filter">Writing Custom Filters</a>.</p>
+<p>A hash of filters to be made available to the ViewModel. For details on how to write a custom filter, see <a href="/guide/filters.html#Writing_a_Custom_Filter">Writing Custom Filters</a>.</p>
 <h3 id="components">components</h3>
 <ul>
 <li><strong>Type:</strong> <code>Object</code></li>
@@ -336,7 +336,7 @@ vm.aDouble <span class="comment">// 4</span>
 <ol>
 <li>The child can bind to data from the parent’s scope in its template;</li>
 <li>The child can access the parent as <code>this.$parent</code>;</li>
-<li>The parent and child can communicate using the <a href="/api/instance-methods.html#cross-viewmodel-events">Event Communication Methods</a>.</li>
+<li>The parent and child can communicate using the <a href="/api/instance-methods.html#Cross-ViewModel_Events">Event Communication Methods</a>.</li>
 <li>When the parent is destroyed, the child will be destroyed too.</li>
 </ol>
 <p>This option is useful when you need to manually manage the lifecycle of nested ViewModels for better memory control.</p>
@@ -345,9 +345,10 @@ vm.aDouble <span class="comment">// 4</span>
 <li><strong>Type:</strong> <code>Boolean</code></li>
 <li><strong>Default:</strong> <code>false</code></li>
 </ul>
-<p>Whether to trigger <code>v-model</code> updates only on <code>change</code> event (hit enter or lose focus) or on every <code>input</code> event (on every keystroke).</p>
+<p>Whether to trigger <code>v-model</code> updates only on <code>change</code> events (hit enter or lose focus) or on every <code>input</code> event (on every keystroke).</p>
 <p><strong>Note:</strong> since 0.10.5 child ViewModels will inherit their parents’ <code>lazy</code> option if they don’t have the option set on themselves.</p>
 
+    <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
         
         </div>
