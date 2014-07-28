@@ -75,9 +75,31 @@
 <h3 id="vm-$watch(_keypath,_callback_)">vm.$watch( keypath, callback )</h3>
 <ul>
 <li><strong>keypath</strong> <code>String</code></li>
-<li><strong>callback( newValue )</strong> <code>Function</code></li>
+<li><strong>callback( newValue, [mutation])</strong> <code>Function</code></li>
 </ul>
-<p>Watch a keypath on the vm’s data object for changes and call the callback with the new value.</p>
+<p>Watch a keypath on the vm’s data object (or the <code>$data</code> object itself) for changes and call the callback with the new value.</p>
+<p>A second <code>mutation</code> object is also available and is useful when watching arrarys:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="keyword">this</span>.$watch(<span class="string">'list'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value, mutation)</span> {</span>
+    <span class="keyword">if</span> (mutation) {
+        mutation.method <span class="comment">// e.g. 'push'</span>
+        mutation.args <span class="comment">// raw arguments to the mutation method</span>
+        mutation.result <span class="comment">// return value</span>
+        mutation.inserted <span class="comment">// new, inserted elements</span>
+        mutation.removed <span class="comment">// removed elements</span>
+    }
+})
+</pre></td></tr></table></figure>
+
+
 <h3 id="vm-$unwatch(_keypath,_[callback]_)">vm.$unwatch( keypath, [callback] )</h3>
 <ul>
 <li><strong>keypath</strong> <code>String</code></li>
