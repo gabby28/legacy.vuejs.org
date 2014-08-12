@@ -353,9 +353,12 @@ ul.demo li {
 .sidebar .sidebar-link:hover {
   border-bottom: 2px solid #42b983;
 }
+.sidebar .ad {
+  margin-top: 20px;
+}
 .content {
   padding: 2.2em 0;
-  max-width: 720px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .content.with-sidebar {
@@ -512,6 +515,9 @@ ul.demo li {
     display: block;
   }
   .sidebar .list {
+    display: none;
+  }
+  .sidebar .ad {
     display: none;
   }
   .sidebar.open {
