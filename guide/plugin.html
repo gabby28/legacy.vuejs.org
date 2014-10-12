@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,52 +37,58 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link current">Guide</a></li>
-        <li><a href="/api/" class="nav-link">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Guide</h2>
-        <ul>
-        
-            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
-        
-            <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
-        
-            <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-        
-            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
-        
-            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
-        
-            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
-        
-            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
-        
-            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-        
-            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
-        
-            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
-        
-            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
-        
-            <li><a href="/guide/plugin.html" class="sidebar-link current">Plugins</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+            
+                <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
+            
+                <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+            
+                <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+            
+                <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+            
+                <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+            
+                <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+            
+                <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+            
+                <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+            
+                <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+            
+                <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+            
+                <li><a href="/guide/plugin.html" class="sidebar-link current">Plugins</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -91,63 +103,30 @@
 </blockquote>
 <h2 id="Using_a_Plugin">Using a Plugin</h2>
 <h3 id="Verbose_version">Verbose version</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="comment">// assuming using a CommonJS build system</span>
-<span class="keyword">var</span> vueTouch = <span class="built_in">require</span>(<span class="string">'vue-touch'</span>)
-<span class="comment">// use the plugin globally</span>
-Vue.use(vueTouch)
-
-<span class="comment">// Extended components can use plugins too!</span>
-<span class="keyword">var</span> awesomePlugin = <span class="built_in">require</span>(<span class="string">'vue-awesome'</span>),
-    MyComponent = Vue.extend({})
-MyComponent.use(awesomePlugin)
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// assuming using a CommonJS build system</span></div><div class="line"><span class="keyword">var</span> vueTouch = <span class="built_in">require</span>(<span class="string">'vue-touch'</span>)</div><div class="line"><span class="comment">// use the plugin globally</span></div><div class="line">Vue.use(vueTouch)</div><div class="line"></div><div class="line"><span class="comment">// Extended components can use plugins too!</span></div><div class="line"><span class="keyword">var</span> awesomePlugin = <span class="built_in">require</span>(<span class="string">'vue-awesome'</span>),</div><div class="line">    MyComponent = Vue.extend({})</div><div class="line">MyComponent.use(awesomePlugin)</div></pre></td></tr></table></figure>
 
 <h3 id="Shorthand_equivalent">Shorthand equivalent</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="comment">// will auto require('vue-touch')</span>
-Vue.use(<span class="string">'vue-touch'</span>)
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// will auto require('vue-touch')</span></div><div class="line">Vue.use(<span class="string">'vue-touch'</span>)</div></pre></td></tr></table></figure>
 
 <p class="tip">The shorthand only works in Component, not in Browserify! Browserify uses static parsing to extract dependencies and cannot handle dynamic <code>require()</code>.</p>
 
 <h3 id="Optional_arguments">Optional arguments</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="comment">// every additional argument will be passed to the plugin</span>
-Vue.use(<span class="string">'vue-touch'</span>, { moveTolerance: <span class="number">12</span> })
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// every additional argument will be passed to the plugin</span></div><div class="line">Vue.use(<span class="string">'vue-touch'</span>, { moveTolerance: <span class="number">12</span> })</div></pre></td></tr></table></figure>
 
 <h2 id="Plugin_Implementation">Plugin Implementation</h2>
 <p>Note that the passed in <code>Vue</code> constructor could be an extended Component constructor. Assume that only <code>Vue.require()</code> and asset registration methods are available. Do not use <code>Vue.config()</code> inside plugins.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>exports.install = <span class="function"><span class="keyword">function</span> <span class="params">(Vue, options)</span> {</span>
-    <span class="comment">// use Vue.require to access internal modules</span>
-    <span class="keyword">var</span> utils = Vue.require(<span class="string">'utils'</span>)
-}
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">exports.install = <span class="function"><span class="keyword">function</span> <span class="params">(Vue, options)</span> </span>{</div><div class="line">    <span class="comment">// use Vue.require to access internal modules</span></div><div class="line">    <span class="keyword">var</span> utils = Vue.require(<span class="string">'utils'</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
 
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

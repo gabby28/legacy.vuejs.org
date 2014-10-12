@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "api"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,42 +37,48 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
-        <li><a href="/api/" class="nav-link current">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Api</h2>
-        <ul>
-        
-            <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
-        
-            <li><a href="/api/instantiation-options.html" class="sidebar-link current">Instantiation Options</a></li>
-        
-            <li><a href="/api/instance-properties.html" class="sidebar-link">Instance Properties</a></li>
-        
-            <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
-        
-            <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
-        
-            <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
-        
-            <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
+            
+                <li><a href="/api/instantiation-options.html" class="sidebar-link current">Instantiation Options</a></li>
+            
+                <li><a href="/api/instance-properties.html" class="sidebar-link">Instance Properties</a></li>
+            
+                <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
+            
+                <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
+            
+                <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
+            
+                <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -82,36 +94,10 @@
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
 <p>The data object for the ViewModel. It can be accessed as <code>vm.$data</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="keyword">var</span> data = { a: <span class="number">1</span> }
-<span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
-    data: data
-})
-vm.$data === data <span class="comment">// true</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = { a: <span class="number">1</span> }</div><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({</div><div class="line">    data: data</div><div class="line">})</div><div class="line">vm.$data === data <span class="comment">// true</span></div></pre></td></tr></table></figure>
 
 <p>The ViewModel will proxy access to all its properties, therefore you can manipulate the properties on the ViewModel and the changes get synced back to the actual data object:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>vm.a <span class="comment">// 1</span>
-
-vm.a = <span class="number">2</span>
-data.a <span class="comment">// 2</span>
-
-data.a = <span class="number">3</span>
-vm.a <span class="comment">// 3</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">vm.a <span class="comment">// 1</span></div><div class="line"></div><div class="line">vm.a = <span class="number">2</span></div><div class="line">data.a <span class="comment">// 2</span></div><div class="line"></div><div class="line">data.a = <span class="number">3</span></div><div class="line">vm.a <span class="comment">// 3</span></div></pre></td></tr></table></figure>
 
 <p>The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with <code>JSON.stringify</code>. You can also share it between multiple ViewModels.</p>
 <p class="tip">Under the hood, Vue.js attaches a hidden property <code>__emitter__</code> and recursively converts the object’s non-function properties into getters and setters that trigger events when called. Properties with keys that starts with <code>$</code> or <code>_</code> are skipped.</p>
@@ -122,28 +108,7 @@ vm.a <span class="comment">// 3</span>
 </ul>
 <p>Methods to be mixed into the ViewModel. You can access these methods directly on the VM instance, or use them in directive expressions. All methods will have their <code>this</code> context automatically bound to the ViewModel instance.</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
-    data: { a: <span class="number">1</span> },
-    methods: {
-        plus: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-            <span class="keyword">this</span>.a++
-        }
-    }
-})
-vm.plus()
-vm.a <span class="comment">// 2</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({</div><div class="line">    data: { a: <span class="number">1</span> },</div><div class="line">    methods: {</div><div class="line">        plus: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">            <span class="keyword">this</span>.a++</div><div class="line">        }</div><div class="line">    }</div><div class="line">})</div><div class="line">vm.plus()</div><div class="line">vm.a <span class="comment">// 2</span></div></pre></td></tr></table></figure>
 
 <h3 id="computed">computed</h3>
 <ul>
@@ -151,52 +116,7 @@ vm.a <span class="comment">// 2</span>
 </ul>
 <p>Computed properties to be mixed into the ViewModel. All getters and setters have their <code>this</code> context automatically bound to the ViewModel instance.</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({
-    data: { a: <span class="number">1</span> },
-    computed: {
-        <span class="comment">// get only, just need a function</span>
-        aDouble: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-            <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="number">2</span>
-        },
-        <span class="comment">// both get and set</span>
-        aPlus: {
-            $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-                <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>
-            },
-            $set: <span class="function"><span class="keyword">function</span> <span class="params">(v)</span> {</span>
-                <span class="keyword">this</span>.a = v - <span class="number">1</span>
-            }
-        }
-    }
-})
-vm.aPlus <span class="comment">// 2</span>
-vm.aPlus = <span class="number">3</span>
-vm.a <span class="comment">// 2</span>
-vm.aDouble <span class="comment">// 4</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({</div><div class="line">    data: { a: <span class="number">1</span> },</div><div class="line">    computed: {</div><div class="line">        <span class="comment">// get only, just need a function</span></div><div class="line">        aDouble: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="number">2</span></div><div class="line">        },</div><div class="line">        <span class="comment">// both get and set</span></div><div class="line">        aPlus: {</div><div class="line">            $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span></div><div class="line">            },</div><div class="line">            $set: <span class="function"><span class="keyword">function</span> <span class="params">(v)</span> </span>{</div><div class="line">                <span class="keyword">this</span>.a = v - <span class="number">1</span></div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">})</div><div class="line">vm.aPlus <span class="comment">// 2</span></div><div class="line">vm.aPlus = <span class="number">3</span></div><div class="line">vm.a <span class="comment">// 2</span></div><div class="line">vm.aDouble <span class="comment">// 4</span></div></pre></td></tr></table></figure>
 
 <h3 id="paramAttributes">paramAttributes</h3>
 <ul>
@@ -204,31 +124,11 @@ vm.aDouble <span class="comment">// 4</span>
 </ul>
 <p>An array of attribute names to be set on the VM as initial data.</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"test"</span> <span class="attribute">size</span>=<span class="value">"100"</span> <span class="attribute">message</span>=<span class="value">"hello!"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"test"</span> <span class="attribute">size</span>=<span class="value">"100"</span> <span class="attribute">message</span>=<span class="value">"hello!"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
-    el: <span class="string">'#test'</span>,
-    paramAttributes: [<span class="string">'size'</span>, <span class="string">'message'</span>],
-    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        console.log(<span class="keyword">this</span>.size) <span class="comment">// 100</span>
-        console.log(<span class="keyword">this</span>.message) <span class="comment">// 'hello!'</span>
-    }
-})
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue({</div><div class="line">    el: <span class="string">'#test'</span>,</div><div class="line">    paramAttributes: [<span class="string">'size'</span>, <span class="string">'message'</span>],</div><div class="line">    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.size) <span class="comment">// 100</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.message) <span class="comment">// 'hello!'</span></div><div class="line">    }</div><div class="line">})</div></pre></td></tr></table></figure>
 
 <p>Param attributes can also contain interpolation tags, but they will only be evaluated once, and changes inside the component will not affect the source data.</p>
 <h2 id="DOM_Element">DOM Element</h2>
@@ -358,8 +258,13 @@ vm.aDouble <span class="comment">// 4</span>
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

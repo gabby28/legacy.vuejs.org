@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,52 +37,58 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link current">Guide</a></li>
-        <li><a href="/api/" class="nav-link">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Guide</h2>
-        <ul>
-        
-            <li><a href="/guide/installation.html" class="sidebar-link current">Installation</a></li>
-        
-            <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
-        
-            <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-        
-            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
-        
-            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
-        
-            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
-        
-            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
-        
-            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-        
-            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
-        
-            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
-        
-            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
-        
-            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/guide/installation.html" class="sidebar-link current">Installation</a></li>
+            
+                <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
+            
+                <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+            
+                <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+            
+                <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+            
+                <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+            
+                <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+            
+                <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+            
+                <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+            
+                <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+            
+                <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+            
+                <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -91,61 +103,37 @@
 </blockquote>
 <h2 id="Standalone">Standalone</h2>
 <p>Simply download and include with a script tag. <code>Vue</code> will be registered as a global variable.</p>
-<p><a class="button" href="https://raw.github.com/yyx990803/vue/v0.10.6/dist/vue.js" download target="_blank">Development Version</a><br><span class="light">124.76kb, plenty of comments and debug/warning messages.</span></p>
-<p><a class="button" href="https://raw.github.com/yyx990803/vue/v0.10.6/dist/vue.min.js" download target="_blank">Production Version</a><br><span class="light">41.8kb minified / 14.29kb gzipped</span></p>
+<div id="downloads"><br><a class="button" href="https://raw.github.com/yyx990803/vue/v0.10.6/dist/vue.js" download="" target="_blank" rel="external">Development Version</a><span class="light info">124.76kb, plenty of comments and debug/warning messages.</span><br><br><a class="button" href="https://raw.github.com/yyx990803/vue/v0.10.6/dist/vue.min.js" download="" target="_blank" rel="external">Production Version</a><span class="light info">41.8kb minified / 14.29kb gzipped</span><br></div>
+
 <p>Also available on <a href="//cdnjs.cloudflare.com/ajax/libs/vue/0.10.6/vue.min.js">cdnjs</a> (takes some time to sync so the latest version might not be available yet).</p>
 <h2 id="Component">Component</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ component install yyx990803/vue
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ component install yyx990803/vue</div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)</div></pre></td></tr></table></figure>
 
 <p>For edge version (unstable branch, use at your own risk!):</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ component install yyx990803/vue@dev
-</pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ component install yyx990803/vue@dev</div></pre></td></tr></table></figure>
 
 <h2 id="Browserify">Browserify</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ npm install vue
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install vue</div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Vue = <span class="built_in">require</span>(<span class="string">'vue'</span>)</div></pre></td></tr></table></figure>
 
 <p>For edge version:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ npm install yyx990803/vue<span class="comment">#dev</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install yyx990803/vue<span class="comment">#dev</span></div></pre></td></tr></table></figure>
 
 <p class="tip">The built version in <code>dist/</code> doesn’t work with Browserify because it assumes it’s loaded in global scope and comes with its own <code>require</code> mechanism. Always directly use source version when using Vue with Browserify.</p>
 
 <h2 id="Bower">Bower</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ bower install vue
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bower install vue</div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bower_components/vue/dist/vue.js"</span>&gt;</span><span class="javascript"></span></div></pre></td></tr></table></figure>
 
 <h2 id="AMD_Module_Loaders">AMD Module Loaders</h2>
 <p>e.g. RequireJS, SeaJS: Built versions in <code>/dist</code> or installed via Bower is wrapped with UMD so it can be used directly as an AMD module.</p>
@@ -154,8 +142,13 @@
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

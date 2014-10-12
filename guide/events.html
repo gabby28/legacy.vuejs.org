@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,52 +37,58 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link current">Guide</a></li>
-        <li><a href="/api/" class="nav-link">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Guide</h2>
-        <ul>
-        
-            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
-        
-            <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
-        
-            <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-        
-            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
-        
-            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
-        
-            <li><a href="/guide/events.html" class="sidebar-link current">Listening for Events</a></li>
-        
-            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
-        
-            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-        
-            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
-        
-            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
-        
-            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
-        
-            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+            
+                <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
+            
+                <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+            
+                <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+            
+                <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+            
+                <li><a href="/guide/events.html" class="sidebar-link current">Listening for Events</a></li>
+            
+                <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+            
+                <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+            
+                <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+            
+                <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+            
+                <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+            
+                <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -87,135 +99,33 @@
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
     </div>
     <p>You can use the <code>v-on</code> directive to bind event listeners to DOM events. It can be bound to either an event handler function (without the invocation parentheses) or an inline expression. If a handler function is provided, it will get the original DOM event as the argument. The event also comes with an extra property: <code>targetVM</code>, pointing to the particular ViewModel the event was triggered on:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">v-on</span>=<span class="value">"click: onClick"</span>&gt;</span>Trigger a handler<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">v-on</span>=<span class="value">"click: n++"</span>&gt;</span>Trigger an expression<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">v-on</span>=<span class="value">"click: onClick"</span>&gt;</span>Trigger a handler<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">v-on</span>=<span class="value">"click: n++"</span>&gt;</span>Trigger an expression<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
-    el: <span class="string">'#demo'</span>,
-    data: {
-        n: <span class="number">0</span>
-    },
-    methods: {
-        onClick: <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> {</span>
-            console.log(e.target.tagName) <span class="comment">// "A"</span>
-            console.log(e.targetVM === <span class="keyword">this</span>) <span class="comment">// true</span>
-        }
-    }
-})
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue({</div><div class="line">    el: <span class="string">'#demo'</span>,</div><div class="line">    data: {</div><div class="line">        n: <span class="number">0</span></div><div class="line">    },</div><div class="line">    methods: {</div><div class="line">        onClick: <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>{</div><div class="line">            <span class="built_in">console</span>.log(e.target.tagName) <span class="comment">// "A"</span></div><div class="line">            <span class="built_in">console</span>.log(e.targetVM === <span class="keyword">this</span>) <span class="comment">// true</span></div><div class="line">        }</div><div class="line">    }</div><div class="line">})</div></pre></td></tr></table></figure>
 
 <h2 id="Invoke_Handler_with_Expression">Invoke Handler with Expression</h2>
 <p><code>targetVM</code> could be useful when <code>v-on</code> is used with <code>v-repeat</code>, since the latter creates a lot of child ViewModels. However, it is often more convenient to use an invocation expression passing in <code>this</code>, which equals the current context ViewModel:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"list"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"items"</span> <span class="attribute">v-on</span>=<span class="value">"click: toggle(this)"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"items"</span> <span class="attribute">v-on</span>=<span class="value">"click: toggle(this)"</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
-    el: <span class="string">'#list'</span>,
-    data: {
-        items: [
-            { text: <span class="string">'one'</span>, done: <span class="literal">true</span> },
-            { text: <span class="string">'two'</span>, done: <span class="literal">false</span> }
-        ]
-    },
-    methods: {
-        toggle: <span class="function"><span class="keyword">function</span> <span class="params">(item)</span> {</span>
-            item.done = !item.done
-        }
-    }
-})
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue({</div><div class="line">    el: <span class="string">'#list'</span>,</div><div class="line">    data: {</div><div class="line">        items: [</div><div class="line">            { text: <span class="string">'one'</span>, done: <span class="literal">true</span> },</div><div class="line">            { text: <span class="string">'two'</span>, done: <span class="literal">false</span> }</div><div class="line">        ]</div><div class="line">    },</div><div class="line">    methods: {</div><div class="line">        toggle: <span class="function"><span class="keyword">function</span> <span class="params">(item)</span> </span>{</div><div class="line">            item.done = !item.done</div><div class="line">        }</div><div class="line">    }</div><div class="line">})</div></pre></td></tr></table></figure>
 
 <p>When you want to access the original DOM event in an expression handler, you can pass it in as <code>$event</code>:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">button</span> <span class="attribute">v-on</span>=<span class="value">"click: submit('hello!', $event)"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">v-on</span>=<span class="value">"click: submit('hello!', $event)"</span>&gt;</span>Submit<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="comment">/* ... */</span>
-{
-    methods: {
-        submit: <span class="function"><span class="keyword">function</span> <span class="params">(msg, e)</span> {</span>
-            e.stopPropagation()
-        }
-    }
-}
-<span class="comment">/* ... */</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* ... */</span></div><div class="line">{</div><div class="line">    methods: {</div><div class="line">        submit: <span class="function"><span class="keyword">function</span> <span class="params">(msg, e)</span> </span>{</div><div class="line">            e.stopPropagation()</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"><span class="comment">/* ... */</span></div></pre></td></tr></table></figure>
 
 <h2 id="The_Special_key_Filter">The Special <code>key</code> Filter</h2>
 <p>When listening for keyboard events, we often need to check for common key codes. Vue.js provides a special <code>key</code> filter that can only be used with <code>v-on</code> directives. It takes a single argument that denotes the key code to check for:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="comment">&lt;!-- only call vm.submit() when the keyCode is 13 --&gt;</span>
-<span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:submit | key 13"</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- only call vm.submit() when the keyCode is 13 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:submit | key 13"</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>It also has a few presets for commonly used keys:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="comment">&lt;!-- same as above --&gt;</span>
-<span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:submit | key enter"</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- same as above --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup:submit | key enter"</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Check the API reference for a <a href="/api/filters.html#key">full list of key filter presets</a>.</p>
 <h2 id="Why_Listeners_in_HTML?">Why Listeners in HTML?</h2>
@@ -229,8 +139,13 @@
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

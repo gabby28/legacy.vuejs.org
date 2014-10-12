@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "api"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,42 +37,48 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
-        <li><a href="/api/" class="nav-link current">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Api</h2>
-        <ul>
-        
-            <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
-        
-            <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
-        
-            <li><a href="/api/instance-properties.html" class="sidebar-link">Instance Properties</a></li>
-        
-            <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
-        
-            <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
-        
-            <li><a href="/api/directives.html" class="sidebar-link current">Directives</a></li>
-        
-            <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
+            
+                <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
+            
+                <li><a href="/api/instance-properties.html" class="sidebar-link">Instance Properties</a></li>
+            
+                <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
+            
+                <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
+            
+                <li><a href="/api/directives.html" class="sidebar-link current">Directives</a></li>
+            
+                <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -98,18 +110,7 @@
 </ul>
 <p>If no argument is provided, it will add the binding’s value to the element’s classList, and update the class as the value changes.</p>
 <p>If a directive argument is provided, the argument will be the class to be toggled depending on the binding value’s truthy-ness. Combined with multiple clauses this can be pretty useful:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-class</span>=<span class="value">"
-    red    : hasError,
-    bold   : isImportant,
-    hidden : isHidden
-"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-class</span>=<span class="value">"</span></span></div><div class="line">    red    : hasError,</div><div class="line">    bold   : isImportant,</div><div class="line">    hidden : isHidden</div><div class="line">"&gt;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <h3 id="v-attr">v-attr</h3>
 <ul>
@@ -117,10 +118,7 @@
 </ul>
 <p>Updates the element’s given attribute (indicated by the argument).</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">v-attr</span>=<span class="value">"width:w, height:h"</span>&gt;</span><span class="tag">&lt;/<span class="title">canvas</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">v-attr</span>=<span class="value">"width:w, height:h"</span>&gt;</span><span class="tag">&lt;/<span class="title">canvas</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Internally, &#123;&#123; Mustache &#125;&#125; interpolations inside attributes are compiled into computed <code>v-attr</code> directives.</p>
 <p class="tip">You should use <code>v-attr</code> instead of mustache binding when setting the <code>src</code> attribute on <code>&lt;img&gt;</code> elements. Your templates are parsed by the browser before being compiled by Vue.js, so the mustache binding will cause a 404 when the browser tries to fetch it as the image’s URL.</p>
@@ -133,24 +131,10 @@
 <p>When there is no argument, Vue.js will use the value to set <code>el.style.cssText</code>.</p>
 <p>When there is an argument, it will be used as the CSS property to apply. Combined with multiple clauses you can set multiple properties together:</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"
-    top: top + 'px',
-    left: left + 'px',
-    background-color: 'rgb(0,0,' + bg + ')'
-"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"</span></span></div><div class="line">    top: top + 'px',</div><div class="line">    left: left + 'px',</div><div class="line">    background-color: 'rgb(0,0,' + bg + ')'</div><div class="line">"&gt;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>When the argument is prefixed with <code>$</code>, Vue.js will automatically apply prefixed version of the CSS rule too, so you don’t have to manually write all the prefixes inline. In the following example Vue.js will apply <code>transform</code>, <code>webkitTransform</code>, <code>mozTransform</code> and <code>msTransform</code>:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"$transform: 'scale(' + scale + ')'"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-style</span>=<span class="value">"$transform: 'scale(' + scale + ')'"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p class="tip">It is recommended to use <code>v-style</code> instead of mustache bindings inside <code>style</code> attribute because Internet Explorer, regardless of version, will remove invalid inline styles when parsing the HTML.</p>
 
@@ -181,32 +165,10 @@
 <p>Create a child ViewModel for every item in the binding Array. These child ViewModels will be automatically created / destroyed when mutating methods, e.g. <code>push()</code>, are called on the Array.</p>
 <p>When no argument is provided, the child ViewModel will directly use the assigned element in the Array as its <code>$data</code>. If the value is not an object, a wrapper data object will be created and the value will be set on that object using the alias key <code>$value</code>.</p>
 <p><strong>Example:</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users"</span>&gt;</span>
-        {&#123;name&#125;} {&#123;email&#125;}
-    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"users"</span>&gt;</span></div><div class="line">        {&#123;name&#125;} {&#123;email&#125;}</div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>If an argument is provided, a wrapper data object will always be created, using the argument string as the alias key. This allows for more explicit property access in templates:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"user : users"</span>&gt;</span>
-        {&#123;user.name&#125;} {&#123;user.email&#125;}
-    <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">v-repeat</span>=<span class="value">"user : users"</span>&gt;</span></div><div class="line">        {&#123;user.name&#125;} {&#123;user.email&#125;}</div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>For detailed examples, see <a href="/guide/list.html">Displaying a List</a>.</p>
 <h3 id="v-view">v-view</h3>
@@ -222,47 +184,14 @@
 </ul>
 <p>Allows a child ViewModel to inherit data from the parents. You can either pass in an Object which will be used as the <code>data</code> option, or bind individual parent properties to the child with different keys. This directive must be used in combination with another directive that creates a child ViewModel, e.g. <code>v-component</code> or <code>v-view</code>.</p>
 <p>Example inheriting an object:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="comment">// parent data looks like this</span>
-{
-    user: {
-        name: <span class="string">'Foo Bar'</span>,
-        email: <span class="string">'foo@bar.com'</span>
-    }
-}
-</pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// parent data looks like this</span></div><div class="line">{</div><div class="line">    user: {</div><div class="line">        name: <span class="string">'Foo Bar'</span>,</div><div class="line">        email: <span class="string">'foo@bar.com'</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-with</span>=<span class="value">"user"</span>&gt;</span>
-    <span class="comment">&lt;!-- you can access properties without `user.` --&gt;</span>
-    {&#123;name&#125;} {&#123;email&#125;}
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-with</span>=<span class="value">"user"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- you can access properties without `user.` --&gt;</span></div><div class="line">    {&#123;name&#125;} {&#123;email&#125;}</div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Example inheriting individual properties (using the same data):</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-with</span>=<span class="value">"myName : user.name, myEmail: user.email"</span>&gt;</span>
-    <span class="comment">&lt;!-- you can access properties with the new keys --&gt;</span>
-    {&#123;myName&#125;} {&#123;myEmail&#125;}
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-with</span>=<span class="value">"myName : user.name, myEmail: user.email"</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- you can access properties with the new keys --&gt;</span></div><div class="line">    {&#123;myName&#125;} {&#123;myEmail&#125;}</div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <h2 id="Literal_Directives">Literal Directives</h2>
 <blockquote>
@@ -274,10 +203,7 @@
 <p>Only respected when used in combination with directives that create child components: <code>v-component</code>, <code>v-view</code>, <code>v-if</code> or <code>v-repeat</code>. The ViewModel will be accessible in its parent’s <code>$</code> object, e.g. <code>parent.$[id]</code>. When used with <code>v-repeat</code>, the value will be an Array containing the child ViewModel instances corresponding to the Array they are bound to. For examples see <a href="/guide/composition.html#Accessing_Child_Components">Accessing Child Components</a>.</p>
 <h3 id="v-partial">v-partial</h3>
 <p>Replace the element’s innerHTML with a registered partial. Partials can be registered with <code>Vue.partial()</code> or passed inside the <code>partials</code> option. You can also use this syntax (which doesn’t support expressions):</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; my-partial&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;&gt; my-partial&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <h3 id="v-effect">v-effect</h3>
 <p>Apply a registered JavaScript effect to the element. JavaScript effects can be registered with <code>Vue.effect()</code> or passed inside the <code>effects</code> option.</p>
@@ -299,8 +225,13 @@
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

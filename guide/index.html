@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,52 +37,58 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link current">Guide</a></li>
-        <li><a href="/api/" class="nav-link">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Guide</h2>
-        <ul>
-        
-            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
-        
-            <li><a href="/guide/index.html" class="sidebar-link current">Getting Started</a></li>
-        
-            <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-        
-            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
-        
-            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
-        
-            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
-        
-            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
-        
-            <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
-        
-            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
-        
-            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
-        
-            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
-        
-            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+            
+                <li><a href="/guide/index.html" class="sidebar-link current">Getting Started</a></li>
+            
+                <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+            
+                <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+            
+                <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+            
+                <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+            
+                <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+            
+                <li><a href="/guide/computed.html" class="sidebar-link">Computed Properties</a></li>
+            
+                <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+            
+                <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+            
+                <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+            
+                <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -90,50 +102,35 @@
 <p>Vue.js is a library for building interactive web interfaces.</p>
 <p>Technically, Vue.js is focused on the <a href="#ViewModel">ViewModel</a> layer of the MVVM pattern. It connects the <a href="#View">View</a> and the <a href="#Model">Model</a> via two way data bindings. Actual DOM manipulations and output formatting are abstracted away into <a href="#Directives">Directives</a> and <a href="#Filters">Filters</a>.</p>
 <p>Philosophically, the goal is to provide the benefits of MVVM data binding with an API that is as simple as possible. Modularity and composability are also important design considerations. It is not a full-blown framework - it is designed to be simple and flexible. You can use it alone for rapid prototyping, or mix and match with other libraries for a custom front-end stack. It’s also a natural fit for no-backend services such as Firebase.</p>
-<p>Vue.js’ API is heavily influenced by <a href="http://angularjs.org" target="_blank">AngularJS</a>, <a href="http://knockoutjs.com" target="_blank">KnockoutJS</a>, <a href="http://ractivejs.org" target="_blank">Ractive.js</a> and <a href="http://www.rivetsjs.com" target="_blank">Rivets.js</a>. Despite the similarities, I believe Vue.js offers a valuable alternative to these existing libraries by finding a sweetspot between simplicity and functionality.</p>
+<p>Vue.js’ API is heavily influenced by <a href="http://angularjs.org" target="_blank" rel="external">AngularJS</a>, <a href="http://knockoutjs.com" target="_blank" rel="external">KnockoutJS</a>, <a href="http://ractivejs.org" target="_blank" rel="external">Ractive.js</a> and <a href="http://www.rivetsjs.com" target="_blank" rel="external">Rivets.js</a>. Despite the similarities, I believe Vue.js offers a valuable alternative to these existing libraries by finding a sweetspot between simplicity and functionality.</p>
 <p>Even if you are already familiar with some of these terms, it is recommended that you go through the following concepts overview because your notion of these terms might be different from what they mean in the Vue.js context.</p>
 <h2 id="Concepts_Overview">Concepts Overview</h2>
 <h3 id="ViewModel">ViewModel</h3>
 <p>An object that syncs the Model and the View. In Vue.js, ViewModels are instantiated with the <code>Vue</code> constructor or its sub-classes:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({ <span class="comment">/* options */</span> })
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue({ <span class="comment">/* options */</span> })</div></pre></td></tr></table></figure>
 
 <p>This is the primary object that you will be interacting with as a developer when using Vue.js. For more details see <a href="/api/">Class: Vue</a>.</p>
 <h3 id="View">View</h3>
 <p>The actual HTML/DOM that the user sees.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>vm.$el <span class="comment">// The View</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vm.$el <span class="comment">// The View</span></div></pre></td></tr></table></figure>
 
 <p>When using Vue.js, you rarely have to touch the DOM yourself except in custom directives (explained later). View updates will be automatically triggered when the data changes. These view updates are highly granular with the precision down to a textNode. They are also batched and executed asynchronously for greater performance.</p>
 <h3 id="Model">Model</h3>
 <p>A slightly modified plain JavaScript object.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>vm.$data <span class="comment">// The Model</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vm.$data <span class="comment">// The Model</span></div></pre></td></tr></table></figure>
 
 <p>In Vue.js, models are simply plain JavaScript objects, or <strong>data objects</strong>. You can manipulate their properties and ViewModels that are observing them will be notified of the changes. Vue.js converts the properties on data objects into ES5 getter/setters, which allows direct manipulation without the need for dirty checking.</p>
 <p>The data objects are mutated in place, so modifying it by reference has the same effects as modifying <code>vm.$data</code>. This also makes it easy for multiple ViewModel instances to observe the same piece of data.</p>
 <p>For technical details see <a href="/api/instantiation-options.html#data">Instantiation Options: data</a>.</p>
 <h3 id="Directives">Directives</h3>
 <p>Prefixed HTML attributes that tell Vue.js to do something about a DOM element.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Here the div element has a <code>v-text</code> directive with the value <code>message</code>. What it does is telling Vue.js to keep the div’s textContent in sync with the ViewModel’s <code>message</code> property.</p>
 <p>Directives can encapsulate arbitrary DOM manipulations. For example <code>v-attr</code> manipulates an element’s attributes, <code>v-repeat</code> clones an element based on an Array, <code>v-on</code> attaches event listeners… we will cover them later.</p>
 <h3 id="Mustache_Bindings">Mustache Bindings</h3>
 <p>You can also use mustache-style bindings, both in text and in attributes. They are translated into <code>v-text</code> and <code>v-attr</code> directives under the hood. For example:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"person-&#123;&#123;id&#125;&#125;"</span>&gt;</span>Hello &#123;&#123;name&#125;&#125;!<span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Although it is convenient, there are a few things you need to be aware of:</p>
 <p class="tip">The <code>src</code> attribute on an <code>&lt;image&gt;</code> element makes an HTTP requests when a value is set, so when the template is first parsed it will result in a 404. In this case <code>v-attr</code> is preferred.</p>
@@ -144,76 +141,17 @@
 
 <h3 id="Filters">Filters</h3>
 <p>Functions that are used to process the raw values before updating the View. They are denoted by a “pipe” inside directives or bindings:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;message | capitalize&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span>&#123;&#123;message | capitalize&#125;&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Now before the div’s textContent is updated, the <code>message</code> value will first be passed through the <code>capitalize</code> function. For more details see <a href="/guide/filters.html">Filters in Depth</a>.</p>
 <h3 id="Components">Components</h3>
-<p>In Vue.js, a component is simply a ViewModel constructor registered with an ID using <code>Vue.component(ID, constructor)</code>. By having an associated ID, they can be nested in other ViewModels’ templates with the <code>v-component</code> directive. This simple mechanism enables declarative reuse and composition of ViewModels in a fashion similar to <a href="http://www.w3.org/TR/components-intro/" target="_blank">Web Components</a>, without the need for latest browsers or heavy polyfills. By breaking an application into smaller components, the result is a highly decoupled and maintainable codebase. For more details, see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
+<p>In Vue.js, a component is simply a ViewModel constructor registered with an ID using <code>Vue.component(ID, constructor)</code>. By having an associated ID, they can be nested in other ViewModels’ templates with the <code>v-component</code> directive. This simple mechanism enables declarative reuse and composition of ViewModels in a fashion similar to <a href="http://www.w3.org/TR/components-intro/" target="_blank" rel="external">Web Components</a>, without the need for latest browsers or heavy polyfills. By breaking an application into smaller components, the result is a highly decoupled and maintainable codebase. For more details, see <a href="/guide/composition.html">Composing ViewModels</a>.</p>
 <h2 id="A_Quick_Example">A Quick Example</h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title | uppercase&#125;&#125;<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">li
-</span>            <span class="attribute">v-repeat</span>=<span class="value">"todos"</span>
-            <span class="attribute">v-on</span>=<span class="value">"click: done = !done"</span>
-            <span class="attribute">class</span>=<span class="value">"&#123;&#123;done ? 'done' : ''&#125;&#125;"</span>&gt;</span>
-            &#123;&#123;content&#125;&#125;
-        <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>&#123;&#123;title | uppercase&#125;&#125;<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">li</span></span></div><div class="line">            <span class="attribute">v-repeat</span>=<span class="value">"todos"</span></div><div class="line">            <span class="attribute">v-on</span>=<span class="value">"click: done = !done"</span></div><div class="line">            <span class="attribute">class</span>=<span class="value">"&#123;&#123;done ? 'done' : ''&#125;&#125;"</span>&gt;</div><div class="line">            &#123;&#123;content&#125;&#125;</div><div class="line">        <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
 
 
 
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
-    el: <span class="string">'#demo'</span>,
-    data: {
-        title: <span class="string">'todos'</span>,
-        todos: [
-            {
-                done: <span class="literal">true</span>,
-                content: <span class="string">'Learn JavaScript'</span>
-            },
-            {
-                done: <span class="literal">false</span>,
-                content: <span class="string">'Learn Vue.js'</span>
-            }
-        ]
-    }
-})
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({</div><div class="line">    el: <span class="string">'#demo'</span>,</div><div class="line">    data: {</div><div class="line">        title: <span class="string">'todos'</span>,</div><div class="line">        todos: [</div><div class="line">            {</div><div class="line">                done: <span class="literal">true</span>,</div><div class="line">                content: <span class="string">'Learn JavaScript'</span></div><div class="line">            },</div><div class="line">            {</div><div class="line">                done: <span class="literal">false</span>,</div><div class="line">                content: <span class="string">'Learn Vue.js'</span></div><div class="line">            }</div><div class="line">        ]</div><div class="line">    }</div><div class="line">})</div></pre></td></tr></table></figure>
 
 <p><strong>Result</strong></p>
 <p><div id="demo"><h1>&#123;&#123;title | uppercase&#125;&#125;</h1><ul><li v-repeat="todos" v-on="click: done = !done" class="&#123;&#123;done ? 'done' : ''&#125;&#125;">&#123;&#123;content&#125;&#125;</li></ul></div></p>
@@ -236,14 +174,19 @@ var demo = new Vue({
 })
 </script>
 
-<p>Also available on <a href="http://jsfiddle.net/yyx990803/yMv7y/" target="_blank">jsfiddle</a>.</p>
+<p>Also available on <a href="http://jsfiddle.net/yyx990803/yMv7y/" target="_blank" rel="external">jsfiddle</a>.</p>
 <p>You can click on a todo to toggle it, or you can open your Browser’s console and play with the <code>demo</code> object - for example, change <code>demo.title</code>, push a new object into <code>demo.todos</code>, or toggle a todo’s <code>done</code> state.</p>
 <p>You probably have a few questions in mind now - don’t worry, we’ll cover them soon. Next up: <a href="/guide/directives.html">Directives in Depth</a>.</p>
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

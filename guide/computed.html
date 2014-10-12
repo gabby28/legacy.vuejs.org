@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "guide"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,52 +37,58 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link current">Guide</a></li>
-        <li><a href="/api/" class="nav-link">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link current">Guide</a></li>
+<li><a href="/api/" class="nav-link">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Guide</h2>
-        <ul>
-        
-            <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
-        
-            <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
-        
-            <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
-        
-            <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
-        
-            <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
-        
-            <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
-        
-            <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
-        
-            <li><a href="/guide/computed.html" class="sidebar-link current">Computed Properties</a></li>
-        
-            <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
-        
-            <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
-        
-            <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
-        
-            <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/guide/installation.html" class="sidebar-link">Installation</a></li>
+            
+                <li><a href="/guide/index.html" class="sidebar-link">Getting Started</a></li>
+            
+                <li><a href="/guide/directives.html" class="sidebar-link">Directives In Depth</a></li>
+            
+                <li><a href="/guide/filters.html" class="sidebar-link">Filters in Depth</a></li>
+            
+                <li><a href="/guide/list.html" class="sidebar-link">Displaying a List</a></li>
+            
+                <li><a href="/guide/events.html" class="sidebar-link">Listening for Events</a></li>
+            
+                <li><a href="/guide/forms.html" class="sidebar-link">Handling Forms</a></li>
+            
+                <li><a href="/guide/computed.html" class="sidebar-link current">Computed Properties</a></li>
+            
+                <li><a href="/guide/transitions.html" class="sidebar-link">Adding Transition Effects</a></li>
+            
+                <li><a href="/guide/composition.html" class="sidebar-link">Composing Components</a></li>
+            
+                <li><a href="/guide/application.html" class="sidebar-link">Building Larger Apps</a></li>
+            
+                <li><a href="/guide/plugin.html" class="sidebar-link">Plugins</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -88,112 +100,18 @@
     </div>
     <p>Vue.js’ inline expressions are very convenient, but the best use cases for them are simple boolean operations or string concatenations. For more complicated logic, you should use <strong>computed properties</strong>.</p>
 <p>In Vue.js, you define computed properties with the <code>computed</code> option:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
-    data: {
-        firstName: <span class="string">'Foo'</span>,
-        lastName: <span class="string">'Bar'</span>
-    },
-    computed: {
-        fullName: {
-            <span class="comment">// the getter should return the desired value</span>
-            $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-                <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName
-            },
-            <span class="comment">// the setter is optional</span>
-            $set: <span class="function"><span class="keyword">function</span> <span class="params">(newValue)</span> {</span>
-                <span class="keyword">var</span> names = newValue.split(<span class="string">' '</span>)
-                <span class="keyword">this</span>.firstName = names[<span class="number">0</span>]
-                <span class="keyword">this</span>.lastName = names[names.length - <span class="number">1</span>]
-            }
-        }
-    }
-})
-demo.fullName <span class="comment">// 'Foo Bar'</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({</div><div class="line">    data: {</div><div class="line">        firstName: <span class="string">'Foo'</span>,</div><div class="line">        lastName: <span class="string">'Bar'</span></div><div class="line">    },</div><div class="line">    computed: {</div><div class="line">        fullName: {</div><div class="line">            <span class="comment">// the getter should return the desired value</span></div><div class="line">            $get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName</div><div class="line">            },</div><div class="line">            <span class="comment">// the setter is optional</span></div><div class="line">            $set: <span class="function"><span class="keyword">function</span> <span class="params">(newValue)</span> </span>{</div><div class="line">                <span class="keyword">var</span> names = newValue.split(<span class="string">' '</span>)</div><div class="line">                <span class="keyword">this</span>.firstName = names[<span class="number">0</span>]</div><div class="line">                <span class="keyword">this</span>.lastName = names[names.length - <span class="number">1</span>]</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">})</div><div class="line">demo.fullName <span class="comment">// 'Foo Bar'</span></div></pre></td></tr></table></figure>
 
 <p>When you only need the getter, you can provide a single function instead of an object:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="comment">// ...</span>
-computed: {
-    fullName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName 
-    }    
-}
-<span class="comment">// ...</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line">computed: {</div><div class="line">    fullName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName </div><div class="line">    }    </div><div class="line">}</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
 
 <p>A computed property is essentially a property defined with getter/setter functions. You can use a computed property just like a normal property, but when you access it, you get the value returned by the getter function; when you change its value, you trigger the setter function passing in the new value as its argument.</p>
 <h2 id="Dependency_Collection_Gotcha">Dependency Collection Gotcha</h2>
 <p>Like inline expressions, Vue.js automatically collects dependencies for computed properties and refreshes them when their dependencies change. There’s one thing to keep in mind though: since Vue.js collects dependencies by monitoring which properties are accessed inside a getter, you need to be careful when there is conditional logic within your getters. Consider this example:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="comment">// ...</span>
-status: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">return</span> <span class="keyword">this</span>.validated
-        ? <span class="keyword">this</span>.okMsg
-        : <span class="keyword">this</span>.errMsg
-}
-<span class="comment">// ...</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line">status: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.validated</div><div class="line">        ? <span class="keyword">this</span>.okMsg</div><div class="line">        : <span class="keyword">this</span>.errMsg</div><div class="line">}</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
 
 <p>If <code>validated</code> is true in the beginning, then <code>errMsg</code> will not be accessed and therefore not collected as a dependency. Vice-versa for <code>okMsg</code>. To get around this you can simply manually access potentially unreachable properties in your getter:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="comment">// ...</span>
-status: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="comment">// access dependencies explicitly</span>
-    <span class="keyword">this</span>.okMsg
-    <span class="keyword">this</span>.errMsg
-    <span class="keyword">return</span> <span class="keyword">this</span>.validated
-        ? <span class="keyword">this</span>.okMsg
-        : <span class="keyword">this</span>.errMsg
-}
-<span class="comment">// ...</span>
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line">status: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="comment">// access dependencies explicitly</span></div><div class="line">    <span class="keyword">this</span>.okMsg</div><div class="line">    <span class="keyword">this</span>.errMsg</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.validated</div><div class="line">        ? <span class="keyword">this</span>.okMsg</div><div class="line">        : <span class="keyword">this</span>.errMsg</div><div class="line">}</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
 
 <p class="tip">You don’t need to worry about this in inline expressions because Vue.js’ expression parser takes care of it for you.</p>
 
@@ -201,8 +119,13 @@ status: <span class="function"><span class="keyword">function</span> <span class
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

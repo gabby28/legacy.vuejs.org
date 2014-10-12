@@ -131,18 +131,20 @@ p {
 }
 a.button {
   display: inline-block;
-  font-size: 1.25em;
-  color: #fff !important;
-  font-weight: 400 !important;
-  background-color: #42b983;
-  padding: 0.5em 1.5em;
-  border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-  border-bottom: 1px solid #3aa373;
-  transition: all 0.2s ease-out;
+  font-size: 1.2em;
+  color: #42b983;
+  font-weight: 700;
+  background-color: #fff;
+  padding: 12px 24px;
+  border-radius: 24px;
+  border: 2px solid #42b983;
+  transition: all 0.15s ease;
 }
 a.button:hover {
-  background-color: #53c290;
+  color: #fff;
+  -webkit-transform: scale(1.03);
+  transform: scale(1.03);
+  background-color: #42b983;
 }
 .highlight {
   overflow-x: auto;
@@ -202,6 +204,7 @@ a.button:hover {
   position: relative;
   z-index: 1;
   padding: 0 60px 30px;
+  overflow-x: hidden;
 }
 #ad {
   width: 130px;
@@ -456,10 +459,15 @@ body {
   list-style-type: none;
 }
 #why ul li:before {
-  content: "✓";
-  font-weight: bold;
-  margin-right: 0.75em;
-  font-size: 1.2em;
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url("../images/check.png") center center no-repeat;
+  background-size: 24px 24px;
+  margin-right: 10px;
+  position: relative;
+  top: 4px;
 }
 #footer {
   text-align: center;
@@ -481,10 +489,10 @@ body {
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   display: inline-block;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 12px 20px;
+  border-radius: 25px;
   transition: all 0.15s ease;
   margin-bottom: 2em;
 }
@@ -564,11 +572,11 @@ body {
     width: 250px;
   }
   #why ul {
-    width: 250px;
+    width: 280px;
     font-size: 1.1em;
   }
   #why h2 {
-    font-size: 1.35em;
+    font-size: 1.4em;
   }
   #ad {
     position: static;

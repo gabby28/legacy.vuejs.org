@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "api"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,42 +37,48 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
-        <li><a href="/api/" class="nav-link current">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Api</h2>
-        <ul>
-        
-            <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
-        
-            <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
-        
-            <li><a href="/api/instance-properties.html" class="sidebar-link">Instance Properties</a></li>
-        
-            <li><a href="/api/instance-methods.html" class="sidebar-link current">Instance Methods</a></li>
-        
-            <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
-        
-            <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
-        
-            <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
+            
+                <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
+            
+                <li><a href="/api/instance-properties.html" class="sidebar-link">Instance Properties</a></li>
+            
+                <li><a href="/api/instance-methods.html" class="sidebar-link current">Instance Methods</a></li>
+            
+                <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
+            
+                <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
+            
+                <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -87,26 +99,7 @@
 </ul>
 <p>Watch a keypath on the vm’s data object (or the <code>$data</code> object itself) for changes and call the callback with the new value.</p>
 <p>A second <code>mutation</code> object is also available and is useful when watching arrarys:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="keyword">this</span>.$watch(<span class="string">'list'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value, mutation)</span> {</span>
-    <span class="keyword">if</span> (mutation) {
-        mutation.method <span class="comment">// e.g. 'push'</span>
-        mutation.args <span class="comment">// raw arguments to the mutation method</span>
-        mutation.result <span class="comment">// return value</span>
-        mutation.inserted <span class="comment">// new, inserted elements</span>
-        mutation.removed <span class="comment">// removed elements</span>
-    }
-})
-</pre></td></tr></table></figure>
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.$watch(<span class="string">'list'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(value, mutation)</span> </span>{</div><div class="line">    <span class="keyword">if</span> (mutation) {</div><div class="line">        mutation.method <span class="comment">// e.g. 'push'</span></div><div class="line">        mutation.args <span class="comment">// raw arguments to the mutation method</span></div><div class="line">        mutation.result <span class="comment">// return value</span></div><div class="line">        mutation.inserted <span class="comment">// new, inserted elements</span></div><div class="line">        mutation.removed <span class="comment">// removed elements</span></div><div class="line">    }</div><div class="line">})</div></pre></td></tr></table></figure>
 
 <h3 id="vm-$unwatch(_keypath,_[callback]_)">vm.$unwatch( keypath, [callback] )</h3>
 <ul>
@@ -192,8 +185,13 @@
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>

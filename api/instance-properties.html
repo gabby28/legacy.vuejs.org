@@ -10,8 +10,8 @@
         <script>
             window.PAGE_TYPE = "api"
         </script>
-        <script src="/js/vue.min.js"></script>
         <link rel="stylesheet" href="/css/page.css" type="text/css">
+
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,8 +21,14 @@
   ga('create', 'UA-46852172-1', 'vuejs.org');
   ga('send', 'pageview');
 </script>
+        <script src="/js/vue.min.js"></script>
     </head>
     <body>
+        <div id="mobile-bar">
+            <a class="menu-button"></a>
+            <a class="logo" href="/"></a>
+        </div>
+        
         
             <div id="header">
     <a id="logo" href="/">
@@ -31,42 +37,48 @@
     </a>
     <ul id="nav">
         <li><a href="/guide/" class="nav-link">Guide</a></li>
-        <li><a href="/api/" class="nav-link current">API Reference</a></li>
-        <br class="break" />
-        <li><a href="/examples/" class="nav-link">Examples</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
     </ul>
 </div>
         
+
         <div id="main">
-        
             
+                
     <div class="sidebar">
-    <div class="toggle">···</div>
+    <ul class="main-menu">
+        <li><a href="/guide/" class="nav-link">Guide</a></li>
+<li><a href="/api/" class="nav-link current">API Reference</a></li>
+<li><a href="/examples/" class="nav-link">Examples</a></li>
+<li><a href="/blog/" class="nav-link">Blog</a></li>
+<li><a href="https://github.com/yyx990803/vue" target="_blank" class="nav-link">GitHub</a></li>
+    </ul>
     <div class="list">
         <h2>Api</h2>
-        <ul>
-        
-            <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
-        
-            <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
-        
-            <li><a href="/api/instance-properties.html" class="sidebar-link current">Instance Properties</a></li>
-        
-            <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
-        
-            <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
-        
-            <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
-        
-            <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
-        
-        <li style="margin:10px 0 3px">
-          <script data-gittip-username="yyx990803"
-            data-gittip-widget="button"
-            src="//gttp.co/v1.js"></script>
-        </li>
+        <ul class="menu-root">
+            
+                <li><a href="/api/index.html" class="sidebar-link">Class: Vue</a></li>
+            
+                <li><a href="/api/instantiation-options.html" class="sidebar-link">Instantiation Options</a></li>
+            
+                <li><a href="/api/instance-properties.html" class="sidebar-link current">Instance Properties</a></li>
+            
+                <li><a href="/api/instance-methods.html" class="sidebar-link">Instance Methods</a></li>
+            
+                <li><a href="/api/global-methods.html" class="sidebar-link">Global Methods</a></li>
+            
+                <li><a href="/api/directives.html" class="sidebar-link">Directives</a></li>
+            
+                <li><a href="/api/filters.html" class="sidebar-link">Filters</a></li>
+            
+            <li style="margin:10px 0 3px">
+              <script data-gittip-username="yyx990803"
+                data-gittip-widget="button"
+                src="//gttp.co/v1.js"></script>
+            </li>
         </ul>
     </div>
 </div>
@@ -92,20 +104,7 @@
 <li><strong>Type:</strong> <code>Object</code></li>
 </ul>
 <p>The instantiation options used for the current ViewModel. This is useful when you want to include custom properties in the options:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="keyword">new</span> Vue({
-    customOption: <span class="string">'foo'</span>,
-    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        console.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// 'foo'</span>
-    }
-})
-</pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue({</div><div class="line">    customOption: <span class="string">'foo'</span>,</div><div class="line">    created: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.$options.customOption) <span class="comment">// 'foo'</span></div><div class="line">    }</div><div class="line">})</div></pre></td></tr></table></figure>
 
 <h3 id="vm-$">vm.$</h3>
 <ul>
@@ -139,8 +138,13 @@
 
     <div class="footer">Caught a mistake or want to contribute to the documentation? <a href="https://github.com/vuejs/vuejs.org" target="_blank">Fork this site on Github</a>!</div>
 </div>
-        
+            
         </div>
-        <script src="/js/common.js"></script>
+
+        
+            <script src="/js/smooth-scroll.min.js"></script>
+            <script src="/js/common.js"></script>
+        
+
     </body>
 </html>
