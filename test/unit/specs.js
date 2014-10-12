@@ -96,7 +96,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Batcher = __webpack_require__(47)
+	var Batcher = __webpack_require__(48)
 	var nextTick = __webpack_require__(55).nextTick
 
 	describe('Batcher', function () {
@@ -157,7 +157,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Binding = __webpack_require__(48)
+	var Binding = __webpack_require__(47)
 
 	describe('Binding', function () {
 
@@ -619,7 +619,7 @@
 
 	var Observer = __webpack_require__(57)
 	var config = __webpack_require__(52)
-	var Binding = __webpack_require__(48)
+	var Binding = __webpack_require__(47)
 	var _ = __webpack_require__(55)
 
 	describe('Observer', function () {
@@ -4777,7 +4777,7 @@
 	var _ = __webpack_require__(55)
 	var Vue = __webpack_require__(50)
 	var transition = __webpack_require__(58)
-	var def = __webpack_require__(69)
+	var def = __webpack_require__(71)
 
 	if (_.inBrowser) {
 	  describe('v-show', function () {
@@ -4809,7 +4809,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(55)
-	var def = __webpack_require__(70)
+	var def = __webpack_require__(69)
 
 	if (_.inBrowser) {
 	  describe('v-style', function () {
@@ -4861,7 +4861,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(55)
-	var def = __webpack_require__(71)
+	var def = __webpack_require__(70)
 
 	if (_.inBrowser) {
 	  describe('v-text', function () {
@@ -6890,6 +6890,62 @@
 /* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var uid = 0
+
+	/**
+	 * A binding is an observable that can have multiple
+	 * directives subscribing to it.
+	 *
+	 * @constructor
+	 */
+
+	function Binding () {
+	  this.id = ++uid
+	  this.subs = []
+	}
+
+	var p = Binding.prototype
+
+	/**
+	 * Add a directive subscriber.
+	 *
+	 * @param {Directive} sub
+	 */
+
+	p.addSub = function (sub) {
+	  this.subs.push(sub)
+	}
+
+	/**
+	 * Remove a directive subscriber.
+	 *
+	 * @param {Directive} sub
+	 */
+
+	p.removeSub = function (sub) {
+	  if (this.subs.length) {
+	    var i = this.subs.indexOf(sub)
+	    if (i > -1) this.subs.splice(i, 1)
+	  }
+	}
+
+	/**
+	 * Notify all subscribers of a new value.
+	 */
+
+	p.notify = function () {
+	  var i = this.subs.length
+	  while (i--) {
+	    this.subs[i].update()
+	  }
+	}
+
+	module.exports = Binding
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var _ = __webpack_require__(55)
 
 	/**
@@ -6959,62 +7015,6 @@
 	}
 
 	module.exports = Batcher
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var uid = 0
-
-	/**
-	 * A binding is an observable that can have multiple
-	 * directives subscribing to it.
-	 *
-	 * @constructor
-	 */
-
-	function Binding () {
-	  this.id = ++uid
-	  this.subs = []
-	}
-
-	var p = Binding.prototype
-
-	/**
-	 * Add a directive subscriber.
-	 *
-	 * @param {Directive} sub
-	 */
-
-	p.addSub = function (sub) {
-	  this.subs.push(sub)
-	}
-
-	/**
-	 * Remove a directive subscriber.
-	 *
-	 * @param {Directive} sub
-	 */
-
-	p.removeSub = function (sub) {
-	  if (this.subs.length) {
-	    var i = this.subs.indexOf(sub)
-	    if (i > -1) this.subs.splice(i, 1)
-	  }
-	}
-
-	/**
-	 * Notify all subscribers of a new value.
-	 */
-
-	p.notify = function () {
-	  var i = this.subs.length
-	  while (i--) {
-	    this.subs[i].update()
-	  }
-	}
-
-	module.exports = Binding
 
 /***/ },
 /* 49 */
@@ -7506,7 +7506,7 @@
 	var _ = __webpack_require__(55)
 	var Observer = __webpack_require__(57)
 	var expParser = __webpack_require__(62)
-	var Batcher = __webpack_require__(47)
+	var Batcher = __webpack_require__(48)
 
 	var batcher = new Batcher()
 	var uid = 0
@@ -8076,7 +8076,7 @@
 	 * Install special array filters
 	 */
 
-	_.extend(exports, __webpack_require__(84))
+	_.extend(exports, __webpack_require__(82))
 
 /***/ },
 /* 57 */
@@ -8084,10 +8084,10 @@
 
 	var _ = __webpack_require__(55)
 	var config = __webpack_require__(52)
-	var Binding = __webpack_require__(48)
-	var arrayMethods = __webpack_require__(82)
+	var Binding = __webpack_require__(47)
+	var arrayMethods = __webpack_require__(83)
 	var arrayKeys = Object.getOwnPropertyNames(arrayMethods)
-	__webpack_require__(83)
+	__webpack_require__(84)
 
 	var uid = 0
 
@@ -10253,19 +10253,6 @@
 /* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var transition = __webpack_require__(58)
-
-	module.exports = function (value) {
-	  var el = this.el
-	  transition.apply(el, value ? 1 : -1, function () {
-	    el.style.display = value ? '' : 'none'
-	  }, this.vm)
-	}
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var prefixes = ['-webkit-', '-moz-', '-ms-']
 	var importantRE = /!important;?$/
 
@@ -10314,7 +10301,7 @@
 	}
 
 /***/ },
-/* 71 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(55)
@@ -10331,6 +10318,19 @@
 	    this.el[this.attr] = _.toString(value)
 	  }
 	  
+	}
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var transition = __webpack_require__(58)
+
+	module.exports = function (value) {
+	  var el = this.el
+	  transition.apply(el, value ? 1 : -1, function () {
+	    el.style.display = value ? '' : 'none'
+	  }, this.vm)
 	}
 
 /***/ },
@@ -10562,7 +10562,7 @@
 
 	var _ = __webpack_require__(55)
 	var Observer = __webpack_require__(57)
-	var Binding = __webpack_require__(48)
+	var Binding = __webpack_require__(47)
 
 	/**
 	 * Setup the scope of an instance, which contains:
@@ -11419,6 +11419,98 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(55)
+	var Path = __webpack_require__(63)
+
+	/**
+	 * Filter filter for v-repeat
+	 *
+	 * @param {String} searchKey
+	 * @param {String} [delimiter]
+	 * @param {String} dataKey
+	 */
+
+	exports.filterBy = function (arr, searchKey, delimiter, dataKey) {
+	  // allow optional `in` delimiter
+	  // because why not
+	  if (delimiter && delimiter !== 'in') {
+	    dataKey = delimiter
+	  }
+	  // get the search string
+	  var search =
+	    _.stripQuotes(searchKey) ||
+	    this.$get(searchKey)
+	  if (!search) {
+	    return arr
+	  }
+	  search = search.toLowerCase()
+	  // get the optional dataKey
+	  dataKey =
+	    dataKey &&
+	    (_.stripQuotes(dataKey) || this.$get(dataKey))
+	  return arr.filter(function (item) {
+	    return dataKey
+	      ? contains(Path.get(item, dataKey), search)
+	      : contains(item, search)
+	  })
+	}
+
+	/**
+	 * Filter filter for v-repeat
+	 *
+	 * @param {String} sortKey
+	 * @param {String} reverseKey
+	 */
+
+	exports.orderBy = function (arr, sortKey, reverseKey) {
+	  var key =
+	    _.stripQuotes(sortKey) ||
+	    this.$get(sortKey)
+	  if (!key) {
+	    return arr
+	  }
+	  var order = 1
+	  if (reverseKey) {
+	    if (reverseKey === '-1') {
+	      order = -1
+	    } else if (reverseKey.charCodeAt(0) === 0x21) { // !
+	      reverseKey = reverseKey.slice(1)
+	      order = this.$get(reverseKey) ? 1 : -1
+	    } else {
+	      order = this.$get(reverseKey) ? -1 : 1
+	    }
+	  }
+	  // sort on a copy to avoid mutating original array
+	  return arr.slice().sort(function (a, b) {
+	    a = Path.get(a, key)
+	    b = Path.get(b, key)
+	    return a === b ? 0 : a > b ? order : -order
+	  })
+	}
+
+	/**
+	 * String contain helper
+	 *
+	 * @param {*} val
+	 * @param {String} search
+	 */
+
+	function contains (val, search) {
+	  if (_.isObject(val)) {
+	    for (var key in val) {
+	      if (contains(val[key], search)) {
+	        return true
+	      }
+	    }
+	  } else if (val != null) {
+	    return val.toString().toLowerCase().indexOf(search) > -1
+	  }
+	}
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(55)
 	var arrayProto = Array.prototype
 	var arrayMethods = Object.create(arrayProto)
 
@@ -11510,7 +11602,7 @@
 	module.exports = arrayMethods
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(55)
@@ -11588,98 +11680,6 @@
 	    }
 	  }
 	)
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(55)
-	var Path = __webpack_require__(63)
-
-	/**
-	 * Filter filter for v-repeat
-	 *
-	 * @param {String} searchKey
-	 * @param {String} [delimiter]
-	 * @param {String} dataKey
-	 */
-
-	exports.filterBy = function (arr, searchKey, delimiter, dataKey) {
-	  // allow optional `in` delimiter
-	  // because why not
-	  if (delimiter && delimiter !== 'in') {
-	    dataKey = delimiter
-	  }
-	  // get the search string
-	  var search =
-	    _.stripQuotes(searchKey) ||
-	    this.$get(searchKey)
-	  if (!search) {
-	    return arr
-	  }
-	  search = search.toLowerCase()
-	  // get the optional dataKey
-	  dataKey =
-	    dataKey &&
-	    (_.stripQuotes(dataKey) || this.$get(dataKey))
-	  return arr.filter(function (item) {
-	    return dataKey
-	      ? contains(Path.get(item, dataKey), search)
-	      : contains(item, search)
-	  })
-	}
-
-	/**
-	 * Filter filter for v-repeat
-	 *
-	 * @param {String} sortKey
-	 * @param {String} reverseKey
-	 */
-
-	exports.orderBy = function (arr, sortKey, reverseKey) {
-	  var key =
-	    _.stripQuotes(sortKey) ||
-	    this.$get(sortKey)
-	  if (!key) {
-	    return arr
-	  }
-	  var order = 1
-	  if (reverseKey) {
-	    if (reverseKey === '-1') {
-	      order = -1
-	    } else if (reverseKey.charCodeAt(0) === 0x21) { // !
-	      reverseKey = reverseKey.slice(1)
-	      order = this.$get(reverseKey) ? 1 : -1
-	    } else {
-	      order = this.$get(reverseKey) ? -1 : 1
-	    }
-	  }
-	  // sort on a copy to avoid mutating original array
-	  return arr.slice().sort(function (a, b) {
-	    a = Path.get(a, key)
-	    b = Path.get(b, key)
-	    return a === b ? 0 : a > b ? order : -order
-	  })
-	}
-
-	/**
-	 * String contain helper
-	 *
-	 * @param {*} val
-	 * @param {String} search
-	 */
-
-	function contains (val, search) {
-	  if (_.isObject(val)) {
-	    for (var key in val) {
-	      if (contains(val[key], search)) {
-	        return true
-	      }
-	    }
-	  } else if (val != null) {
-	    return val.toString().toLowerCase().indexOf(search) > -1
-	  }
-	}
 
 /***/ },
 /* 85 */
@@ -12796,15 +12796,15 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// manipulation directives
-	exports.text       = __webpack_require__(71)
+	exports.text       = __webpack_require__(70)
 	exports.html       = __webpack_require__(68)
 	exports.attr       = __webpack_require__(66)
-	exports.show       = __webpack_require__(69)
+	exports.show       = __webpack_require__(71)
 	exports['class']   = __webpack_require__(67)
 	exports.el         = __webpack_require__(94)
 	exports.ref        = __webpack_require__(95)
 	exports.cloak      = __webpack_require__(96)
-	exports.style      = __webpack_require__(70)
+	exports.style      = __webpack_require__(69)
 	exports.partial    = __webpack_require__(97)
 	exports.transition = __webpack_require__(72)
 
